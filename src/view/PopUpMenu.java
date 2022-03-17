@@ -1,36 +1,28 @@
 package view;
 
 
-import model.base.Menu;
+import model.interfaces.IMenu;
 
-import java.util.ArrayList;
-import java.util.EventObject;
+import javax.swing.*;
 
 /**
  * Un menu que sale encina de otro/s
  */
-public class PopUpMenu extends Menu {
+public class PopUpMenu extends JFrame implements IMenu {
+    public PopUpMenu() {
+        super("V1rulent - Pandemic");
+        initialize();
+    }
+
     public PopUpMenu(String title) {
         super(title);
-    }
-
-    public PopUpMenu(String title, String description) {
-        super(title, description);
+        initialize();
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
     public void initialize() {
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void handleEvent(EventObject eventObject) {
-
+        setVisible(true);
     }
 }

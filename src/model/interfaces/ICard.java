@@ -1,9 +1,12 @@
 package model.interfaces;
 
 
-import model.exception.NotImplementedException;
-
-
 public interface ICard<T> {
-    boolean applyEffect(T target) throws NotImplementedException;
+    /**
+     * Aplica el efecto adecuado al {@code target}
+     *
+     * @param target Quien recibirá la bonificación
+     * @return True si se ha podido aplicar el efecto; False en caso contrario
+     */
+    boolean applyEffect(T target);
 }
