@@ -3,7 +3,9 @@ package model.game;
 
 import java.util.ArrayList;
 
-
+/**
+ * Mapa del mundo
+ */
 public class Map {
     public ArrayList<Continent> continents;
 
