@@ -1,23 +1,29 @@
 package model.db;
 
+
 import model.exception.NotImplementedException;
 
-public class DbContext<T> {
+import java.sql.ResultSet;
+
+/**
+ * Contenedor de una conexión a una BD
+ */
+public class DbContext {
     public String connectionString;
 
-    public T receiveData() throws NotImplementedException {
+    public ResultSet receiveData() throws NotImplementedException {
         throw new NotImplementedException();
     }
 
-    public T sendData() throws NotImplementedException {
+    public ResultSet sendData() throws NotImplementedException {
         throw new NotImplementedException();
     }
 
-    public void modifyData(T data) throws NotImplementedException {
+    public void modifyData(String field, String value) throws NotImplementedException {
         throw new NotImplementedException();
     }
 
-    public void deleteData(T data) throws NotImplementedException {
+    public void deleteData(String identifier) throws NotImplementedException {
         throw new NotImplementedException();
     }
 }
