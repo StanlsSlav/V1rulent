@@ -1,38 +1,34 @@
 package view;
 
 
-import model.base.Menu;
+import model.interfaces.IMenu;
 
-import java.util.EventObject;
+import javax.swing.*;
+import java.awt.*;
 
-/**
- * El menu principal que se muestra al inicio del juego
- */
-public class MainMenu extends Menu {
+public class MainMenu extends JFrame implements IMenu {
+    private JPanel panelMain;
+    private JButton button1;
+    private JButton button2;
+    private JButton button3;
+
     public MainMenu() {
+        super("Pandemic - V1rulent");
+        initialize();
     }
 
     public MainMenu(String title) {
         super(title);
+        initialize();
     }
 
-    public MainMenu(String title, String description) {
-        super(title, description);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void initialize() {
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new Dimension(500, 250));
 
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void handleEvent(EventObject eventObject) {
-
+        add(panelMain);
+        pack();
+        setVisible(true);
     }
 }
