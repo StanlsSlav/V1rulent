@@ -5,12 +5,12 @@ import model.db.DbContext;
 import model.exception.NotImplementedException;
 
 
-public class DbManager<T> {
-    public void connect(DbContext<T> dbContext) throws NotImplementedException {
+public class DbManager {
+    public void connect(DbContext dbContext) throws NotImplementedException {
         throw new NotImplementedException();
     }
 
-    public void disconnect(DbContext<T> dbContext) throws NotImplementedException {
+    public void disconnect(DbContext dbContext) throws NotImplementedException {
         throw new NotImplementedException();
     }
 }
