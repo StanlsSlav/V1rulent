@@ -8,7 +8,6 @@ import java.awt.*;
 
 public class MainMenu extends JFrame implements IMenu {
     private JPanel panelMain;
-    private JButton button1;
 
     public MainMenu() {
         super("Pandemic - V1rulent");
@@ -18,7 +17,7 @@ public class MainMenu extends JFrame implements IMenu {
     @Override
     public void initialize() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(500, 250));
+        setMinimumSize(new Dimension(800, 600));
 
         add(panelMain);
         pack();
