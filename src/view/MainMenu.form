@@ -7,7 +7,9 @@
     </constraints>
     <properties>
       <debugGraphicsOptions value="0"/>
+      <doubleBuffered value="true"/>
       <enabled value="true"/>
+      <focusCycleRoot value="true"/>
       <font/>
       <minimumSize width="-1" height="-1"/>
     </properties>
@@ -33,6 +35,7 @@
         </constraints>
         <properties>
           <alignmentX value="0.0"/>
+          <doubleBuffered value="true"/>
           <opaque value="false"/>
         </properties>
         <border type="empty">
@@ -44,29 +47,38 @@
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-657931"/>
               <borderPainted value="false"/>
+              <doubleBuffered value="false"/>
+              <focusCycleRoot value="false"/>
               <focusPainted value="false"/>
               <focusable value="true"/>
               <font/>
               <hideActionText value="false"/>
+              <horizontalAlignment value="2"/>
               <horizontalTextPosition value="11"/>
+              <margin top="0" left="25" bottom="0" right="0"/>
               <text value="Credits"/>
             </properties>
           </component>
-          <component id="f7645" class="javax.swing.JButton" binding="playButton" custom-create="true" default-binding="true">
+          <component id="7a434" class="javax.swing.JButton" binding="playButton" custom-create="true" default-binding="true">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <alignmentX value="0.0"/>
+              <background color="-3326145"/>
               <borderPainted value="false"/>
+              <doubleBuffered value="false"/>
+              <focusCycleRoot value="false"/>
               <focusPainted value="false"/>
+              <focusTraversalPolicyProvider value="false"/>
               <focusable value="true"/>
               <font/>
-              <hideActionText value="false"/>
+              <horizontalAlignment value="2"/>
               <horizontalTextPosition value="11"/>
-              <margin top="0" left="0" bottom="0" right="0"/>
-              <text value="Play"/>
+              <margin top="0" left="25" bottom="0" right="0"/>
+              <text value="PLAY"/>
             </properties>
           </component>
           <component id="502f1" class="javax.swing.JButton" binding="exitButton" custom-create="true" default-binding="true">
@@ -74,12 +86,17 @@
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-657931"/>
               <borderPainted value="false"/>
+              <doubleBuffered value="false"/>
+              <focusCycleRoot value="false"/>
               <focusPainted value="false"/>
               <focusable value="true"/>
               <font/>
               <hideActionText value="false"/>
+              <horizontalAlignment value="2"/>
               <horizontalTextPosition value="11"/>
+              <margin top="0" left="25" bottom="0" right="0"/>
               <text value="Exit"/>
             </properties>
           </component>
@@ -88,13 +105,18 @@
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-657931"/>
               <borderPainted value="false"/>
+              <doubleBuffered value="false"/>
+              <enabled value="true"/>
+              <focusCycleRoot value="false"/>
               <focusPainted value="false"/>
               <focusable value="true"/>
               <font/>
               <hideActionText value="false"/>
+              <horizontalAlignment value="2"/>
               <horizontalTextPosition value="11"/>
-              <margin top="0" left="0" bottom="0" right="0"/>
+              <margin top="0" left="25" bottom="0" right="0"/>
               <text value="Rules"/>
             </properties>
           </component>
@@ -103,12 +125,17 @@
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-657931"/>
               <borderPainted value="false"/>
+              <doubleBuffered value="false"/>
+              <focusCycleRoot value="false"/>
               <focusPainted value="false"/>
               <focusable value="true"/>
               <font/>
               <hideActionText value="false"/>
+              <horizontalAlignment value="2"/>
               <horizontalTextPosition value="11"/>
+              <margin top="0" left="25" bottom="0" right="0"/>
               <text value="Settings"/>
             </properties>
           </component>

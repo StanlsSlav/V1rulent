@@ -3,7 +3,7 @@ package view;
 
 import model.interfaces.IMenu;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
 /**
  * Un menu que sale encina de otro/s
