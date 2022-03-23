@@ -10,7 +10,7 @@ import javax.swing.*;
  */
 public class PopUpMenu extends JFrame implements IMenu {
     public PopUpMenu() {
-        super("V1rulent - Pandemic");
+        super("V1rulent");
         initialize();
     }
 
