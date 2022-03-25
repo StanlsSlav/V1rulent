@@ -19,11 +19,11 @@
     <children>
       <component id="9d7c" class="javax.swing.JLabel" binding="menuTitle">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="0" indent="2" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <alignmentY value="0.0"/>
-          <font name="Consolas" size="74" style="1"/>
+          <font/>
           <horizontalTextPosition value="11"/>
           <text value="V1RULENT"/>
         </properties>
@@ -148,7 +148,7 @@
       </grid>
       <vspacer id="3dff3">
         <constraints>
-          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
             <preferred-size width="11" height="57"/>
           </grid>
         </constraints>

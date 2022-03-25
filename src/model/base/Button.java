@@ -17,10 +17,4 @@ public class Button extends JButton {
         setFont(new Font("Roboto Light", PLAIN, 40));
         setForeground(Color.BLACK);
     }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-    }
 }
