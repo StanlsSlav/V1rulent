@@ -1,7 +1,6 @@
 package view;
 
 
-import com.sun.deploy.panel.ITreeNode;
 import model.base.Button;
 import model.base.Panel;
 import model.interfaces.IMenu;
@@ -13,13 +12,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 
 public class MainMenu extends JFrame implements IMenu {
     private JLabel menuTitle;
@@ -33,9 +35,27 @@ public class MainMenu extends JFrame implements IMenu {
     private JButton creditsButton;
     private JButton exitButton;
 
+    public MainMenu(Point location, int width, int height) {
+        getWindows()[0].setLocation(location.x, location.y);
+        setSize(width, height);
+        initialize();
+    }
+
     public MainMenu() {
         super("V1rulent");
         initialize();
+
+        double y = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+        double x = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+
+        // Centra la ventana del juego al centro del monitor
+        getWindows()[0].setLocation((int) x / 2 - getWidth() / 2, (int) y / 2 - getHeight() / 2);
+    }
+
+    @Override
+    public void initialize() {
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new Dimension(960, 540));
 
         addComponentListener(new ComponentAdapter() {
             @Override
@@ -45,15 +65,15 @@ public class MainMenu extends JFrame implements IMenu {
                 int width = getWidth();
                 int height = getHeight();
 
-                // Asegúrate de que los botones no pasan el border inclinado negro
-                int percent = 9;
+                // Asegúrate de que los botones no pasan el border inclinado azul oscuro
+                int percent = 5;
 
                 if (width > 1550) {
                     percent += 10;
                 } else if (width > 1295) {
-                    percent += 7;
-                } else if (width > 1100) {
                     percent += 5;
+                } else if (width > 1100) {
+                    percent += 3;
                 }
 
                 buttonsPanel.setBorder(
@@ -91,18 +111,22 @@ public class MainMenu extends JFrame implements IMenu {
                 System.exit(0);
             }
         });
-    }
 
-    @Override
-    public void initialize() {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(960, 540));
+        creditsButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                // new Frame ... (getLocationOnScreen(), getWidth(), getHeight());
+                setVisible(false);
+            }
+        });
 
-        double y = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-        double x = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-
-        // Center the game window center to monitor's center
-        getWindows()[0].setLocation((int) x / 2 - getWidth() / 2, (int) y / 2 - getHeight() / 2);
+        try {
+            menuTitle.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("./src/assets/fonts/Orbitron-SemiBold.ttf")));
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
+        menuTitle.setFont(menuTitle.getFont().deriveFont(Font.PLAIN, 86));
 
         add(mainPanel);
 
