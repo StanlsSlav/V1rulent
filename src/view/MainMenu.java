@@ -11,23 +11,25 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+
+import static utils.Utilities.exitOnClick;
+
 
 public class MainMenu extends JFrame implements IMenu {
     private JLabel menuTitle;
 
     private JPanel mainPanel;
     private JPanel buttonsPanel;
+    private JPanel switcherPanel;
 
     private JButton playButton;
     private JButton rulesButton;
@@ -35,11 +37,7 @@ public class MainMenu extends JFrame implements IMenu {
     private JButton creditsButton;
     private JButton exitButton;
 
-    public MainMenu(Point location, int width, int height) {
-        getWindows()[0].setLocation(location.x, location.y);
-        setSize(width, height);
-        initialize();
-    }
+    private CardLayout switcherLayout;
 
     public MainMenu() {
         super("V1rulent");
@@ -56,6 +54,8 @@ public class MainMenu extends JFrame implements IMenu {
     public void initialize() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(960, 540));
+
+        switcherLayout = (CardLayout) switcherPanel.getLayout();
 
         addComponentListener(new ComponentAdapter() {
             @Override
@@ -76,7 +76,7 @@ public class MainMenu extends JFrame implements IMenu {
                     percent += 3;
                 }
 
-                buttonsPanel.setBorder(
+                switcherPanel.setBorder(
                       BorderFactory.createEmptyBorder(0, Math.round(width / 100f * percent), 0, 0));
 
                 double y = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
@@ -98,31 +98,18 @@ public class MainMenu extends JFrame implements IMenu {
                 int fivePercentOfHeight = height / 100 * 5;
 
                 mainPanel.setBorder(
-                      BorderFactory.createEmptyBorder(fivePercentOfHeight, fivePercentOfWidth, fivePercentOfHeight, fivePercentOfWidth));
+                      BorderFactory.createEmptyBorder(fivePercentOfHeight, fivePercentOfWidth, fivePercentOfHeight,
+                                                      fivePercentOfWidth));
 
                 System.out.printf("Width: %d - Height: %d%n", getWidth(), getHeight());
             }
         });
 
-        exitButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                System.exit(0);
-            }
-        });
-
-        creditsButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
-                // new Frame ... (getLocationOnScreen(), getWidth(), getHeight());
-                setVisible(false);
-            }
-        });
+        exitButton.addMouseListener(exitOnClick);
 
         try {
-            menuTitle.setFont(Font.createFont(Font.TRUETYPE_FONT, new File("./src/assets/fonts/Orbitron-SemiBold.ttf")));
+            menuTitle.setFont(
+                  Font.createFont(Font.TRUETYPE_FONT, new File("./src/assets/fonts/Orbitron-SemiBold.ttf")));
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }

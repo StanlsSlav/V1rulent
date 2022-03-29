@@ -1,12 +1,16 @@
 package utils;
 
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 
 public class Utilities {
-    private static JPanel currentPanel;
-
-    public static void changePanels(JFrame oldFrame, JFrame newFrame) {
-    }
+    public static MouseAdapter exitOnClick = new MouseAdapter() {
+        @Override
+        public void mousePressed(MouseEvent e) {
+            super.mousePressed(e);
+            System.exit(0);
+        }
+    };
 }
