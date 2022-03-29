@@ -18,17 +18,20 @@ import java.awt.FontFormatException;
 import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
 import static utils.Utilities.exitOnClick;
+import static utils.Utilities.switchToCard;
 
 
 public class MainMenu extends JFrame implements IMenu {
     private JLabel menuTitle;
 
     private JPanel mainPanel;
-    private JPanel buttonsPanel;
+    private JPanel mainMenu;
     private JPanel switcherPanel;
 
     private JButton playButton;
@@ -36,8 +39,8 @@ public class MainMenu extends JFrame implements IMenu {
     private JButton settingsButton;
     private JButton creditsButton;
     private JButton exitButton;
-
-    private CardLayout switcherLayout;
+    private JPanel creditsMenu;
+    private JButton creditsBackButton;
 
     public MainMenu() {
         super("V1rulent");
@@ -54,8 +57,6 @@ public class MainMenu extends JFrame implements IMenu {
     public void initialize() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(960, 540));
-
-        switcherLayout = (CardLayout) switcherPanel.getLayout();
 
         addComponentListener(new ComponentAdapter() {
             @Override
@@ -82,7 +83,7 @@ public class MainMenu extends JFrame implements IMenu {
                 double y = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
                 double x = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 
-                // TODO: activar despues para fijar pantalla
+                // TODO: activar despues en el menu de settings para fijar la pantalla
 //                if (x >= 1920 && y >= 1080) {
 //                    setSize(new Dimension(1920, 1080));
 //                } else if (x >= 1366 && y >= 768) {
@@ -102,6 +103,22 @@ public class MainMenu extends JFrame implements IMenu {
                                                       fivePercentOfWidth));
 
                 System.out.printf("Width: %d - Height: %d%n", getWidth(), getHeight());
+            }
+        });
+
+        creditsBackButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                switchToCard(switcherPanel, "MainMenu");
+            }
+        });
+
+        creditsButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                switchToCard(switcherPanel, "CreditsMenu");
             }
         });
 
@@ -130,5 +147,7 @@ public class MainMenu extends JFrame implements IMenu {
         settingsButton = new Button();
         creditsButton = new Button();
         exitButton = new Button();
+
+        creditsBackButton = new Button();
     }
 }
