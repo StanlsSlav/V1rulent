@@ -28,135 +28,10 @@
           <text value="V1RULENT"/>
         </properties>
       </component>
-      <grid id="11b5a" binding="buttonsPanel" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="25">
-        <margin top="0" left="0" bottom="0" right="0"/>
-        <constraints>
-          <grid row="0" column="1" row-span="6" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <alignmentX value="0.0"/>
-          <doubleBuffered value="true"/>
-          <opaque value="false"/>
-        </properties>
-        <border type="empty">
-          <size top="0" left="0" bottom="0" right="0"/>
-        </border>
-        <children>
-          <component id="666fe" class="javax.swing.JButton" binding="creditsButton" custom-create="true" default-binding="true">
-            <constraints>
-              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-3326145"/>
-              <borderPainted value="false"/>
-              <doubleBuffered value="false"/>
-              <focusCycleRoot value="false"/>
-              <focusPainted value="false"/>
-              <focusable value="true"/>
-              <font/>
-              <hideActionText value="false"/>
-              <horizontalAlignment value="2"/>
-              <horizontalTextPosition value="11"/>
-              <margin top="0" left="20" bottom="0" right="0"/>
-              <text value="Credits"/>
-            </properties>
-          </component>
-          <component id="7a434" class="javax.swing.JButton" binding="playButton" custom-create="true" default-binding="true">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <alignmentX value="0.0"/>
-              <background color="-657931"/>
-              <borderPainted value="false"/>
-              <doubleBuffered value="false"/>
-              <focusCycleRoot value="false"/>
-              <focusPainted value="false"/>
-              <focusTraversalPolicyProvider value="false"/>
-              <focusable value="true"/>
-              <font/>
-              <horizontalAlignment value="2"/>
-              <horizontalTextPosition value="11"/>
-              <margin top="0" left="20" bottom="0" right="0"/>
-              <text value="PLAY"/>
-            </properties>
-          </component>
-          <component id="502f1" class="javax.swing.JButton" binding="exitButton" custom-create="true" default-binding="true">
-            <constraints>
-              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-3326145"/>
-              <borderPainted value="false"/>
-              <doubleBuffered value="false"/>
-              <focusCycleRoot value="false"/>
-              <focusPainted value="false"/>
-              <focusable value="true"/>
-              <font/>
-              <hideActionText value="false"/>
-              <horizontalAlignment value="2"/>
-              <horizontalTextPosition value="11"/>
-              <margin top="0" left="20" bottom="0" right="0"/>
-              <text value="Exit"/>
-            </properties>
-          </component>
-          <component id="4faaa" class="javax.swing.JButton" binding="rulesButton" custom-create="true" default-binding="true">
-            <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-3326145"/>
-              <borderPainted value="false"/>
-              <doubleBuffered value="false"/>
-              <enabled value="true"/>
-              <focusCycleRoot value="false"/>
-              <focusPainted value="false"/>
-              <focusable value="true"/>
-              <font/>
-              <hideActionText value="false"/>
-              <horizontalAlignment value="2"/>
-              <horizontalTextPosition value="11"/>
-              <margin top="0" left="20" bottom="0" right="0"/>
-              <text value="Rules"/>
-            </properties>
-          </component>
-          <component id="ebe69" class="javax.swing.JButton" binding="settingsButton" custom-create="true" default-binding="true">
-            <constraints>
-              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-3326145"/>
-              <borderPainted value="false"/>
-              <doubleBuffered value="false"/>
-              <focusCycleRoot value="false"/>
-              <focusPainted value="false"/>
-              <focusable value="true"/>
-              <font/>
-              <hideActionText value="false"/>
-              <horizontalAlignment value="2"/>
-              <horizontalTextPosition value="11"/>
-              <margin top="0" left="20" bottom="0" right="0"/>
-              <text value="Settings"/>
-            </properties>
-          </component>
-          <vspacer id="883bc">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-            </constraints>
-          </vspacer>
-        </children>
-      </grid>
       <vspacer id="3dff3">
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
             <preferred-size width="11" height="57"/>
-          </grid>
-        </constraints>
-      </vspacer>
-      <vspacer id="56f5d">
-        <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
-            <preferred-size width="11" height="128"/>
           </grid>
         </constraints>
       </vspacer>
@@ -165,16 +40,143 @@
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
+      <vspacer id="942f7">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
       <vspacer id="6e35b">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
-      <vspacer id="5e46e">
+      <grid id="7815c" binding="switcherPanel" layout-manager="CardLayout" hgap="0" vgap="0" show="11b5a">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="1" row-span="6" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-      </vspacer>
+        <properties>
+          <opaque value="false"/>
+        </properties>
+        <border type="empty"/>
+        <children>
+          <grid id="11b5a" binding="buttonsPanel" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="25">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <card name="Card1"/>
+            </constraints>
+            <properties>
+              <opaque value="false"/>
+            </properties>
+            <border type="empty">
+              <size top="0" left="0" bottom="0" right="0"/>
+            </border>
+            <children>
+              <component id="666fe" class="javax.swing.JButton" binding="creditsButton" custom-create="true" default-binding="true">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-3326145"/>
+                  <borderPainted value="false"/>
+                  <doubleBuffered value="false"/>
+                  <focusCycleRoot value="false"/>
+                  <focusPainted value="false"/>
+                  <focusable value="true"/>
+                  <font/>
+                  <hideActionText value="false"/>
+                  <horizontalAlignment value="2"/>
+                  <horizontalTextPosition value="11"/>
+                  <margin top="0" left="20" bottom="0" right="0"/>
+                  <text value="Credits"/>
+                </properties>
+              </component>
+              <component id="7a434" class="javax.swing.JButton" binding="playButton" custom-create="true" default-binding="true">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <alignmentX value="0.0"/>
+                  <background color="-657931"/>
+                  <borderPainted value="false"/>
+                  <doubleBuffered value="false"/>
+                  <focusCycleRoot value="false"/>
+                  <focusPainted value="false"/>
+                  <focusTraversalPolicyProvider value="false"/>
+                  <focusable value="true"/>
+                  <font/>
+                  <horizontalAlignment value="2"/>
+                  <horizontalTextPosition value="11"/>
+                  <margin top="0" left="20" bottom="0" right="0"/>
+                  <text value="PLAY"/>
+                </properties>
+              </component>
+              <component id="502f1" class="javax.swing.JButton" binding="exitButton" custom-create="true" default-binding="true">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-3326145"/>
+                  <borderPainted value="false"/>
+                  <doubleBuffered value="false"/>
+                  <focusCycleRoot value="false"/>
+                  <focusPainted value="false"/>
+                  <focusable value="true"/>
+                  <font/>
+                  <hideActionText value="false"/>
+                  <horizontalAlignment value="2"/>
+                  <horizontalTextPosition value="11"/>
+                  <margin top="0" left="20" bottom="0" right="0"/>
+                  <text value="Exit"/>
+                </properties>
+              </component>
+              <component id="4faaa" class="javax.swing.JButton" binding="rulesButton" custom-create="true" default-binding="true">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-3326145"/>
+                  <borderPainted value="false"/>
+                  <doubleBuffered value="false"/>
+                  <enabled value="true"/>
+                  <focusCycleRoot value="false"/>
+                  <focusPainted value="false"/>
+                  <focusable value="true"/>
+                  <font/>
+                  <hideActionText value="false"/>
+                  <horizontalAlignment value="2"/>
+                  <horizontalTextPosition value="11"/>
+                  <margin top="0" left="20" bottom="0" right="0"/>
+                  <text value="Rules"/>
+                </properties>
+              </component>
+              <component id="ebe69" class="javax.swing.JButton" binding="settingsButton" custom-create="true" default-binding="true">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-3326145"/>
+                  <borderPainted value="false"/>
+                  <doubleBuffered value="false"/>
+                  <focusCycleRoot value="false"/>
+                  <focusPainted value="false"/>
+                  <focusable value="true"/>
+                  <font/>
+                  <hideActionText value="false"/>
+                  <horizontalAlignment value="2"/>
+                  <horizontalTextPosition value="11"/>
+                  <margin top="0" left="20" bottom="0" right="0"/>
+                  <text value="Settings"/>
+                </properties>
+              </component>
+              <vspacer id="883bc">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+            </children>
+          </grid>
+        </children>
+      </grid>
     </children>
   </grid>
 </form>
