@@ -23,8 +23,6 @@
         </constraints>
         <properties>
           <alignmentY value="0.0"/>
-          <font/>
-          <horizontalTextPosition value="11"/>
           <text value="V1RULENT"/>
         </properties>
       </component>
@@ -95,7 +93,6 @@
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <alignmentX value="0.0"/>
                   <background color="-657931"/>
                   <borderPainted value="false"/>
                   <doubleBuffered value="false"/>
@@ -156,14 +153,8 @@
                 <properties>
                   <background color="-3326145"/>
                   <borderPainted value="false"/>
-                  <doubleBuffered value="false"/>
-                  <focusCycleRoot value="false"/>
                   <focusPainted value="false"/>
-                  <focusable value="true"/>
-                  <font/>
-                  <hideActionText value="false"/>
                   <horizontalAlignment value="2"/>
-                  <horizontalTextPosition value="11"/>
                   <margin top="0" left="20" bottom="0" right="0"/>
                   <text value="Settings"/>
                 </properties>
@@ -175,17 +166,19 @@
               </vspacer>
             </children>
           </grid>
-          <grid id="85718" binding="creditsMenu" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="85718" binding="creditsMenu" layout-manager="GridLayoutManager" row-count="11" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="25">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <card name="CreditsMenu"/>
             </constraints>
-            <properties/>
+            <properties>
+              <opaque value="false"/>
+            </properties>
             <border type="none"/>
             <children>
               <component id="410be" class="javax.swing.JButton" binding="creditsBackButton" custom-create="true">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <background color="-3326145"/>
@@ -202,6 +195,184 @@
                   <text value="Back"/>
                 </properties>
               </component>
+              <component id="ab0e0" class="javax.swing.JLabel" binding="versionLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <foreground color="-657931"/>
+                  <horizontalAlignment value="0"/>
+                  <horizontalTextPosition value="0"/>
+                  <text value="Vervion 1.0.0"/>
+                  <verticalTextPosition value="3"/>
+                </properties>
+              </component>
+              <component id="c5275" class="javax.swing.JLabel" binding="authorsLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <foreground color="-657931"/>
+                  <horizontalAlignment value="0"/>
+                  <text value="Authors"/>
+                </properties>
+              </component>
+              <component id="ae39f" class="javax.swing.JLabel" binding="bryanLabel">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font size="28"/>
+                  <foreground color="-657931"/>
+                  <text value="Bryan Cayetano"/>
+                </properties>
+              </component>
+              <component id="977ed" class="javax.swing.JLabel" binding="iagoLabel">
+                <constraints>
+                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font size="28"/>
+                  <foreground color="-657931"/>
+                  <text value="Iago Prieto"/>
+                </properties>
+              </component>
+              <component id="9bc14" class="javax.swing.JLabel" binding="ericLabel">
+                <constraints>
+                  <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font size="28"/>
+                  <foreground color="-657931"/>
+                  <text value="Eric Serrano"/>
+                </properties>
+              </component>
+              <component id="23b0a" class="javax.swing.JLabel" binding="sebLabel">
+                <constraints>
+                  <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font size="28"/>
+                  <foreground color="-657931"/>
+                  <text value="Sebastian Stan"/>
+                </properties>
+              </component>
+              <vspacer id="4c9a9">
+                <constraints>
+                  <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+              <vspacer id="b451">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+              <vspacer id="d46e">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+              <vspacer id="c82b4">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+            </children>
+          </grid>
+          <grid id="9819" binding="gameStartMenu" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="25">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <card name="GameStartMenu"/>
+            </constraints>
+            <properties>
+              <opaque value="false"/>
+            </properties>
+            <border type="empty">
+              <size top="0" left="0" bottom="0" right="0"/>
+            </border>
+            <children>
+              <component id="a5809" class="javax.swing.JButton" binding="gameStartContinueButton" custom-create="true">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-657931"/>
+                  <borderPainted value="false"/>
+                  <doubleBuffered value="false"/>
+                  <focusCycleRoot value="false"/>
+                  <focusPainted value="false"/>
+                  <focusTraversalPolicyProvider value="false"/>
+                  <focusable value="true"/>
+                  <font/>
+                  <horizontalAlignment value="2"/>
+                  <horizontalTextPosition value="11"/>
+                  <margin top="0" left="15" bottom="0" right="0"/>
+                  <text value="CONTINUE"/>
+                </properties>
+              </component>
+              <component id="56b66" class="javax.swing.JButton" binding="gameStartBackButton" custom-create="true">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-3326145"/>
+                  <borderPainted value="false"/>
+                  <doubleBuffered value="false"/>
+                  <focusCycleRoot value="false"/>
+                  <focusPainted value="false"/>
+                  <focusable value="true"/>
+                  <font/>
+                  <hideActionText value="false"/>
+                  <horizontalAlignment value="2"/>
+                  <horizontalTextPosition value="11"/>
+                  <margin top="0" left="15" bottom="0" right="0"/>
+                  <text value="Back"/>
+                </properties>
+              </component>
+              <component id="de5d4" class="javax.swing.JButton" binding="gameStartLoadButton" custom-create="true">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-3326145"/>
+                  <borderPainted value="false"/>
+                  <doubleBuffered value="false"/>
+                  <enabled value="true"/>
+                  <focusCycleRoot value="false"/>
+                  <focusPainted value="false"/>
+                  <focusable value="true"/>
+                  <font/>
+                  <hideActionText value="false"/>
+                  <horizontalAlignment value="2"/>
+                  <horizontalTextPosition value="11"/>
+                  <margin top="0" left="15" bottom="0" right="0"/>
+                  <text value="Load Game"/>
+                </properties>
+              </component>
+              <component id="9fd2c" class="javax.swing.JButton" binding="gameStartNewButton" custom-create="true">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-3326145"/>
+                  <borderPainted value="false"/>
+                  <doubleBuffered value="false"/>
+                  <focusCycleRoot value="false"/>
+                  <focusPainted value="false"/>
+                  <focusable value="true"/>
+                  <font/>
+                  <hideActionText value="false"/>
+                  <horizontalAlignment value="2"/>
+                  <horizontalTextPosition value="11"/>
+                  <margin top="0" left="15" bottom="0" right="0"/>
+                  <text value="New Game"/>
+                </properties>
+              </component>
+              <vspacer id="1dc09">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
             </children>
           </grid>
         </children>
