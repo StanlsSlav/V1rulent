@@ -10,6 +10,7 @@ public enum Images {
     MainMenuBg(),
     CreditsMenuBg(),
     GameBg(),
+    PauseMenuBg(),
     Logo();
 
     Images() {

@@ -10,7 +10,7 @@
       <grid id="f94cd" binding="menusPanel" custom-create="true" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="25">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <card name="Menus"/>
+          <card name="MenusPanel"/>
         </constraints>
         <properties>
           <debugGraphicsOptions value="0"/>
@@ -283,6 +283,17 @@
         </constraints>
         <properties/>
         <border type="none"/>
+        <children/>
+      </grid>
+      <grid id="b3856" binding="pausePanel" custom-create="true" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <card name="PausePanel"/>
+        </constraints>
+        <properties/>
+        <border type="empty">
+          <size top="0" left="0" bottom="0" right="0"/>
+        </border>
         <children/>
       </grid>
     </children>
