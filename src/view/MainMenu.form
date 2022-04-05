@@ -50,17 +50,6 @@
                       <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-3326145"/>
-                      <borderPainted value="false"/>
-                      <doubleBuffered value="false"/>
-                      <focusCycleRoot value="false"/>
-                      <focusPainted value="false"/>
-                      <focusable value="true"/>
-                      <font/>
-                      <hideActionText value="false"/>
-                      <horizontalAlignment value="2"/>
-                      <horizontalTextPosition value="11"/>
-                      <margin top="0" left="20" bottom="0" right="0"/>
                       <text value="Credits"/>
                     </properties>
                   </component>
@@ -69,17 +58,6 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-657931"/>
-                      <borderPainted value="false"/>
-                      <doubleBuffered value="false"/>
-                      <focusCycleRoot value="false"/>
-                      <focusPainted value="false"/>
-                      <focusTraversalPolicyProvider value="false"/>
-                      <focusable value="true"/>
-                      <font/>
-                      <horizontalAlignment value="2"/>
-                      <horizontalTextPosition value="11"/>
-                      <margin top="0" left="20" bottom="0" right="0"/>
                       <text value="PLAY"/>
                     </properties>
                   </component>
@@ -88,17 +66,6 @@
                       <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-3326145"/>
-                      <borderPainted value="false"/>
-                      <doubleBuffered value="false"/>
-                      <focusCycleRoot value="false"/>
-                      <focusPainted value="false"/>
-                      <focusable value="true"/>
-                      <font/>
-                      <hideActionText value="false"/>
-                      <horizontalAlignment value="2"/>
-                      <horizontalTextPosition value="11"/>
-                      <margin top="0" left="20" bottom="0" right="0"/>
                       <text value="Exit"/>
                     </properties>
                   </component>
@@ -107,18 +74,6 @@
                       <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-3326145"/>
-                      <borderPainted value="false"/>
-                      <doubleBuffered value="false"/>
-                      <enabled value="true"/>
-                      <focusCycleRoot value="false"/>
-                      <focusPainted value="false"/>
-                      <focusable value="true"/>
-                      <font/>
-                      <hideActionText value="false"/>
-                      <horizontalAlignment value="2"/>
-                      <horizontalTextPosition value="11"/>
-                      <margin top="0" left="20" bottom="0" right="0"/>
                       <text value="Rules"/>
                     </properties>
                   </component>
@@ -127,11 +82,6 @@
                       <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-3326145"/>
-                      <borderPainted value="false"/>
-                      <focusPainted value="false"/>
-                      <horizontalAlignment value="2"/>
-                      <margin top="0" left="20" bottom="0" right="0"/>
                       <text value="Settings"/>
                     </properties>
                   </component>
@@ -154,14 +104,6 @@
                   <component id="48437" class="javax.swing.JButton" binding="creditsBackButton" custom-create="true">
                     <constraints border-constraint="South"/>
                     <properties>
-                      <background color="-3326145"/>
-                      <borderPainted value="false"/>
-                      <doubleBuffered value="false"/>
-                      <focusCycleRoot value="false"/>
-                      <focusPainted value="false"/>
-                      <focusable value="true"/>
-                      <horizontalAlignment value="2"/>
-                      <margin top="0" left="20" bottom="0" right="0"/>
                       <text value="Back"/>
                     </properties>
                   </component>
@@ -184,17 +126,6 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-657931"/>
-                      <borderPainted value="false"/>
-                      <doubleBuffered value="false"/>
-                      <focusCycleRoot value="false"/>
-                      <focusPainted value="false"/>
-                      <focusTraversalPolicyProvider value="false"/>
-                      <focusable value="true"/>
-                      <font/>
-                      <horizontalAlignment value="2"/>
-                      <horizontalTextPosition value="11"/>
-                      <margin top="0" left="15" bottom="0" right="0"/>
                       <text value="CONTINUE"/>
                     </properties>
                   </component>
@@ -203,17 +134,6 @@
                       <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-3326145"/>
-                      <borderPainted value="false"/>
-                      <doubleBuffered value="false"/>
-                      <focusCycleRoot value="false"/>
-                      <focusPainted value="false"/>
-                      <focusable value="true"/>
-                      <font/>
-                      <hideActionText value="false"/>
-                      <horizontalAlignment value="2"/>
-                      <horizontalTextPosition value="11"/>
-                      <margin top="0" left="15" bottom="0" right="0"/>
                       <text value="Back"/>
                     </properties>
                   </component>
@@ -222,18 +142,6 @@
                       <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-3326145"/>
-                      <borderPainted value="false"/>
-                      <doubleBuffered value="false"/>
-                      <enabled value="true"/>
-                      <focusCycleRoot value="false"/>
-                      <focusPainted value="false"/>
-                      <focusable value="true"/>
-                      <font/>
-                      <hideActionText value="false"/>
-                      <horizontalAlignment value="2"/>
-                      <horizontalTextPosition value="11"/>
-                      <margin top="0" left="15" bottom="0" right="0"/>
                       <text value="Load Game"/>
                     </properties>
                   </component>
@@ -242,17 +150,6 @@
                       <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <background color="-3326145"/>
-                      <borderPainted value="false"/>
-                      <doubleBuffered value="false"/>
-                      <focusCycleRoot value="false"/>
-                      <focusPainted value="false"/>
-                      <focusable value="true"/>
-                      <font/>
-                      <hideActionText value="false"/>
-                      <horizontalAlignment value="2"/>
-                      <horizontalTextPosition value="11"/>
-                      <margin top="0" left="15" bottom="0" right="0"/>
                       <text value="New Game"/>
                     </properties>
                   </component>

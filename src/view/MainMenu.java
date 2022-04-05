@@ -21,6 +21,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
+import static model.base.Button.ButtonType;
 import static utils.Utilities.*;
 
 
@@ -47,10 +48,14 @@ public class MainMenu extends JFrame implements IMenu {
     private JButton gameStartLoadButton;
     private JButton gameStartNewButton;
 
+    private JButton pauseContinueBtn;
+    private JButton pauseSettingsBtn;
+    private JButton pauseExitBtn;
+
     private final MouseAdapter switchToGame = new MouseAdapter() {
         @Override
-        public void mousePressed(MouseEvent e) {
-            super.mousePressed(e);
+        public void mouseClicked(MouseEvent e) {
+            super.mouseClicked(e);
             switchToCard(rootPanel, "GamePanel");
         }
     };
@@ -110,44 +115,10 @@ public class MainMenu extends JFrame implements IMenu {
             }
         });
 
-//        pausePanel.addComponentListener(new ComponentAdapter() {
-//            @Override
-//            public void componentResized(ComponentEvent e) {
-//                super.componentResized(e);
-//
-//                float percentage = 37.37f;
-//                int horizontalGapLength = Math.round(getWidth() / 100f * percentage);
-//
-//                pausePanel.setBorder(BorderFactory.createEmptyBorder(
-//                      0, horizontalGapLength, Math.round(getHeight() / 100f * 10), horizontalGapLength));
-//            }
-//        });
-
-        JButton pauseContinueBtn = new Button();
-        pauseContinueBtn.setBounds(357, 248, 240, 47);
-        pauseContinueBtn.setFocusPainted(false);
-        pauseContinueBtn.setBorderPainted(false);
-        pauseContinueBtn.setContentAreaFilled(false);
-        pauseContinueBtn.setVisible(true);
-
-        JButton pauseSettingsBtn = new JButton();
-        pauseSettingsBtn.setBounds(357, 318, 240, 47);
-        pauseSettingsBtn.setFocusPainted(false);
-        pauseSettingsBtn.setBorderPainted(false);
-        pauseSettingsBtn.setContentAreaFilled(false);
-        pauseSettingsBtn.setVisible(true);
-
-        JButton pauseExitBtn = new JButton();
-        pauseExitBtn.setBounds(357, 386, 240, 47);
-        pauseExitBtn.setFocusPainted(false);
-        pauseExitBtn.setBorderPainted(false);
-        pauseExitBtn.setContentAreaFilled(false);
-        pauseExitBtn.setVisible(true);
-
         pauseContinueBtn.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
                 switchToCard(rootPanel, "MenusPanel");
             }
         });
@@ -159,8 +130,8 @@ public class MainMenu extends JFrame implements IMenu {
 
         gamePanel.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
 
                 if (e.getButton() == MouseEvent.BUTTON2) {
                     switchToCard(rootPanel, "PausePanel");
@@ -170,8 +141,8 @@ public class MainMenu extends JFrame implements IMenu {
 
         creditsBackButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
 
                 if (isLeftButtonPressed(e)) {
                     switchToCard(switcherPanel, "MainMenu");
@@ -182,8 +153,8 @@ public class MainMenu extends JFrame implements IMenu {
 
         creditsButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
 
                 if (isLeftButtonPressed(e)) {
                     switchToCard(switcherPanel, "CreditsMenu");
@@ -194,8 +165,8 @@ public class MainMenu extends JFrame implements IMenu {
 
         gameStartBackButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
 
                 if (isLeftButtonPressed(e)) {
                     switchToCard(switcherPanel, "MainMenu");
@@ -205,8 +176,8 @@ public class MainMenu extends JFrame implements IMenu {
 
         playButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
 
                 if (isLeftButtonPressed(e)) {
                     switchToCard(switcherPanel, "GameStartMenu");
@@ -229,7 +200,7 @@ public class MainMenu extends JFrame implements IMenu {
         gamePanel = new Panel(Images.GameBg.get());
         pausePanel = new Panel(Images.PauseMenuBg.get());
 
-        playButton = new Button();
+        playButton = new Button(ButtonType.PRIMARY);
         rulesButton = new Button();
         settingsButton = new Button();
         creditsButton = new Button();
@@ -241,5 +212,12 @@ public class MainMenu extends JFrame implements IMenu {
         gameStartLoadButton = new Button();
         gameStartNewButton = new Button();
         gameStartBackButton = new Button();
+
+        pauseContinueBtn = new Button("Continue", ButtonType.PRIMARY);
+        pauseContinueBtn.setBounds(357, 248, 240, 47);
+        pauseSettingsBtn = new Button("Settings");
+        pauseSettingsBtn.setBounds(357, 318, 240, 47);
+        pauseExitBtn = new Button("Exit");
+        pauseExitBtn.setBounds(357, 386, 240, 47);
     }
 }
