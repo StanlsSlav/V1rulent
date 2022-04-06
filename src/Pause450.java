@@ -1,3 +1,5 @@
+package src;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -5,6 +7,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+
+
 
 public class Pause450 extends JFrame {
 
@@ -20,27 +24,32 @@ public class Pause450 extends JFrame {
 
         JButton botoonContinue = new JButton();
 
+        botoonContinue.setFocusPainted(false);
+        botoonContinue.setBorderPainted(false);
+        botoonContinue.setContentAreaFilled(false);
 
         botoonContinue.setOpaque(true);
-        botoonContinue.setIcon(new ImageIcon(("img/pause/540/continue.png")));
+
+        botoonContinue.setOpaque(true);
+        botoonContinue.setIcon(new ImageIcon(("img/pause/540/btn/continue/stages/continue.png")));
         botoonContinue.addMouseListener(new MouseAdapter() {
 
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseClicked(e);
-                botoonContinue.setIcon(new ImageIcon(("img/pause/540/continue hover.png")));
+                botoonContinue.setIcon(new ImageIcon(("img/pause/540/btn/continue/stages/continue hover.png")));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseClicked(e);
-                botoonContinue.setIcon(new ImageIcon(("img/pause/540/continue.png")));
+                botoonContinue.setIcon(new ImageIcon(("img/pause/540/btn/continue.png")));
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mouseClicked(e);
-                botoonContinue.setIcon(new ImageIcon(("img/pause/540/continue click.png")));
+                botoonContinue.setIcon(new ImageIcon(("img/pause/540/continue/stages/continue click.png")));
 
             }
 
@@ -62,25 +71,25 @@ public class Pause450 extends JFrame {
         botoonSettings.setContentAreaFilled(false);
 
         botoonSettings.setOpaque(true);
-        botoonSettings.setIcon(new ImageIcon(("img/pause/540/settings.png")));
+        botoonSettings.setIcon(new ImageIcon(("img/pause/540/btn/settings/stages/settings.png")));
         botoonSettings.addMouseListener(new MouseAdapter() {
 
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseClicked(e);
-                botoonSettings.setIcon(new ImageIcon(("img/pause/540/settings hover.png")));
+                botoonSettings.setIcon(new ImageIcon(("img/pause/540/btn/settings/stages/settings hover.png")));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseClicked(e);
-                botoonSettings.setIcon(new ImageIcon(("img/pause/540/settings.png")));
+                botoonSettings.setIcon(new ImageIcon(("img/pause/540/btn/settings/stages/settings.png")));
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mouseClicked(e);
-                botoonSettings.setIcon(new ImageIcon(("img/pause/540/settings click.png")));
+                botoonSettings.setIcon(new ImageIcon(("img/pause/540/btn/settings/stages/settings click.png")));
             }
 
         });
@@ -94,25 +103,25 @@ public class Pause450 extends JFrame {
         exit.setContentAreaFilled(false);
 
         exit.setOpaque(true);
-        exit.setIcon(new ImageIcon(("img/pause/540/Exit.png")));
+        exit.setIcon(new ImageIcon(("img/pause/540/btn/Exit/stages/Exit.png")));
         exit.addMouseListener(new MouseAdapter() {
 
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseClicked(e);
-                exit.setIcon(new ImageIcon(("img/pause/540/Exit hover.png")));
+                exit.setIcon(new ImageIcon(("img/pause/540/btn/Exit/stages/Exit hover.png")));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseClicked(e);
-                exit.setIcon(new ImageIcon(("img/pause/540/Exit.png")));
+                exit.setIcon(new ImageIcon(("img/pause/540/btn/Exit/stages/Exit.png")));
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mouseClicked(e);
-                exit.setIcon(new ImageIcon(("img/pause/540/Exit click.png")));
+                exit.setIcon(new ImageIcon(("img/pause/540/btn/Exit/stages/Exit click.png")));
             }
 
 
@@ -122,7 +131,7 @@ public class Pause450 extends JFrame {
         setVisible(true);
 
         try {
-            FondoSwing fondo = new FondoSwing(ImageIO.read(new File("img/pause/540/PAUSE 540.jpg")));
+            src.FondoSwing fondo = new src.FondoSwing(ImageIO.read(new File("img/pause/540/bg/PAUSE 540.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
             panel.setBorder(fondo);
         } catch (IOException ex) {
