@@ -9,8 +9,12 @@ import utils.Images;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
 import javax.swing.WindowConstants;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -18,6 +22,10 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyVetoException;
+import java.beans.VetoableChangeListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -47,6 +55,9 @@ public class MainMenu extends JFrame implements IMenu {
     private JButton gameStartBackButton;
     private JButton gameStartLoadButton;
     private JButton gameStartNewButton;
+    private JPanel settingsMenu;
+    private JButton settingsBackButton;
+    private JComboBox<Integer> comboBox1;
 
     private JButton pauseContinueBtn;
     private JButton pauseSettingsBtn;
@@ -75,6 +86,30 @@ public class MainMenu extends JFrame implements IMenu {
 
         // Centra la ventana del juego al centro del monitor
         getWindows()[0].setLocation((int) x / 2 - getWidth() / 2, (int) y / 2 - getHeight() / 2);
+
+        comboBox1.addPropertyChangeListener(evt -> {
+            if (null == comboBox1.getSelectedItem()) {
+                return;
+            }
+
+            Dimension newDimension = new Dimension(
+                  (int) comboBox1.getSelectedItem(), Math.round((int) comboBox1.getSelectedItem() * 1.7778f));
+
+            System.out.printf("Height%f -- Width%f%n", newDimension.getHeight(), newDimension.getWidth());
+            setSize(newDimension);
+        });
+
+        comboBox1.addVetoableChangeListener(evt -> {
+            if (null == comboBox1.getSelectedItem()) {
+                return;
+            }
+
+            Dimension newDimension = new Dimension(
+                  (int) comboBox1.getSelectedItem(), Math.round((int) comboBox1.getSelectedItem() * 1.7778f));
+
+            System.out.printf("Height%f -- Width%f%n", newDimension.getHeight(), newDimension.getWidth());
+            setSize(newDimension);
+        });
     }
 
     @Override
@@ -185,6 +220,32 @@ public class MainMenu extends JFrame implements IMenu {
             }
         });
 
+        settingsButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                if (isLeftButtonPressed(e)) {
+                    switchToCard(switcherPanel, "SettingsMenu");
+                }
+            }
+        });
+
+        settingsBackButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                if (isLeftButtonPressed(e)) {
+                    switchToCard(switcherPanel, "MainMenu");
+                }
+            }
+        });
+
+        comboBox1.addItem(540);
+        comboBox1.addItem(720);
+        comboBox1.addItem(1080);
+
         gameStartContinueButton.addMouseListener(switchToGame);
         gameStartNewButton.addMouseListener(switchToGame);
 
@@ -219,5 +280,7 @@ public class MainMenu extends JFrame implements IMenu {
         pauseSettingsBtn.setBounds(357, 318, 240, 47);
         pauseExitBtn = new Button("Exit");
         pauseExitBtn.setBounds(357, 386, 240, 47);
+
+        settingsBackButton = new Button();
     }
 }
