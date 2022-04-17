@@ -12,28 +12,24 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JSlider;
-import javax.swing.JSpinner;
 import javax.swing.WindowConstants;
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyVetoException;
-import java.beans.VetoableChangeListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 import static model.base.Button.ButtonType;
 import static utils.Utilities.*;
 
 
 public class MainMenu extends JFrame implements IMenu {
+    private final JFrame instance = this;
+
     private JPanel rootPanel;
 
     private JPanel menusPanel;
@@ -57,7 +53,7 @@ public class MainMenu extends JFrame implements IMenu {
     private JButton gameStartNewButton;
     private JPanel settingsMenu;
     private JButton settingsBackButton;
-    private JComboBox<Integer> comboBox1;
+    private JComboBox<Integer> resolutionsComboBox;
 
     private JButton pauseContinueBtn;
     private JButton pauseSettingsBtn;
@@ -81,41 +77,14 @@ public class MainMenu extends JFrame implements IMenu {
             e.printStackTrace();
         }
 
-        double y = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-        double x = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-
-        // Centra la ventana del juego al centro del monitor
-        getWindows()[0].setLocation((int) x / 2 - getWidth() / 2, (int) y / 2 - getHeight() / 2);
-
-        comboBox1.addPropertyChangeListener(evt -> {
-            if (null == comboBox1.getSelectedItem()) {
-                return;
-            }
-
-            Dimension newDimension = new Dimension(
-                  (int) comboBox1.getSelectedItem(), Math.round((int) comboBox1.getSelectedItem() * 1.7778f));
-
-            System.out.printf("Height%f -- Width%f%n", newDimension.getHeight(), newDimension.getWidth());
-            setSize(newDimension);
-        });
-
-        comboBox1.addVetoableChangeListener(evt -> {
-            if (null == comboBox1.getSelectedItem()) {
-                return;
-            }
-
-            Dimension newDimension = new Dimension(
-                  (int) comboBox1.getSelectedItem(), Math.round((int) comboBox1.getSelectedItem() * 1.7778f));
-
-            System.out.printf("Height%f -- Width%f%n", newDimension.getHeight(), newDimension.getWidth());
-            setSize(newDimension);
-        });
+        centerScreen(instance);
     }
 
     @Override
     public void initialize() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(960, 540));
+        setResizable(false);
 
         addComponentListener(new ComponentAdapter() {
             @Override
@@ -154,7 +123,7 @@ public class MainMenu extends JFrame implements IMenu {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                switchToCard(rootPanel, "MenusPanel");
+                switchToCard(rootPanel, "GamePanel");
             }
         });
 
@@ -242,9 +211,34 @@ public class MainMenu extends JFrame implements IMenu {
             }
         });
 
-        comboBox1.addItem(540);
-        comboBox1.addItem(720);
-        comboBox1.addItem(1080);
+        pauseSettingsBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                if (isLeftButtonPressed(e)) {
+                    switchToCard(switcherPanel, "SettingsMenu");
+                    switchToCard(rootPanel, "MenusPanel");
+                }
+            }
+        });
+
+        resolutionsComboBox.addItem(540);
+        resolutionsComboBox.addItem(720);
+        resolutionsComboBox.addItem(1080);
+        resolutionsComboBox.addItemListener(e -> {
+            Dictionary<Integer, Integer> resolutionsAvailable = new Hashtable<>();
+
+            resolutionsAvailable.put(540, 960);
+            resolutionsAvailable.put(720, 1280);
+            resolutionsAvailable.put(1080, 1920);
+
+            int height = (int) e.getItem();
+            int width = resolutionsAvailable.get(height);
+
+            setSize(new Dimension(width, height));
+            centerScreen(instance);
+        });
 
         gameStartContinueButton.addMouseListener(switchToGame);
         gameStartNewButton.addMouseListener(switchToGame);
