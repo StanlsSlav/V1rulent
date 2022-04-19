@@ -10,7 +10,6 @@ import java.awt.event.MouseEvent;
 
 import static java.awt.Font.PLAIN;
 
-
 public class Button extends JButton {
     public enum ButtonType {
         PRIMARY,
@@ -19,25 +18,44 @@ public class Button extends JButton {
 
     private final ButtonType type;
 
-    public Button() {
+    private String menuName;
+    private int windowWidth;
+
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
+    }
+
+    public void setWindowWidth(int windowWidth) {
+        this.windowWidth = windowWidth;
+    }
+
+    public Button(String menuName, int windowWidth) {
         type = ButtonType.SECONDARY;
+        setMenuName(menuName);
+        setWindowWidth(windowWidth);
         initialize();
     }
 
-    public Button(String text) {
+    public Button(String text, String menuName, int windowWidth) {
         type = ButtonType.SECONDARY;
         setText(text);
+        setMenuName(menuName);
+        setWindowWidth(windowWidth);
         initialize();
     }
 
-    public Button(ButtonType type) {
+    public Button(ButtonType type, String menuName, int windowWidth) {
         this.type = type;
+        setMenuName(menuName);
+        setWindowWidth(windowWidth);
         initialize();
     }
 
-    public Button(String text, ButtonType type) {
+    public Button(String text, ButtonType type, String menuName, int windowWidth) {
         this.type = type;
         setText(text);
+        setMenuName(menuName);
+        setWindowWidth(windowWidth);
         initialize();
     }
 

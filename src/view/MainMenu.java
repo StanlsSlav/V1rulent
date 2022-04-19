@@ -255,26 +255,26 @@ public class MainMenu extends JFrame implements IMenu {
         gamePanel = new Panel(Images.GameBg.get());
         pausePanel = new Panel(Images.PauseMenuBg.get());
 
-        playButton = new Button(ButtonType.PRIMARY);
-        rulesButton = new Button();
-        settingsButton = new Button();
-        creditsButton = new Button();
-        exitButton = new Button();
+        playButton = new Button(ButtonType.PRIMARY, "mainMenu", getWidth());
+        rulesButton = new Button("mainMenu", getWidth());
+        settingsButton = new Button("mainMenu", getWidth());
+        creditsButton = new Button("mainMenu", getWidth());
+        exitButton = new Button("mainMenu", getWidth());
 
-        creditsBackButton = new Button();
+        creditsBackButton = new Button("creditsMenu", getWidth());
 
-        gameStartContinueButton = new Button();
-        gameStartLoadButton = new Button();
-        gameStartNewButton = new Button();
-        gameStartBackButton = new Button();
+        gameStartContinueButton = new Button("gameStartMenu", getWidth());
+        gameStartLoadButton = new Button("gameStartMenu", getWidth());
+        gameStartNewButton = new Button("gameStartMenu", getWidth());
+        gameStartBackButton = new Button("gameStartMenu", getWidth());
 
-        pauseContinueBtn = new Button("Continue", ButtonType.PRIMARY);
+        pauseContinueBtn = new Button("Continue", ButtonType.PRIMARY, "pauseMenu", getWidth());
         pauseContinueBtn.setBounds(357, 248, 240, 47);
-        pauseSettingsBtn = new Button("Settings");
+        pauseSettingsBtn = new Button("Settings", "pauseMenu", getWidth());
         pauseSettingsBtn.setBounds(357, 318, 240, 47);
-        pauseExitBtn = new Button("Exit");
+        pauseExitBtn = new Button("Exit", "pauseMenu", getWidth());
         pauseExitBtn.setBounds(357, 386, 240, 47);
 
-        settingsBackButton = new Button();
+        settingsBackButton = new Button("settingsMenu", getWidth());
     }
 }
