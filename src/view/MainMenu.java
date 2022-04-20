@@ -26,7 +26,6 @@ import java.util.Hashtable;
 import static model.base.Button.ButtonType;
 import static utils.Utilities.*;
 
-
 public class MainMenu extends JFrame implements IMenu {
     private final JFrame instance = this;
 

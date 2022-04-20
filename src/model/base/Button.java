@@ -1,42 +1,51 @@
 package model.base;
 
 
+import model.game.ButtonState;
+import model.interfaces.IPositionable;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.nio.file.Paths;
 
 import static java.awt.Font.PLAIN;
 
-public class Button extends JButton {
+public class Button extends JButton implements IPositionable {
     public enum ButtonType {
         PRIMARY,
         SECONDARY
     }
 
+    private String basePath = "assets/img";
     private final ButtonType type;
-
+    private ButtonState state;
     private String menuName;
-    private int windowWidth;
+    private Integer windowWidth;
+    private String name;
+    private Image backgroundImage;
 
     public void setMenuName(String menuName) {
         this.menuName = menuName;
     }
 
-    public void setWindowWidth(int windowWidth) {
+    public void setWindowWidth(Integer windowWidth) {
         this.windowWidth = windowWidth;
     }
 
-    public Button(String menuName, int windowWidth) {
+    public Button(String menuName, Integer windowWidth) {
         type = ButtonType.SECONDARY;
         setMenuName(menuName);
         setWindowWidth(windowWidth);
         initialize();
     }
 
-    public Button(String text, String menuName, int windowWidth) {
+    public Button(String text, String menuName, Integer windowWidth) {
         type = ButtonType.SECONDARY;
         setText(text);
         setMenuName(menuName);
@@ -44,22 +53,37 @@ public class Button extends JButton {
         initialize();
     }
 
-    public Button(ButtonType type, String menuName, int windowWidth) {
+    public Button(ButtonType type, String menuName, Integer windowWidth) {
         this.type = type;
         setMenuName(menuName);
         setWindowWidth(windowWidth);
         initialize();
     }
 
-    public Button(String text, ButtonType type, String menuName, int windowWidth) {
+    public Button(String text, ButtonType type, String menuName, Integer windowWidth) {
         this.type = type;
         setText(text);
         setMenuName(menuName);
         setWindowWidth(windowWidth);
         initialize();
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+    }
+
+    @Override
+    public void updateImage() {
+        // TODO: Format
+        backgroundImage = getToolkit().getImage(
+              basePath + menuName + windowWidth + "btn" + name + "stages" + state + ".png");
     }
 
     private void initialize() {
+        backgroundImage = getToolkit().getImage(basePath + "/");
+
         setFont(new Font("Roboto Light", PLAIN, 40));
         setForeground(Color.BLACK);
 
