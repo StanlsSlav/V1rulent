@@ -4,10 +4,10 @@ package model.game;
 import java.util.ArrayList;
 
 /**
- * Mapa del mundo
+ * Representante del mapa del mundo (juego)
  */
 public class Map {
-    public ArrayList<Continent> continents;
+    public ArrayList<City> cities;
 
     public static int citiesBetween(City startingPoint, City destination) throws Exception {
         throw new Exception();
