@@ -1,7 +1,7 @@
 package model;
 
 
-public class Position {
+public class Location {
     public int x;
     public int y;
 }

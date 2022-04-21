@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-import static model.base.Button.ButtonType;
 import static utils.Utilities.*;
 
 public class MainMenu extends JFrame implements IMenu {
@@ -250,30 +249,30 @@ public class MainMenu extends JFrame implements IMenu {
     }
 
     private void createUIComponents() {
-        menusPanel = new Panel(Images.MainMenuBg.get());
-        gamePanel = new Panel(Images.GameBg.get());
-        pausePanel = new Panel(Images.PauseMenuBg.get());
+        menusPanel = new Panel("mainMenu", getWindows()[0]);
+        gamePanel = new Panel("game", getWindows()[0]);
+        pausePanel = new Panel("pauseMenu", getWindows()[0]);
 
-        playButton = new Button(ButtonType.PRIMARY, "mainMenu", getWidth());
-        rulesButton = new Button("mainMenu", getWidth());
-        settingsButton = new Button("mainMenu", getWidth());
-        creditsButton = new Button("mainMenu", getWidth());
-        exitButton = new Button("mainMenu", getWidth());
+        playButton = new Button("play", "mainMenu", getWindows()[0]);
+        rulesButton = new Button("rules", "mainMenu", getWindows()[0]);
+        settingsButton = new Button("settings", "mainMenu", getWindows()[0]);
+        creditsButton = new Button("credits", "mainMenu", getWindows()[0]);
+        exitButton = new Button("exit", "mainMenu", getWindows()[0]);
 
-        creditsBackButton = new Button("creditsMenu", getWidth());
+        creditsBackButton = new Button("back", "creditsMenu", getWindows()[0]);
 
-        gameStartContinueButton = new Button("gameStartMenu", getWidth());
-        gameStartLoadButton = new Button("gameStartMenu", getWidth());
-        gameStartNewButton = new Button("gameStartMenu", getWidth());
-        gameStartBackButton = new Button("gameStartMenu", getWidth());
+        gameStartContinueButton = new Button("continue", "gameStartMenu", getWindows()[0]);
+        gameStartLoadButton = new Button("load", "gameStartMenu", getWindows()[0]);
+        gameStartNewButton = new Button("new", "gameStartMenu", getWindows()[0]);
+        gameStartBackButton = new Button("back", "gameStartMenu", getWindows()[0]);
 
-        pauseContinueBtn = new Button("Continue", ButtonType.PRIMARY, "pauseMenu", getWidth());
+        pauseContinueBtn = new Button("continue", "pauseMenu", getWindows()[0]);
         pauseContinueBtn.setBounds(357, 248, 240, 47);
-        pauseSettingsBtn = new Button("Settings", "pauseMenu", getWidth());
+        pauseSettingsBtn = new Button("settings", "pauseMenu", getWindows()[0]);
         pauseSettingsBtn.setBounds(357, 318, 240, 47);
-        pauseExitBtn = new Button("Exit", "pauseMenu", getWidth());
+        pauseExitBtn = new Button("exit", "pauseMenu", getWindows()[0]);
         pauseExitBtn.setBounds(357, 386, 240, 47);
 
-        settingsBackButton = new Button("settingsMenu", getWidth());
+        settingsBackButton = new Button("back", "settingsMenu", getWindows()[0]);
     }
 }

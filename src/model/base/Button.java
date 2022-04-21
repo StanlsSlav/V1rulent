@@ -1,103 +1,66 @@
 package model.base;
 
 
-import model.game.ButtonState;
+import model.ButtonState;
 import model.interfaces.IPositionable;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.nio.file.Paths;
-
-import static java.awt.Font.PLAIN;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Button extends JButton implements IPositionable {
-    public enum ButtonType {
-        PRIMARY,
-        SECONDARY
-    }
-
-    private String basePath = "assets/img";
-    private final ButtonType type;
-    private ButtonState state;
+    private ButtonState state = ButtonState.Idle;
     private String menuName;
-    private Integer windowWidth;
+    private Window parentWindow;
     private String name;
-    private Image backgroundImage;
 
     public void setMenuName(String menuName) {
-        this.menuName = menuName;
-    }
-
-    public void setWindowWidth(Integer windowWidth) {
-        this.windowWidth = windowWidth;
-    }
-
-    public Button(String menuName, Integer windowWidth) {
-        type = ButtonType.SECONDARY;
-        setMenuName(menuName);
-        setWindowWidth(windowWidth);
-        initialize();
-    }
-
-    public Button(String text, String menuName, Integer windowWidth) {
-        type = ButtonType.SECONDARY;
-        setText(text);
-        setMenuName(menuName);
-        setWindowWidth(windowWidth);
-        initialize();
-    }
-
-    public Button(ButtonType type, String menuName, Integer windowWidth) {
-        this.type = type;
-        setMenuName(menuName);
-        setWindowWidth(windowWidth);
-        initialize();
-    }
-
-    public Button(String text, ButtonType type, String menuName, Integer windowWidth) {
-        this.type = type;
-        setText(text);
-        setMenuName(menuName);
-        setWindowWidth(windowWidth);
-        initialize();
+        this.menuName = menuName.trim();
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+    public void setName(String name) {
+        this.name = name.trim().toLowerCase();
+    }
+
+    public void setParentWindow(Window parentWindow) {
+        this.parentWindow = parentWindow;
+    }
+
+    public Button(String name, String menuName, Window parentWindow) {
+        setName(name);
+        setMenuName(menuName);
+        setParentWindow(parentWindow);
+        initialize();
     }
 
     @Override
     public void updateImage() {
-        // TODO: Format
-        backgroundImage = getToolkit().getImage(
-              basePath + menuName + windowWidth + "btn" + name + "stages" + state + ".png");
+        File imageFile = new File(String.format("./src/assets/img/%s/%d/btn/%s/stages/%s.png",
+              menuName, parentWindow.getHeight() == 0 ? 540 : parentWindow.getHeight(), name, state.name().toLowerCase()));
+
+        if (!imageFile.exists()) {
+            try {
+                throw new FileNotFoundException();
+            } catch (FileNotFoundException ig) {
+                System.err.printf("Check path '%s'%n", imageFile.getPath());
+            }
+        }
+
+        setIcon(new ImageIcon(getToolkit().getImage(imageFile.getAbsolutePath())));
     }
 
     private void initialize() {
-        backgroundImage = getToolkit().getImage(basePath + "/");
+        updateImage();
 
-        setFont(new Font("Roboto Light", PLAIN, 40));
-        setForeground(Color.BLACK);
-
-        setHorizontalAlignment(LEFT);
-        setHorizontalTextPosition(CENTER);
-
-        setFocusPainted(false);
-        setBorderPainted(false);
-
-        if (type == ButtonType.PRIMARY) {
-            setBackground(Color.decode("#F5F5F5"));
-        } else {
-            setBackground(Color.decode("#CD3F3F"));
-        }
+        setOpaque(false);
+        setContentAreaFilled(false);
+        setBorderPainted(true);
 
         setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
 
@@ -106,48 +69,32 @@ public class Button extends JButton implements IPositionable {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                if (type == ButtonType.PRIMARY) {
-                    setBackground(Color.decode("#777777"));
-                    return;
-                }
-
-                setBackground(Color.decode("#480808"));
+                state = ButtonState.Clicked;
+                updateImage();
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
 
-                if (type == ButtonType.PRIMARY) {
-                    setBackground(Color.decode("#C0C0C0"));
-                    return;
-                }
-
-                setBackground(Color.decode("#8E1E1E"));
+                state = ButtonState.Idle;
+                updateImage();
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
 
-                if (type == ButtonType.PRIMARY) {
-                    setBackground(Color.decode("#C0C0C0"));
-                    return;
-                }
-
-                setBackground(Color.decode("#8E1E1E"));
+                state = ButtonState.Hover;
+                updateImage();
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
 
-                if (type == ButtonType.PRIMARY) {
-                    setBackground(Color.decode("#F5F5F5"));
-                    return;
-                }
-
-                setBackground(Color.decode("#CD3F3F"));
+                state = ButtonState.Idle;
+                updateImage();
             }
         });
     }
