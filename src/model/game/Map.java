@@ -3,11 +3,13 @@ package model.game;
 
 import java.util.ArrayList;
 
+import static utils.Utilities.loadCities;
+
 /**
  * Representante del mapa del mundo (juego)
  */
 public class Map {
-    public static Map instance;
+    private static Map instance;
 
     public static Map getInstance() {
         if (null == instance) {
@@ -15,6 +17,12 @@ public class Map {
         }
 
         return instance;
+    }
+
+    public Map() {
+        if (instance.cities.size() == 0) {
+            loadCities();
+        }
     }
 
     public ArrayList<City> cities;
