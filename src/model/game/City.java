@@ -1,7 +1,7 @@
 package model.game;
 
 
-import model.Position;
+import model.Location;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -13,10 +13,9 @@ import java.util.Dictionary;
 public class City {
     public String name;
     public Color color;
-    public Position position;
+    public Location location;
     public ArrayList<City> connectedCities;
     public Dictionary<Illness, Integer> presentIllnesses;
-    public int totalPopulation;
 
     public enum Color {
         Blue,

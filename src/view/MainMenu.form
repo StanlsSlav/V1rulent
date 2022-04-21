@@ -47,42 +47,43 @@
                 <children>
                   <component id="ce993" class="javax.swing.JButton" binding="creditsButton" custom-create="true" default-binding="true">
                     <constraints>
-                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="Credits"/>
+                      <icon value="assets/img/mainMenu/540/btn/credits/stages/idle.png"/>
                     </properties>
                   </component>
                   <component id="75bd" class="javax.swing.JButton" binding="playButton" custom-create="true" default-binding="true">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="PLAY"/>
+                      <icon value="assets/img/mainMenu/540/btn/play/stages/idle.png"/>
+                      <iconTextGap value="0"/>
                     </properties>
                   </component>
                   <component id="b1016" class="javax.swing.JButton" binding="exitButton" custom-create="true" default-binding="true">
                     <constraints>
-                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="Exit"/>
+                      <icon value="assets/img/mainMenu/540/btn/exit/stages/idle.png"/>
                     </properties>
                   </component>
                   <component id="15c8c" class="javax.swing.JButton" binding="rulesButton" custom-create="true" default-binding="true">
                     <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="Rules"/>
+                      <icon value="assets/img/mainMenu/540/btn/rules/stages/idle.png"/>
                     </properties>
                   </component>
                   <component id="f96b0" class="javax.swing.JButton" binding="settingsButton" custom-create="true" default-binding="true">
                     <constraints>
-                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="Settings"/>
+                      <icon value="assets/img/mainMenu/540/btn/settings/stages/idle.png"/>
                     </properties>
                   </component>
                   <vspacer id="f55">
@@ -104,7 +105,7 @@
                   <component id="48437" class="javax.swing.JButton" binding="creditsBackButton" custom-create="true">
                     <constraints border-constraint="South"/>
                     <properties>
-                      <text value="Back"/>
+                      <icon value="assets/img/creditsMenu/540/btn/back/stages/idle.png"/>
                     </properties>
                   </component>
                 </children>
@@ -123,34 +124,38 @@
                 <children>
                   <component id="9fdc7" class="javax.swing.JButton" binding="gameStartContinueButton" custom-create="true">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="CONTINUE"/>
+                      <icon value="assets/img/gameStartMenu/540/btn/continue/stages/idle.png"/>
+                      <iconTextGap value="0"/>
                     </properties>
                   </component>
                   <component id="4ae3c" class="javax.swing.JButton" binding="gameStartBackButton" custom-create="true">
                     <constraints>
-                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="Back"/>
+                      <icon value="assets/img/gameStartMenu/540/btn/back/stages/idle.png"/>
+                      <iconTextGap value="0"/>
                     </properties>
                   </component>
                   <component id="168" class="javax.swing.JButton" binding="gameStartLoadButton" custom-create="true">
                     <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="Load Game"/>
+                      <icon value="assets/img/gameStartMenu/540/btn/load/stages/idle.png"/>
+                      <iconTextGap value="0"/>
                     </properties>
                   </component>
                   <component id="b3357" class="javax.swing.JButton" binding="gameStartNewButton" custom-create="true">
                     <constraints>
-                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="New Game"/>
+                      <icon value="assets/img/gameStartMenu/540/btn/new/stages/idle.png"/>
+                      <iconTextGap value="0"/>
                     </properties>
                   </component>
                   <vspacer id="df68b">
@@ -218,7 +223,8 @@
           </hspacer>
         </children>
       </grid>
-      <grid id="2094d" binding="gamePanel" custom-create="true" layout-manager="CardLayout" hgap="0" vgap="0">
+      <grid id="2094d" binding="gamePanel" custom-create="true" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <card name="GamePanel"/>
         </constraints>
