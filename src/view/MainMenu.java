@@ -5,6 +5,7 @@ import model.base.Button;
 import model.base.Panel;
 import model.interfaces.IMenu;
 import utils.Images;
+import utils.Utilities;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -24,6 +25,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 import static utils.Utilities.*;
+
 
 public class MainMenu extends JFrame implements IMenu {
     private final JFrame instance = this;
@@ -57,11 +59,72 @@ public class MainMenu extends JFrame implements IMenu {
     private JButton pauseSettingsBtn;
     private JButton pauseExitBtn;
 
-    private final MouseAdapter switchToGame = new MouseAdapter() {
+    private final MouseAdapter switchToGamePanel = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
-            switchToCard(rootPanel, "GamePanel");
+
+            if (isLeftButtonPressed(e)) {
+                Utilities.loadCities();
+                switchToCard(rootPanel, "GamePanel");
+            }
+        }
+    };
+
+    private final MouseAdapter switchToMainMenu = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            super.mouseClicked(e);
+
+            if (isLeftButtonPressed(e)) {
+                switchToCard(switcherPanel, "MainMenu");
+                switchImage(menusPanel, getToolkit().createImage("src/assets/MainMenuBg.jpg"));
+            }
+        }
+    };
+
+    private final MouseAdapter switchToPausePanel = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            super.mouseClicked(e);
+
+            if (e.getButton() == MouseEvent.BUTTON2) {
+                switchToCard(rootPanel, "PausePanel");
+            }
+        }
+    };
+
+    private final MouseAdapter switchToCreditsMenu = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            super.mouseClicked(e);
+
+            if (isLeftButtonPressed(e)) {
+                switchToCard(switcherPanel, "CreditsPanel");
+                switchImage(menusPanel, Images.CreditsMenuBg.get());
+            }
+        }
+    };
+
+    private final MouseAdapter switchToGameStartMenu = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            super.mouseClicked(e);
+
+            if (isLeftButtonPressed(e)) {
+                switchToCard(switcherPanel, "GameStartMenu");
+            }
+        }
+    };
+
+    private final MouseAdapter switchToSettingsMenu = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            super.mouseClicked(e);
+
+            if (isLeftButtonPressed(e)) {
+                switchToCard(switcherPanel, "SettingsMenu");
+            }
         }
     };
 
@@ -117,109 +180,26 @@ public class MainMenu extends JFrame implements IMenu {
             }
         });
 
-        pauseContinueBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                switchToCard(rootPanel, "GamePanel");
-            }
-        });
+        pauseContinueBtn.addMouseListener(switchToGamePanel);
 
         pausePanel.setLayout(null);
         pausePanel.add(pauseContinueBtn);
         pausePanel.add(pauseSettingsBtn);
         pausePanel.add(pauseExitBtn);
 
-        gamePanel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+        gamePanel.addMouseListener(switchToPausePanel);
 
-                if (e.getButton() == MouseEvent.BUTTON2) {
-                    switchToCard(rootPanel, "PausePanel");
-                }
-            }
-        });
+        creditsBackButton.addMouseListener(switchToMainMenu);
+        creditsButton.addMouseListener(switchToCreditsMenu);
 
-        creditsBackButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+        gameStartBackButton.addMouseListener(switchToMainMenu);
 
-                if (isLeftButtonPressed(e)) {
-                    switchToCard(switcherPanel, "MainMenu");
-                    switchImage(menusPanel, Images.MainMenuBg.get());
-                }
-            }
-        });
+        playButton.addMouseListener(switchToGameStartMenu);
 
-        creditsButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+        settingsButton.addMouseListener(switchToSettingsMenu);
+        settingsBackButton.addMouseListener(switchToMainMenu);
 
-                if (isLeftButtonPressed(e)) {
-                    switchToCard(switcherPanel, "CreditsMenu");
-                    switchImage(menusPanel, Images.CreditsMenuBg.get());
-                }
-            }
-        });
-
-        gameStartBackButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-
-                if (isLeftButtonPressed(e)) {
-                    switchToCard(switcherPanel, "MainMenu");
-                }
-            }
-        });
-
-        playButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-
-                if (isLeftButtonPressed(e)) {
-                    switchToCard(switcherPanel, "GameStartMenu");
-                }
-            }
-        });
-
-        settingsButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-
-                if (isLeftButtonPressed(e)) {
-                    switchToCard(switcherPanel, "SettingsMenu");
-                }
-            }
-        });
-
-        settingsBackButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-
-                if (isLeftButtonPressed(e)) {
-                    switchToCard(switcherPanel, "MainMenu");
-                }
-            }
-        });
-
-        pauseSettingsBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-
-                if (isLeftButtonPressed(e)) {
-                    switchToCard(switcherPanel, "SettingsMenu");
-                    switchToCard(rootPanel, "MenusPanel");
-                }
-            }
-        });
+        pauseSettingsBtn.addMouseListener(switchToMainMenu);
 
         resolutionsComboBox.addItem(540);
         resolutionsComboBox.addItem(720);
@@ -238,8 +218,8 @@ public class MainMenu extends JFrame implements IMenu {
             centerScreen(instance);
         });
 
-        gameStartContinueButton.addMouseListener(switchToGame);
-        gameStartNewButton.addMouseListener(switchToGame);
+        gameStartContinueButton.addMouseListener(switchToGamePanel);
+        gameStartNewButton.addMouseListener(switchToGamePanel);
 
         exitButton.addMouseListener(exitOnClick);
         pauseExitBtn.addMouseListener(exitOnClick);
