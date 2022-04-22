@@ -2,6 +2,7 @@ package utils;
 
 
 import model.Location;
+import model.base.Colour;
 import model.base.Panel;
 import model.game.City;
 import model.game.Map;
@@ -9,7 +10,6 @@ import model.game.Map;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.MouseAdapter;
@@ -47,9 +47,9 @@ public class Utilities {
               (int) y / 2 - mainFrame.getHeight() / 2);
     }
 
-    public static void switchImage(JPanel panel, Image image) {
+    public static void switchImage(JPanel panel, String imageName) {
         Panel panelToSwitch = (Panel) panel;
-        panelToSwitch.setBackgroundImage(image);
+        panelToSwitch.setBackgroundImage(panel.getToolkit().createImage("src/assets/img/" + imageName + ".png"));
 
         // Quita los artefactos
         panel.updateUI();
@@ -58,6 +58,8 @@ public class Utilities {
     public static void switchToCard(JPanel rootPanel, String cardName) {
         CardLayout cardLayout = (CardLayout) rootPanel.getLayout();
         cardLayout.show(rootPanel, cardName);
+
+        System.out.printf("Switching to %s%n", cardName);
     }
 
     public static void loadCities() {
@@ -75,7 +77,7 @@ public class Utilities {
 
                 city.setName(dotCommaSplit[0]);
                 city.setLocation(new Location(Integer.parseInt(location[0]), Integer.parseInt(location[1])));
-                city.setColor(City.Color.valueOf(color));
+                city.setColor(Colour.valueOf(color));
 
                 Map.getInstance().cities.add(city);
             }

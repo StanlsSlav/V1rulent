@@ -1,16 +1,16 @@
 package model.base;
 
 
-import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import java.awt.Graphics;
 import java.awt.Image;
 
-public class Panel extends JPanel {
-    public Panel(String backgroundImageName) {
-        setBackgroundImage(getToolkit().getImage("src/assets/img/" + backgroundImageName + ".png"));
+public class ScrollPane extends JScrollPane {
+    public ScrollPane(String backgroundImageName) {
+        setBackgroundImage(getToolkit().getImage("src/assets/" + backgroundImageName + ".png"));
     }
 
-    public Panel(Image backgroundImage) {
+    public ScrollPane(Image backgroundImage) {
         setBackgroundImage(backgroundImage);
     }
 
