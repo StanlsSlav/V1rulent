@@ -3,6 +3,7 @@ package view;
 
 import model.base.Button;
 import model.base.Panel;
+import model.game.Map;
 import model.interfaces.IMenu;
 import utils.Images;
 import utils.Utilities;
@@ -10,8 +11,8 @@ import utils.Utilities;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import java.awt.Dimension;
@@ -21,8 +22,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.Dictionary;
-import java.util.Hashtable;
 
 import static utils.Utilities.*;
 
@@ -51,13 +50,15 @@ public class MainMenu extends JFrame implements IMenu {
     private JButton gameStartBackButton;
     private JButton gameStartLoadButton;
     private JButton gameStartNewButton;
+
     private JPanel settingsMenu;
     private JButton settingsBackButton;
-    private JComboBox<Integer> resolutionsComboBox;
 
     private JButton pauseContinueBtn;
     private JButton pauseSettingsBtn;
-    private JButton pauseExitBtn;
+    private JButton pauseBackBtn;
+    private JPanel containerPanel;
+    private JLabel pauseIcon;
 
     private final MouseAdapter switchToGamePanel = new MouseAdapter() {
         @Override
@@ -65,7 +66,10 @@ public class MainMenu extends JFrame implements IMenu {
             super.mouseClicked(e);
 
             if (isLeftButtonPressed(e)) {
-                Utilities.loadCities();
+                if (Map.getInstance().cities.size() == 0) {
+                    Utilities.loadCities();
+                }
+
                 switchToCard(rootPanel, "GamePanel");
             }
         }
@@ -89,7 +93,7 @@ public class MainMenu extends JFrame implements IMenu {
             super.mouseClicked(e);
 
             if (e.getButton() == MouseEvent.BUTTON2) {
-                switchToCard(rootPanel, "PausePanel");
+                switchToCard(rootPanel, "PauseMenu");
             }
         }
     };
@@ -100,7 +104,7 @@ public class MainMenu extends JFrame implements IMenu {
             super.mouseClicked(e);
 
             if (isLeftButtonPressed(e)) {
-                switchToCard(switcherPanel, "CreditsPanel");
+                switchToCard(switcherPanel, "CreditsMenu");
                 switchImage(menusPanel, Images.CreditsMenuBg.get());
             }
         }
@@ -123,6 +127,7 @@ public class MainMenu extends JFrame implements IMenu {
             super.mouseClicked(e);
 
             if (isLeftButtonPressed(e)) {
+                switchToCard(rootPanel, "MenusPanel");
                 switchToCard(switcherPanel, "SettingsMenu");
             }
         }
@@ -145,7 +150,6 @@ public class MainMenu extends JFrame implements IMenu {
     public void initialize() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(960, 540));
-        setResizable(false);
 
         addComponentListener(new ComponentAdapter() {
             @Override
@@ -181,78 +185,50 @@ public class MainMenu extends JFrame implements IMenu {
         });
 
         pauseContinueBtn.addMouseListener(switchToGamePanel);
-
-        pausePanel.setLayout(null);
-        pausePanel.add(pauseContinueBtn);
-        pausePanel.add(pauseSettingsBtn);
-        pausePanel.add(pauseExitBtn);
+        pauseSettingsBtn.addMouseListener(switchToMainMenu);
+        pauseBackBtn.addMouseListener(switchToGameStartMenu);
 
         gamePanel.addMouseListener(switchToPausePanel);
 
         creditsBackButton.addMouseListener(switchToMainMenu);
-        creditsButton.addMouseListener(switchToCreditsMenu);
 
         gameStartBackButton.addMouseListener(switchToMainMenu);
-
-        playButton.addMouseListener(switchToGameStartMenu);
-
-        settingsButton.addMouseListener(switchToSettingsMenu);
-        settingsBackButton.addMouseListener(switchToMainMenu);
-
-        pauseSettingsBtn.addMouseListener(switchToMainMenu);
-
-        resolutionsComboBox.addItem(540);
-        resolutionsComboBox.addItem(720);
-        resolutionsComboBox.addItem(1080);
-        resolutionsComboBox.addItemListener(e -> {
-            Dictionary<Integer, Integer> resolutionsAvailable = new Hashtable<>();
-
-            resolutionsAvailable.put(540, 960);
-            resolutionsAvailable.put(720, 1280);
-            resolutionsAvailable.put(1080, 1920);
-
-            int height = (int) e.getItem();
-            int width = resolutionsAvailable.get(height);
-
-            setSize(new Dimension(width, height));
-            centerScreen(instance);
-        });
-
         gameStartContinueButton.addMouseListener(switchToGamePanel);
         gameStartNewButton.addMouseListener(switchToGamePanel);
 
+        playButton.addMouseListener(switchToGameStartMenu);
+        creditsButton.addMouseListener(switchToCreditsMenu);
+        settingsButton.addMouseListener(switchToSettingsMenu);
         exitButton.addMouseListener(exitOnClick);
-        pauseExitBtn.addMouseListener(exitOnClick);
+
+        settingsBackButton.addMouseListener(switchToMainMenu);
 
         add(rootPanel);
         setVisible(true);
     }
 
     private void createUIComponents() {
-        menusPanel = new Panel("mainMenu", getWindows()[0]);
-        gamePanel = new Panel("game", getWindows()[0]);
-        pausePanel = new Panel("pauseMenu", getWindows()[0]);
+        menusPanel = new Panel("MainMenuBg");
+        gamePanel = new Panel("GameBg");
+        pausePanel = new Panel("PauseMenuBg");
 
-        playButton = new Button("play", "mainMenu", getWindows()[0]);
-        rulesButton = new Button("rules", "mainMenu", getWindows()[0]);
-        settingsButton = new Button("settings", "mainMenu", getWindows()[0]);
-        creditsButton = new Button("credits", "mainMenu", getWindows()[0]);
-        exitButton = new Button("exit", "mainMenu", getWindows()[0]);
+        playButton = new Button(Button.ButtonType.PRIMARY);
+        rulesButton = new Button();
+        settingsButton = new Button();
+        creditsButton = new Button();
+        exitButton = new Button();
 
-        creditsBackButton = new Button("back", "creditsMenu", getWindows()[0]);
+        creditsBackButton = new Button();
 
-        gameStartContinueButton = new Button("continue", "gameStartMenu", getWindows()[0]);
-        gameStartLoadButton = new Button("load", "gameStartMenu", getWindows()[0]);
-        gameStartNewButton = new Button("new", "gameStartMenu", getWindows()[0]);
-        gameStartBackButton = new Button("back", "gameStartMenu", getWindows()[0]);
+        gameStartContinueButton = new Button(Button.ButtonType.PRIMARY);
+        gameStartLoadButton = new Button();
+        gameStartNewButton = new Button();
+        gameStartBackButton = new Button();
 
-        pauseContinueBtn = new Button("continue", "pauseMenu", getWindows()[0]);
-        pauseContinueBtn.setBounds(357, 248, 240, 47);
-        pauseSettingsBtn = new Button("settings", "pauseMenu", getWindows()[0]);
-        pauseSettingsBtn.setBounds(357, 318, 240, 47);
-        pauseExitBtn = new Button("exit", "pauseMenu", getWindows()[0]);
-        pauseExitBtn.setBounds(357, 386, 240, 47);
+        pauseContinueBtn = new Button(Button.ButtonType.PRIMARY);
+        pauseSettingsBtn = new Button();
+        pauseBackBtn = new Button();
 
-        settingsBackButton = new Button("back", "settingsMenu", getWindows()[0]);
+        settingsBackButton = new Button();
     }
 }
