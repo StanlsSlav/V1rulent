@@ -3,16 +3,14 @@ package view;
 
 import model.base.Button;
 import model.base.Panel;
-import model.game.Map;
 import model.interfaces.IMenu;
-import utils.Images;
 import utils.Utilities;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import java.awt.Dimension;
@@ -24,7 +22,6 @@ import java.io.File;
 import java.io.IOException;
 
 import static utils.Utilities.*;
-
 
 public class MainMenu extends JFrame implements IMenu {
     private final JFrame instance = this;
@@ -60,6 +57,23 @@ public class MainMenu extends JFrame implements IMenu {
     private JPanel containerPanel;
     private JLabel pauseIcon;
 
+    private JLabel yellowCureLbl;
+    private JLabel redCureLbl;
+    private JLabel blueCureLbl;
+    private JLabel greenCureLbl;
+
+    private ArrayList<JLabel> cardsLbls;
+
+    private ArrayList<JLabel> totalIllnessesLbls;
+
+    private ArrayList<VirusLabel> totalVirusesCounter;
+
+    private JLabel virusIcon;
+
+    private JLabel characterIcon;
+
+    private ScrollPane historialScrollPane;
+
     private final MouseAdapter switchToGamePanel = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -82,7 +96,7 @@ public class MainMenu extends JFrame implements IMenu {
 
             if (isLeftButtonPressed(e)) {
                 switchToCard(switcherPanel, "MainMenu");
-                switchImage(menusPanel, getToolkit().createImage("src/assets/MainMenuBg.jpg"));
+                switchImage(menusPanel, "MainBg");
             }
         }
     };
@@ -105,7 +119,7 @@ public class MainMenu extends JFrame implements IMenu {
 
             if (isLeftButtonPressed(e)) {
                 switchToCard(switcherPanel, "CreditsMenu");
-                switchImage(menusPanel, Images.CreditsMenuBg.get());
+                switchImage(menusPanel, "CreditsBg");
             }
         }
     };
@@ -117,6 +131,7 @@ public class MainMenu extends JFrame implements IMenu {
 
             if (isLeftButtonPressed(e)) {
                 switchToCard(switcherPanel, "GameStartMenu");
+                switchToCard(rootPanel, "MenusPanel");
             }
         }
     };
@@ -138,9 +153,10 @@ public class MainMenu extends JFrame implements IMenu {
         initialize();
 
         try {
-            setIconImage(ImageIO.read(new File("src/assets/Logo.jpg")));
-        } catch (IOException e) {
-            e.printStackTrace();
+            setIconImage(ImageIO.read(new File("src/assets/img/Logo.png")));
+        } catch (IOException ioe) {
+            System.err.println("Logo could not be found");
+            ioe.printStackTrace();
         }
 
         centerScreen(instance);
@@ -185,7 +201,7 @@ public class MainMenu extends JFrame implements IMenu {
         });
 
         pauseContinueBtn.addMouseListener(switchToGamePanel);
-        pauseSettingsBtn.addMouseListener(switchToMainMenu);
+        pauseSettingsBtn.addMouseListener(switchToSettingsMenu);
         pauseBackBtn.addMouseListener(switchToGameStartMenu);
 
         gamePanel.addMouseListener(switchToPausePanel);
@@ -208,9 +224,9 @@ public class MainMenu extends JFrame implements IMenu {
     }
 
     private void createUIComponents() {
-        menusPanel = new Panel("MainMenuBg");
+        menusPanel = new Panel("MainBg");
         gamePanel = new Panel("GameBg");
-        pausePanel = new Panel("PauseMenuBg");
+        pausePanel = new Panel("PauseBg");
 
         playButton = new Button(Button.ButtonType.PRIMARY);
         rulesButton = new Button();

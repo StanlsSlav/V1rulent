@@ -22,12 +22,12 @@ public enum Images {
             return;
         }
 
-        image = Toolkit.getDefaultToolkit().createImage(extensionlessImagePath + ".jpg");
+        image = Toolkit.getDefaultToolkit().createImage(extensionlessImagePath + ".png");
     }
 
     private final Image image;
 
     public Image get() {
-        return Toolkit.getDefaultToolkit().getImage("src/assets/" + this.name() + ".jpg");
+        return Toolkit.getDefaultToolkit().getImage("src/assets/" + this.name() + ".png");
     }
 }
