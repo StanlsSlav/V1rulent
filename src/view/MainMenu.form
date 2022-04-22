@@ -95,7 +95,7 @@
               </grid>
               <grid id="df41f" binding="creditsMenu" layout-manager="BorderLayout" hgap="0" vgap="0">
                 <constraints>
-                  <card name="CreditsMenu"/>
+                  <card name="CreditsPanel"/>
                 </constraints>
                 <properties>
                   <opaque value="false"/>
