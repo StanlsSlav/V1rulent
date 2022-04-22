@@ -8,12 +8,15 @@ Finalmente la fecha límite se nos hechaba encima, el tiempo era cada vez más v
 
 ## Comenzando 🚀
 
-Este repo, es para el examen final de HTML. Está hecho unicamente con propositos de educación y no para nada más. Los recursos que hemos usado son;
-
 * [Esta plantilla](https://github.com/ItzAxxel/Best-README-Template/blob/master/BLANK_README.md). 
+
 Usada para el Readme.md
 
-Modificamos bastante de la original. Aquí tenéis algunos ejemplos:
+Primero comenzamos con creando el documento de analisis y requisitos, para tener una mas clara idea de lo que teniamos pensado hacer e incluir a nuestro proyecto, añadimos gan variedad de cosas, pero por desgracia, no hemos logrado hacer todas, la mayoria por falta de tiempo, y alguna por falta de conocimientos, como la idea de añadir multi-player. 
+
+Despues, nos centramos ya mas a la planificiacion de las clases del protecto haciendo un UML
+
+Posteriormente, como teniamos pensado hacerlo todo a pixelees y que se ajusten a diversas resoluciones pasando por una funcion de rescalado, diseñamos los diferentes paneles desde Figma, con la intencion de pasarlos a codigo exportando todos los botones necesarios, pero por la falta de tiempo no hemos podido hacerlo ya quie necesitamos cuadrar todoas lo elemento pixel a pixel, de forma manual, asi, que al final decidimos usar layauts desde el menu de ``Java Swing UI`
 
 Inicio (Sin modificar)
 
