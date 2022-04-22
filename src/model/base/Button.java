@@ -1,100 +1,75 @@
 package model.base;
 
 
-import model.ButtonState;
-import model.interfaces.IPositionable;
-
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.Window;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.FileNotFoundException;
 
-public class Button extends JButton implements IPositionable {
-    private ButtonState state = ButtonState.Idle;
-    private String menuName;
-    private Window parentWindow;
-    private String name;
+import static java.awt.Font.PLAIN;
 
-    public void setMenuName(String menuName) {
-        this.menuName = menuName.trim();
+
+public class Button extends JButton {
+    public enum ButtonType {
+        PRIMARY,
+        SECONDARY
     }
 
-    @Override
-    public void setName(String name) {
-        this.name = name.trim().toLowerCase();
-    }
-
-    public void setParentWindow(Window parentWindow) {
-        this.parentWindow = parentWindow;
-    }
-
-    public Button(String name, String menuName, Window parentWindow) {
-        setName(name);
-        setMenuName(menuName);
-        setParentWindow(parentWindow);
+    public Button() {
+        this.type = ButtonType.SECONDARY;
         initialize();
     }
 
-    @Override
-    public void updateImage() {
-        File imageFile = new File(String.format("./src/assets/img/%s/%d/btn/%s/stages/%s.png",
-              menuName, parentWindow.getHeight() == 0 ? 540 : parentWindow.getHeight(), name, state.name().toLowerCase()));
-
-        if (!imageFile.exists()) {
-            try {
-                throw new FileNotFoundException();
-            } catch (FileNotFoundException ig) {
-                System.err.printf("Check path '%s'%n", imageFile.getPath());
-            }
-        }
-
-        setIcon(new ImageIcon(getToolkit().getImage(imageFile.getAbsolutePath())));
+    public Button(ButtonType type) {
+        this.type = type;
+        initialize();
     }
 
-    private void initialize() {
-        updateImage();
+    private final ButtonType type;
 
-        setOpaque(false);
-        setContentAreaFilled(false);
-        setBorderPainted(true);
+    private void initialize() {
+        setFont(new Font("Roboto Light", PLAIN, 40));
+        setForeground(Color.BLACK);
+
+        setHorizontalAlignment(LEFT);
+        setHorizontalTextPosition(CENTER);
+
+        setFocusPainted(false);
+        setBorderPainted(false);
+
+        if (type == ButtonType.PRIMARY) {
+            setBackground(Color.decode("#F5F5F5"));
+        } else {
+            setBackground(Color.decode("#CD3F3F"));
+        }
 
         setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
 
         addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-
-                state = ButtonState.Clicked;
-                updateImage();
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                super.mouseReleased(e);
-
-                state = ButtonState.Idle;
-                updateImage();
-            }
-
-            @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
 
-                state = ButtonState.Hover;
-                updateImage();
+                if (type == ButtonType.PRIMARY) {
+                    setBackground(Color.decode("#C0C0C0"));
+                    return;
+                }
+
+                setBackground(Color.decode("#8E1E1E"));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
 
-                state = ButtonState.Idle;
-                updateImage();
+                if (type == ButtonType.PRIMARY) {
+                    setBackground(Color.decode("#F5F5F5"));
+                    return;
+                }
+
+                setBackground(Color.decode("#CD3F3F"));
             }
         });
     }
