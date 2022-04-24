@@ -32,7 +32,6 @@ Sorbe nosotros (Sin modificar)
 
 
 
-
 Inicio (Modificado)
 
 ![image](https://user-images.githubusercontent.com/58775176/117183649-12824300-add8-11eb-8884-aad1e844173d.png)
@@ -64,12 +63,14 @@ Codigo modificado
 
 ## Construido con 🛠️
 
-* [HTML](https://www.w3schools.com/html/)
-* [CSS](https://www.w3schools.com/css/)
-* [JavaScript](https://www.javascript.com/) 
+* `Java`
+* `Figma`
+* `Draw.io`
+* `GitHub`
 
 ## Autores ✒️
 
-
-* **Axel Arroyo** - *Trabajo Inicial* - [ItzAxxel](https://github.com/ItzAxxel)
-* **Iago Varela** - *Ayuda en código* - [IagoVL](https://github.com/IagoVL)
+* **Adrian Sebas Stan** - *Programador principal / lider* - [StanSlav](https://github.com/StansSlav)
+* **Iago Prieto** - *Programador segundario / diseñador principal* - [IagoPL](https://github.com/IagoPL)
+* **Bryan Calletano** - *Encargado de base de datos* - []
+* **Eric Serrano** - *Diseñador segundario encargado base de datos* []
