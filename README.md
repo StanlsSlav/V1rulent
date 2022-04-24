@@ -16,7 +16,7 @@ Primero comenzamos con creando el documento de analisis y requisitos, para tener
 
 Despues, nos centramos ya mas a la planificiacion de las clases del protecto haciendo un UML
 
-Posteriormente, como teniamos pensado hacerlo todo a pixelees y que se ajusten a diversas resoluciones pasando por una funcion de rescalado, diseñamos los diferentes paneles desde Figma, con la intencion de pasarlos a codigo exportando todos los botones necesarios, pero por la falta de tiempo no hemos podido hacerlo ya quie necesitamos cuadrar todoas lo elemento pixel a pixel, de forma manual, asi, que al final decidimos usar layauts desde el menu de ``Java Swing UI`
+Posteriormente, como teniamos pensado hacerlo todo a pixelees y que se ajusten a diversas resoluciones pasando por una funcion de rescalado, diseñamos los diferentes paneles desde Figma, con la intencion de pasarlos a codigo exportando todos los botones necesarios, pero por la falta de tiempo no hemos podido hacerlo ya quie necesitamos cuadrar todoas lo elemento pixel a pixel, de forma manual, asi, que al final decidimos usar layauts desde el menu de `Java Swing UI`
 
 Inicio (Sin modificar)
 
