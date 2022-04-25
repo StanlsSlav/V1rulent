@@ -13,14 +13,9 @@ import model.interfaces.IMenu;
 import utils.Utilities;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
@@ -31,7 +26,6 @@ import java.util.ArrayList;
 
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
 import static utils.Utilities.*;
-
 
 public class MainMenu extends JFrame implements IMenu {
     private final JFrame instance = this;
@@ -82,10 +76,12 @@ public class MainMenu extends JFrame implements IMenu {
     private JLabel virusIcon;
 
     private JLabel epidemiesIcon;
+    private JLabel epidemiesCounterLbl;
 
     private CharacterIcon characterIcon;
 
     private ScrollPane historialScrollPane;
+    private JTextArea historialTxtArea;
 
     private final MouseAdapter switchToGamePanel = new MouseAdapter() {
         @Override
@@ -207,15 +203,13 @@ public class MainMenu extends JFrame implements IMenu {
                     percent -= 10;
                 }
 
-                switcherPanel.setBorder(
-                      BorderFactory.createEmptyBorder(0, Math.round(width / 100f * percent), 0, 0));
+                switcherPanel.setBorder(BorderFactory.createEmptyBorder(0, Math.round(width / 100f * percent), 0, 0));
 
                 // Añade 5% de border entre todos los elementos del panel principal
                 int fivePercentOfWidth = width / 100 * 5;
                 int fivePercentOfHeight = height / 100 * 5;
 
-                menusPanel.setBorder(BorderFactory.createEmptyBorder(
-                      fivePercentOfHeight, fivePercentOfWidth, fivePercentOfHeight, fivePercentOfWidth));
+                menusPanel.setBorder(BorderFactory.createEmptyBorder(fivePercentOfHeight, fivePercentOfWidth, fivePercentOfHeight, fivePercentOfWidth));
 
                 System.out.printf("Width: %d - Height: %d%n", getWidth(), getHeight());
             }
@@ -275,8 +269,9 @@ public class MainMenu extends JFrame implements IMenu {
 
     private void initializeGame() {
         Utilities.loadCities();
-        gamePanel.removeAll();
 
+        // La inicialización debe ser nueva
+        gamePanel.removeAll();
 
         yellowCureIcon = new CureIcon(Colour.Yellow);
         redCureIcon = new CureIcon(Colour.Red);
@@ -291,7 +286,6 @@ public class MainMenu extends JFrame implements IMenu {
         gamePanel.add(redCureIcon);
         gamePanel.add(blueCureIcon);
         gamePanel.add(greenCureIcon);
-
 
         cardsLbls = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
@@ -308,7 +302,6 @@ public class MainMenu extends JFrame implements IMenu {
             gamePanel.add(card);
         }
 
-
         greenTotalVirusesLbl = new VirusLabel(Colour.Green);
         blueTotalVirusesLbl = new VirusLabel(Colour.Blue);
         yellowTotalVirusesLbl = new VirusLabel(Colour.Yellow);
@@ -323,12 +316,10 @@ public class MainMenu extends JFrame implements IMenu {
         gamePanel.add(yellowTotalVirusesLbl);
         gamePanel.add(redTotalVirusesLbl);
 
-
         virusIcon = new JLabel(new ImageIcon("src/assets/img/VirusIcon.png"));
         virusIcon.setSize(new Dimension(150, 150));
         virusIcon.setLocation(1225, 839);
         gamePanel.add(virusIcon);
-
 
         epidemiesIcon = new JLabel(new ImageIcon("src/assets/img/Lifes.png"));
         epidemiesIcon.setSize(new Dimension(118, 118));
@@ -344,12 +335,19 @@ public class MainMenu extends JFrame implements IMenu {
         characterIcon = new CharacterIcon();
         gamePanel.add(characterIcon);
 
-
         historialScrollPane = new ScrollPane("HistorialBg");
         historialScrollPane.setSize(new Dimension(443, 708));
         historialScrollPane.setLocation(1465, 21);
         historialScrollPane.setOpaque(false);
         historialScrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_AS_NEEDED);
+
+        // TODO: Porque no se muestra en el scroll panel?
+        historialTxtArea = new JTextArea("Round 1");
+        historialTxtArea.setWrapStyleWord(true);
+        historialTxtArea.append("Round 1");
+        historialScrollPane.add(historialTxtArea);
+
+
         gamePanel.add(historialScrollPane);
     }
 }
