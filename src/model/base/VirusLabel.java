@@ -9,7 +9,7 @@ import java.awt.Font;
 
 public class VirusLabel extends JLabel {
     public VirusLabel(Colour colour) {
-        super();
+        super("0");
 
         switch (colour) {
             case Blue:
@@ -27,8 +27,7 @@ public class VirusLabel extends JLabel {
         }
 
         setFont(getFont().deriveFont(Font.PLAIN, 64));
-        setSize(new Dimension(61, 79));
+        setSize(new Dimension(61, 80));
         setLocation(1184, 793);
-        setText("0");
     }
 }
