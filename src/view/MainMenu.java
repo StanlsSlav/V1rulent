@@ -318,7 +318,7 @@ public class MainMenu extends JFrame implements IMenu {
 
         virusIcon = new JLabel(new ImageIcon("src/assets/img/VirusIcon.png"));
         virusIcon.setSize(new Dimension(150, 150));
-        virusIcon.setLocation(1225, 839);
+        virusIcon.setLocation(1210, 830);
         gamePanel.add(virusIcon);
 
         epidemiesIcon = new JLabel(new ImageIcon("src/assets/img/Lifes.png"));
