@@ -12,10 +12,18 @@ public class VirusLabel extends JLabel {
         super();
 
         switch (colour) {
-            case Blue -> setForeground(Color.getColor(HexColour.blue));
-            case Red -> setForeground(Color.getColor(HexColour.red));
-            case Green -> setForeground(Color.getColor("39EC6B"));
-            case Yellow -> setForeground(Color.getColor(HexColour.yellow));
+            case Blue:
+                setForeground(Color.decode(HexColour.blue));
+                break;
+            case Red:
+                setForeground(Color.decode(HexColour.red));
+                break;
+            case Green:
+                setForeground(Color.decode(HexColour.green));
+                break;
+            case Yellow:
+                setForeground(Color.decode(HexColour.yellow));
+                break;
         }
 
         setFont(getFont().deriveFont(Font.PLAIN, 64));
