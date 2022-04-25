@@ -188,9 +188,6 @@ public class MainMenu extends JFrame implements IMenu {
 
     @Override
     public void initialize() {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(960, 540));
-
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
@@ -246,6 +243,8 @@ public class MainMenu extends JFrame implements IMenu {
         gamePanel.setLayout(null);
 
         add(rootPanel);
+        setUndecorated(true);
+        setExtendedState(getExtendedState() | MAXIMIZED_BOTH);
         setVisible(true);
     }
 
