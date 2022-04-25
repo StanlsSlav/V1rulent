@@ -212,7 +212,7 @@
         </children>
       </grid>
       <grid id="2094d" binding="gamePanel" custom-create="true" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="15" left="15" bottom="15" right="15"/>
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <card name="GamePanel"/>
         </constraints>

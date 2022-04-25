@@ -2,15 +2,22 @@ package view;
 
 
 import model.base.Button;
+import model.base.CharacterIcon;
+import model.base.CityCard;
+import model.base.Colour;
+import model.base.CureIcon;
 import model.base.Panel;
+import model.base.ScrollPane;
+import model.base.VirusLabel;
 import model.interfaces.IMenu;
 import utils.Utilities;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import java.awt.Dimension;
@@ -20,8 +27,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
+import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
 import static utils.Utilities.*;
+
 
 public class MainMenu extends JFrame implements IMenu {
     private final JFrame instance = this;
@@ -57,20 +67,23 @@ public class MainMenu extends JFrame implements IMenu {
     private JPanel containerPanel;
     private JLabel pauseIcon;
 
-    private JLabel yellowCureLbl;
-    private JLabel redCureLbl;
-    private JLabel blueCureLbl;
-    private JLabel greenCureLbl;
+    private JLabel yellowCureIcon;
+    private JLabel redCureIcon;
+    private JLabel blueCureIcon;
+    private JLabel greenCureIcon;
 
     private ArrayList<JLabel> cardsLbls;
 
-    private ArrayList<JLabel> totalIllnessesLbls;
-
-    private ArrayList<VirusLabel> totalVirusesCounter;
+    private VirusLabel greenTotalVirusesLbl;
+    private VirusLabel blueTotalVirusesLbl;
+    private VirusLabel yellowTotalVirusesLbl;
+    private VirusLabel redTotalVirusesLbl;
 
     private JLabel virusIcon;
 
-    private JLabel characterIcon;
+    private JLabel epidemiesIcon;
+
+    private CharacterIcon characterIcon;
 
     private ScrollPane historialScrollPane;
 
@@ -80,11 +93,22 @@ public class MainMenu extends JFrame implements IMenu {
             super.mouseClicked(e);
 
             if (isLeftButtonPressed(e)) {
-                if (Map.getInstance().cities.size() == 0) {
-                    Utilities.loadCities();
-                }
-
                 switchToCard(rootPanel, "GamePanel");
+            }
+        }
+    };
+
+    private final MouseAdapter switchToNewGame = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            super.mouseClicked(e);
+
+            if (isLeftButtonPressed(e)) {
+                initializeGame();
+                setSize(new Dimension(1920, 1080));
+                centerScreen(instance);
+
+                switchToGamePanel.mouseClicked(e);
             }
         }
     };
@@ -107,7 +131,7 @@ public class MainMenu extends JFrame implements IMenu {
             super.mouseClicked(e);
 
             if (e.getButton() == MouseEvent.BUTTON2) {
-                switchToCard(rootPanel, "PauseMenu");
+                switchToCard(rootPanel, "PausePanel");
             }
         }
     };
@@ -210,7 +234,7 @@ public class MainMenu extends JFrame implements IMenu {
 
         gameStartBackButton.addMouseListener(switchToMainMenu);
         gameStartContinueButton.addMouseListener(switchToGamePanel);
-        gameStartNewButton.addMouseListener(switchToGamePanel);
+        gameStartNewButton.addMouseListener(switchToNewGame);
 
         playButton.addMouseListener(switchToGameStartMenu);
         creditsButton.addMouseListener(switchToCreditsMenu);
@@ -218,6 +242,8 @@ public class MainMenu extends JFrame implements IMenu {
         exitButton.addMouseListener(exitOnClick);
 
         settingsBackButton.addMouseListener(switchToMainMenu);
+
+        gamePanel.setLayout(null);
 
         add(rootPanel);
         setVisible(true);
@@ -246,5 +272,80 @@ public class MainMenu extends JFrame implements IMenu {
         pauseBackBtn = new Button();
 
         settingsBackButton = new Button();
+    }
+
+    private void initializeGame() {
+        Utilities.loadCities();
+        gamePanel.removeAll();
+
+
+        yellowCureIcon = new CureIcon(Colour.Yellow);
+        redCureIcon = new CureIcon(Colour.Red);
+        blueCureIcon = new CureIcon(Colour.Blue);
+        greenCureIcon = new CureIcon(Colour.Green);
+
+        redCureIcon.setLocation(177, 786);
+        blueCureIcon.setLocation(42, 910);
+        greenCureIcon.setLocation(177, 910);
+
+        gamePanel.add(yellowCureIcon);
+        gamePanel.add(redCureIcon);
+        gamePanel.add(blueCureIcon);
+        gamePanel.add(greenCureIcon);
+
+
+        cardsLbls = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            cardsLbls.add(new CityCard());
+        }
+
+        cardsLbls.get(1).setLocation(626, 827);
+        cardsLbls.get(2).setLocation(884, 827);
+        cardsLbls.get(3).setLocation(368, 917);
+        cardsLbls.get(4).setLocation(626, 917);
+        cardsLbls.get(5).setLocation(884, 917);
+
+        for (JLabel card : cardsLbls) {
+            gamePanel.add(card);
+        }
+
+
+        greenTotalVirusesLbl = new VirusLabel(Colour.Green);
+        blueTotalVirusesLbl = new VirusLabel(Colour.Blue);
+        yellowTotalVirusesLbl = new VirusLabel(Colour.Yellow);
+        redTotalVirusesLbl = new VirusLabel(Colour.Red);
+
+        blueTotalVirusesLbl.setLocation(1344, 793);
+        yellowTotalVirusesLbl.setLocation(1184, 935);
+        redTotalVirusesLbl.setLocation(1344, 935);
+
+        gamePanel.add(greenTotalVirusesLbl);
+        gamePanel.add(blueTotalVirusesLbl);
+        gamePanel.add(yellowTotalVirusesLbl);
+        gamePanel.add(redTotalVirusesLbl);
+
+
+        virusIcon = new JLabel(new ImageIcon("src/assets/img/VirusIcon.png"));
+        virusIcon.setSize(new Dimension(150, 150));
+        virusIcon.setLocation(1225, 839);
+        gamePanel.add(virusIcon);
+
+
+        epidemiesIcon = new JLabel(new ImageIcon("src/assets/img/Lifes.png"));
+        epidemiesIcon.setSize(new Dimension(118, 118));
+        epidemiesIcon.setLocation(42, 659);
+        gamePanel.add(epidemiesIcon);
+
+
+        characterIcon = new CharacterIcon();
+        gamePanel.add(characterIcon);
+
+
+        historialScrollPane = new ScrollPane("HistorialBg");
+        historialScrollPane.setSize(new Dimension(443, 708));
+        historialScrollPane.setLocation(1465, 21);
+        historialScrollPane.setOpaque(false);
+        historialScrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_AS_NEEDED);
+        gamePanel.add(historialScrollPane);
     }
 }

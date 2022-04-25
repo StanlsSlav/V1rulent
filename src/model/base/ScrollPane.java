@@ -7,7 +7,7 @@ import java.awt.Image;
 
 public class ScrollPane extends JScrollPane {
     public ScrollPane(String backgroundImageName) {
-        setBackgroundImage(getToolkit().getImage("src/assets/" + backgroundImageName + ".png"));
+        setBackgroundImage(getToolkit().getImage("src/assets/img/" + backgroundImageName + ".png"));
     }
 
     public ScrollPane(Image backgroundImage) {
