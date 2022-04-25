@@ -7,13 +7,19 @@ import model.base.CityCard;
 import model.base.Colour;
 import model.base.CureIcon;
 import model.base.Panel;
-import model.base.ScrollPane;
+import model.base.TextArea;
 import model.base.VirusLabel;
 import model.interfaces.IMenu;
 import utils.Utilities;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ComponentAdapter;
@@ -24,7 +30,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
 import static utils.Utilities.*;
 
 public class MainMenu extends JFrame implements IMenu {
@@ -80,7 +85,6 @@ public class MainMenu extends JFrame implements IMenu {
 
     private CharacterIcon characterIcon;
 
-    private ScrollPane historialScrollPane;
     private JTextArea historialTxtArea;
 
     private final MouseAdapter switchToGamePanel = new MouseAdapter() {
@@ -335,19 +339,15 @@ public class MainMenu extends JFrame implements IMenu {
         characterIcon = new CharacterIcon();
         gamePanel.add(characterIcon);
 
-        historialScrollPane = new ScrollPane("HistorialBg");
-        historialScrollPane.setSize(new Dimension(443, 708));
-        historialScrollPane.setLocation(1465, 21);
-        historialScrollPane.setOpaque(false);
-        historialScrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        // TODO: Porque no se muestra en el scroll panel?
-        historialTxtArea = new JTextArea("Round 1");
+        historialTxtArea = new TextArea("Round 1", "HistorialBg");
+        historialTxtArea.setSize(443, 708);
+        historialTxtArea.setLocation(1465, 21);
+        historialTxtArea.setLineWrap(true);
         historialTxtArea.setWrapStyleWord(true);
-        historialTxtArea.append("Round 1");
-        historialScrollPane.add(historialTxtArea);
+        historialTxtArea.setOpaque(false);
+        historialTxtArea.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
 
-
-        gamePanel.add(historialScrollPane);
+        gamePanel.add(historialTxtArea);
     }
 }
