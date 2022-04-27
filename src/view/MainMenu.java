@@ -21,7 +21,11 @@ import java.util.ArrayList;
 import static utils.Utilities.*;
 
 public class MainMenu extends JFrame implements IMenu {
-    private final JFrame instance = this;
+    private static MainMenu instance;
+
+    public static MainMenu getInstance() {
+        return instance;
+    }
 
     private JPanel rootPanel;
 
@@ -73,7 +77,7 @@ public class MainMenu extends JFrame implements IMenu {
 
     private CharacterIcon characterIcon;
 
-    private JTextArea historialTxtArea;
+    public JTextArea historialTxtArea;
 
     private final MouseAdapter switchToGamePanel = new MouseAdapter() {
         @Override
@@ -162,6 +166,7 @@ public class MainMenu extends JFrame implements IMenu {
 
     public MainMenu() {
         super("V1rulent");
+        instance = this;
         initialize();
 
         try {
@@ -261,6 +266,7 @@ public class MainMenu extends JFrame implements IMenu {
 
     private void initializeGame() {
         Utilities.loadCities();
+        Utilities.loadSettings();
 
         // La inicialización debe ser nueva
         gamePanel.removeAll();
@@ -328,7 +334,7 @@ public class MainMenu extends JFrame implements IMenu {
         gamePanel.add(characterIcon);
 
 
-        historialTxtArea = new TextArea("Round 1", "HistorialBg");
+        historialTxtArea = new TextArea("HistorialBg");
         historialTxtArea.setSize(443, 708);
         historialTxtArea.setLocation(1465, 21);
         historialTxtArea.setLineWrap(true);
