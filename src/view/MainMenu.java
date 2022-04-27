@@ -1,25 +1,13 @@
 package view;
 
 
-import model.base.Button;
-import model.base.CharacterIcon;
-import model.base.CityCard;
-import model.base.Colour;
-import model.base.CureIcon;
-import model.base.Panel;
-import model.base.TextArea;
-import model.base.VirusLabel;
+import model.base.*;
+import model.game.Map;
 import model.interfaces.IMenu;
 import utils.Utilities;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ComponentAdapter;
@@ -349,5 +337,7 @@ public class MainMenu extends JFrame implements IMenu {
         historialTxtArea.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
 
         gamePanel.add(historialTxtArea);
+
+        Map.getInstance().cities.forEach(city -> gamePanel.add(new CityLabel(city)));
     }
 }
