@@ -1,7 +1,6 @@
 package utils;
 
 
-import model.Location;
 import model.base.Colour;
 import model.base.Panel;
 import model.game.City;
@@ -10,6 +9,7 @@ import model.game.Map;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.MouseAdapter;
@@ -21,6 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
 
 public class Utilities {
     public static boolean isLeftButtonPressed(MouseEvent event) {
@@ -44,7 +45,7 @@ public class Utilities {
 
         // Centra la ventana del juego al centro del monitor
         Window.getWindows()[0].setLocation((int) X / 2 - mainFrame.getWidth() / 2,
-              (int) Y / 2 - mainFrame.getHeight() / 2);
+                                           (int) Y / 2 - mainFrame.getHeight() / 2);
     }
 
     public static void switchImage(JPanel panel, String imageName) {
@@ -76,7 +77,7 @@ public class Utilities {
                 City city = new City();
 
                 city.setName(dotCommaSplit[0]);
-                city.setLocation(new Location(Integer.parseInt(location[0]), Integer.parseInt(location[1])));
+                city.setPoint(new Point(Integer.parseInt(location[0]), Integer.parseInt(location[1])));
                 city.setColor(Colour.valueOf(color));
 
                 Map.getInstance().cities.add(city);
@@ -111,10 +112,11 @@ public class Utilities {
 
                 for (String connectedCity : connectedCitiesNames) {
                     connectedCities.add(Map.getInstance()
-                          .cities.stream()
-                          .filter(x -> x.getName().equals(connectedCity))
-                          .findFirst()
-                          .orElseThrow(() -> new RuntimeException(String.format("'%s' was not found", connectedCity))));
+                                              .cities.stream()
+                                              .filter(x -> x.getName().equals(connectedCity))
+                                              .findFirst()
+                                              .orElseThrow(() -> new RuntimeException(
+                                                    String.format("'%s' was not found", connectedCity))));
                 }
 
                 toModify.setConnectedCities(connectedCities);
