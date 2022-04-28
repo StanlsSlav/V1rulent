@@ -26,5 +26,5 @@ Posteriormente, como teniamos pensado hacerlo todo a pixelees y que se ajusten a
 
 * **Adrian Sebas Stan** - *Programador principal / líder* - [StanSlav](https://github.com/StansSlav)
 * **Iago Prieto** - *Programador secundario / diseñador principal* - [IagoPL](https://github.com/IagoPL)
-* **Bryan Cayetano** - *Encargado de base de datos* - [BryanCayetano](https://github.com/BryanCayetano)
+* **Bryan Cayetano** - *Encargado de base de datos / gestor de datos* - [BryanCayetano](https://github.com/BryanCayetano)
 * **Èric Serrano** - *Diseñador secundario / encargado base de datos* - [ericserrano5](https://github.com/ericserrano5)
