@@ -12,7 +12,7 @@ Milan;Blue;770,257;Essen,Paris,Istanbul;
 St. Petersburg;Blue;838,201;Essen,Istanbul,Moscow;
 Los Angeles;Yellow;144,406;San Francisco,Mexico DF,Chicago,Sidney;
 Miami;Yellow;343,400;Washington,Atlanta,Mexico DF,Bogota;
-Mexico DF;Yellow;300,385;Los Angeles,Miami,Chicago,Bogota,Lima;
+Mexico DF;Yellow;244,423;Los Angeles,Miami,Chicago,Bogota,Lima;
 Bogota;Yellow;348,497;Miami,Mexico DF,Lima,Sao Paulo,Buenos Aires;
 Lima;Yellow;313,598;Mexico DF,Bogota,Santiago de Chile;
 Santiago de Chile;Yellow;323,699;Lima;
