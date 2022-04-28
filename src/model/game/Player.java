@@ -1,8 +1,9 @@
 package model.game;
 
 
+import controller.GameManager;
 import model.ActionType;
-import model.exception.NotImplementedException;
+import model.Logger;
 
 /**
  * El jugador del juego
@@ -22,18 +23,80 @@ public class Player {
     public int actions = totalActionsPerRound;
     public City currentCity;
 
-    public static boolean tryPerformAction(ActionType actionType) {
+    public void tryPerformAction(ActionType actionType, City target) {
+        switch (actionType) {
+            case TRAVEL -> getInstance().travelTo(target);
+            case CURE -> getInstance().tryRemoveVirus(target);
+            case COMPLETE_CURE -> getInstance().tryCureCity(target);
+        }
+
+        if (actions < 1) {
+            GameManager.getInstance().startNewRound();
+        }
+    }
+
+    private void tryCureCity(City city) {
+        int actionCost = totalActionsPerRound;
+
+        if (city.getTotalViruses() < 1) {
+            Logger.getInstance().log("There is no virus in %p", city.getName());
+            return;
+        }
+
+        if (actions < actionCost) {
+            Logger.getInstance().log("You need %p more actions to move to %p",
+                  actionCost - actions, city.getName());
+            return;
+        }
+
+        actions -= actionCost;
+        city.setTotalViruses(0);
+
+        Logger.getInstance().log("Cured " + city.getName());
+    }
+
+    private void tryRemoveVirus(City city) {
+        int actionCost = 1;
+        int totalViruses = city.getTotalViruses();
+
+        if (actions < actionCost) {
+            GameManager.getInstance().startNewRound();
+            return;
+        }
+
+        if (totalViruses < 1) {
+            Logger.getInstance().log("There is no virus in %p", city.getName());
+            return;
+        }
+
+        actions -= actionCost;
+        city.decrementVirusesCount();
+
+        Logger.getInstance().log("Removed a virus from %p, %p left",
+              city.getName(), totalViruses);
+
+        GameManager.getInstance().updateGameState();
+    }
+
+    private void travelTo(City city) {
         int actionCost = 1;
 
-        if (actionType == ActionType.COMPLETE_CURE) {
-            actionCost = instance.totalActionsPerRound;
+        if (currentCity == city) {
+            tryRemoveVirus(city);
+            return;
         }
 
-        if (instance.actions >= actionCost) {
-            instance.actions -= actionCost;
-            return true;
+        if (actions < actionCost) {
+            GameManager.getInstance().startNewRound();
+            return;
         }
 
-        return false;
+        actions -= actionCost;
+        currentCity = city;
+        Logger.getInstance().log("Traveled to %p", city.getName());
+    }
+
+    public void refillActions() {
+        actions = totalActionsPerRound;
     }
 }

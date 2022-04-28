@@ -59,6 +59,14 @@ public class City {
         this.totalViruses = totalViruses;
     }
 
+    public void incrementVirusesCount() {
+        setTotalViruses(getTotalViruses() + 1);
+    }
+
+    public void decrementVirusesCount() {
+        setTotalViruses(getTotalViruses() - 1);
+    }
+
     @Override
     public String toString() {
         return String.format("<html>City: %s<br>%s Viruses: %d</html>",
