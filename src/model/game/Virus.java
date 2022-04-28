@@ -1,7 +1,7 @@
 package model.game;
 
 
-import model.exception.NotImplementedException;
+import controller.GameManager;
 
 /**
  * Enfermedad del juego
@@ -10,6 +10,7 @@ public class Virus {
     public City currentCity;
 
     public void propagate()  {
-        new NotImplementedException().printStackTrace();
+        GameManager.getInstance().incrementEpidemiesCounter();
+        GameManager.getInstance().checkEndOfGame();
     }
 }

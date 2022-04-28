@@ -9,7 +9,7 @@ import java.util.List;
  * Cada vez que el jugador se queda sin acciones, una nueva ronda empezara
  */
 public class Round {
-    private static Round instance;
+    public static Round instance;
 
     public static Round getInstance() {
         if (instance == null) {
@@ -17,6 +17,11 @@ public class Round {
         }
 
         return instance;
+    }
+
+    public static void resetInstance() {
+        instance = null;
+        getInstance();
     }
 
     public int number = 1;

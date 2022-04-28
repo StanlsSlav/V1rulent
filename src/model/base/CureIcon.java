@@ -11,7 +11,7 @@ public class CureIcon extends JLabel {
     private Colour colour;
 
     public CureIcon(Colour colour) {
-        setSize(new Dimension(118, 114));
+        setSize(118, 114);
         setIcon(new ImageIcon(cureImagesBasePath + "Empty.png"));
         setLocation(42, 786);
         setColor(colour);

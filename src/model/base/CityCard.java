@@ -11,7 +11,7 @@ public class CityCard extends JLabel {
 
     public CityCard() {
         setIcon(new ImageIcon(BASE_PATH + "Empty.png"));
-        setSize(new Dimension(238, 70));
+        setSize(238, 70);
         setLocation(369, 826);
     }
 
