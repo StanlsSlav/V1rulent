@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--red);
+}
+
+.container-cart {
+    position: relative;
+}
+
+.container-cart .card {
+    position: relative;
+    width: 320px;
+    height: 450px;
+    background: #cecdcd;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.container-cart .card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #BA0003;
+    clip-path: circle(150px at 80% 20%);
+    transition: 0.5s ease-in-out;
+}
+
+.container-cart .card:after {
+    content: 'ACTION';
+    position: absolute;
+    top: 30%;
+    left: -20%;
+    font-size: 12em;
+    font-weight: 800;
+    font-style: italic;
+    color: rgba(152, 10, 60, 0.05);
+    font-family: 'Work Sans', sans-serif;
+}
+
+.container-cart .card .img-box {
+    position: absolute;
+    top: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    width: 100%;
+    height: 220px;
+    transition: 0.5s;
+}
+
+.container-cart .card .content-box {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    transition: 1s;
+    z-index: 10;
+}
+
+.container-cart .card:hover .content-box {
+    height: 210px;
+}
+
+.content-box .card .content-box h2 {
+    position: relative;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: purple;
+    margin: 0;
+}
+
+.container-cart .card .content-box .size, .container-cart .card .content-box .color {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: 0.5s;
+    opacity: 0;
+    visibility: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
+
+}
+
+.container-cart .card:hover .content-box .size{
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0.5s;
+}
+
+
