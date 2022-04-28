@@ -29,7 +29,7 @@ public class Logger {
         MainMenu.getInstance().historialTxtArea.append(message + "\n");
 
         if (logActionsLeft) {
-            MainMenu.getInstance().historialTxtArea.append(Player.getInstance().actions + " actions left\n");
+            MainMenu.getInstance().historialTxtArea.append(Player.getInstance().actions + " actions left\n\n");
         }
     }
 }

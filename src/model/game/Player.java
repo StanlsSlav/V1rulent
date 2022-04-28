@@ -19,15 +19,20 @@ public class Player {
         return instance;
     }
 
-    public int totalActionsPerRound = 2;
+    public static void resetInstance() {
+        instance = null;
+        getInstance();
+    }
+
+    public int totalActionsPerRound = 4;
     public int actions = totalActionsPerRound;
     public City currentCity;
 
     public void tryPerformAction(ActionType actionType, City target) {
         switch (actionType) {
-            case TRAVEL -> getInstance().travelTo(target);
-            case CURE -> getInstance().tryRemoveVirus(target);
-            case COMPLETE_CURE -> getInstance().tryCureCity(target);
+            case TRAVEL: getInstance().travelTo(target); break;
+            case CURE: getInstance().tryRemoveVirus(target); break;
+            case COMPLETE_CURE: getInstance().tryCureCity(target); break;
         }
 
         if (actions < 1) {
@@ -72,9 +77,7 @@ public class Player {
         actions -= actionCost;
         city.decrementVirusesCount();
 
-        Logger.getInstance().log("Removed a virus from %p, %p left",
-              city.getName(), totalViruses);
-
+        Logger.getInstance().log("Removed a virus from %p", city.getName());
         GameManager.getInstance().updateGameState();
     }
 

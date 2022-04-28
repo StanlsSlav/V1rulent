@@ -5,6 +5,7 @@ import controller.GameManager;
 import model.base.*;
 import model.game.Map;
 import model.game.Player;
+import model.game.Round;
 import model.interfaces.IMenu;
 import utils.Utilities;
 
@@ -75,13 +76,13 @@ public class MainMenu extends JFrame implements IMenu {
     private JLabel virusIcon;
 
     private JLabel epidemiesIcon;
-    private JLabel epidemiesCounterLbl;
+    public JLabel epidemiesCounterLbl;
 
     private CharacterIcon characterIcon;
 
     public JTextArea historialTxtArea;
 
-    public boolean wasGameLoaded = false;
+    private boolean wasGameLoaded = false;
 
     private final MouseAdapter switchToGamePanel = new MouseAdapter() {
         @Override
@@ -105,7 +106,7 @@ public class MainMenu extends JFrame implements IMenu {
                 }
 
                 initializeGame();
-                setSize(new Dimension(1920, 1080));
+                setSize(1920, 1080);
                 centerScreen(instance);
 
                 switchToGamePanel.mouseClicked(e);
@@ -113,7 +114,7 @@ public class MainMenu extends JFrame implements IMenu {
         }
     };
 
-    private final MouseAdapter switchToMainMenu = new MouseAdapter() {
+    public final MouseAdapter switchToMainMenu = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
@@ -148,7 +149,7 @@ public class MainMenu extends JFrame implements IMenu {
         }
     };
 
-    private final MouseAdapter switchToGameStartMenu = new MouseAdapter() {
+    public final MouseAdapter switchToGameStartMenu = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
@@ -325,17 +326,17 @@ public class MainMenu extends JFrame implements IMenu {
         gamePanel.add(redTotalVirusesLbl);
 
         virusIcon = new JLabel(new ImageIcon("src/assets/img/VirusIcon.png"));
-        virusIcon.setSize(new Dimension(150, 150));
+        virusIcon.setSize(150, 150);
         virusIcon.setLocation(1210, 830);
         gamePanel.add(virusIcon);
 
         epidemiesIcon = new JLabel(new ImageIcon("src/assets/img/Lifes.png"));
-        epidemiesIcon.setSize(new Dimension(118, 118));
+        epidemiesIcon.setSize(118, 118);
         epidemiesIcon.setLocation(42, 659);
         gamePanel.add(epidemiesIcon);
 
         epidemiesCounterLbl = new JLabel("0");
-        epidemiesCounterLbl.setSize(new Dimension(118, 118));
+        epidemiesCounterLbl.setSize(118, 118);
         epidemiesCounterLbl.setFont(epidemiesCounterLbl.getFont().deriveFont(Font.PLAIN, 64));
         epidemiesCounterLbl.setLocation(epidemiesIcon.getLocation().x + 150, epidemiesIcon.getLocation().y);
         gamePanel.add(epidemiesCounterLbl);
@@ -344,20 +345,15 @@ public class MainMenu extends JFrame implements IMenu {
         gamePanel.add(characterIcon);
 
 
-        historialTxtArea = new TextArea("HistorialBg");
+        historialTxtArea = new TextArea();
         historialTxtArea.setSize(443, 708);
         historialTxtArea.setLocation(1465, 21);
-        historialTxtArea.setLineWrap(true);
-        historialTxtArea.setWrapStyleWord(true);
-        historialTxtArea.setOpaque(false);
-        historialTxtArea.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
 
         gamePanel.add(historialTxtArea);
     }
 
     private void initializeGame() {
-        Player.instance = null;
         Map.getInstance().cities.forEach(city -> gamePanel.add(new CityLabel(city)));
-        GameManager.getInstance().startNewRound();
+        GameManager.getInstance().resetGame();
     }
 }

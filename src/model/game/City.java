@@ -1,6 +1,8 @@
 package model.game;
 
 
+import controller.GameManager;
+import model.Logger;
 import model.base.Colour;
 
 import java.awt.Point;
@@ -60,16 +62,32 @@ public class City {
     }
 
     public void incrementVirusesCount() {
+        if (getTotalViruses() == 3) {
+            sendGiftsToNeighbours(this);
+        }
+
         setTotalViruses(getTotalViruses() + 1);
     }
 
     public void decrementVirusesCount() {
         setTotalViruses(getTotalViruses() - 1);
+        GameManager.getInstance().totalViruses.put(colour, GameManager.getInstance().totalViruses.get(colour) - 1);
+        GameManager.getInstance().checkEndOfGame();
+    }
+
+    private void sendGiftsToNeighbours(City source) {
+        Logger.getInstance().log("An epidemy starts from %p", getName());
+
+        connectedCities.forEach(city -> {
+            if (city != source) {
+                city.incrementVirusesCount();
+            }
+        });
     }
 
     @Override
     public String toString() {
-        return String.format("<html>City: %s<br>%s Viruses: %d</html>",
-              getName(), getColor().name(), getTotalViruses());
+        return String.format("<html>City: %s<br>Viruses: %d</html>",
+              getName(), getTotalViruses());
     }
 }

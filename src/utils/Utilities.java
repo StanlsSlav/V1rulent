@@ -1,6 +1,7 @@
 package utils;
 
 
+import controller.GameManager;
 import model.base.Colour;
 import model.base.Panel;
 import model.exception.NotImplementedException;
@@ -35,10 +36,11 @@ public class Utilities {
 
     public static MouseAdapter exitOnClick = new MouseAdapter() {
         @Override
-        public void mousePressed(MouseEvent e) {
-            super.mousePressed(e);
+        public void mouseClicked(MouseEvent e) {
+            super.mouseClicked(e);
 
             if (isLeftButtonPressed(e)) {
+                GameManager.getInstance().saveGame();
                 System.exit(0);
             }
         }
@@ -139,14 +141,18 @@ public class Utilities {
     }
 
     public static Colour getRandomColour() {
-        return Colour.values()[rand.nextInt(Colour.values().length - 1)];
+        return Colour.values()[rand.nextInt(Colour.values().length)];
     }
 
     public static City getRandomCityForColour(Colour colour) {
-        List<City> sameColouredCities = Map.getInstance().cities.stream()
-              .filter(city -> city.getColor() == colour)
-              .toList();
+        ArrayList<City> sameColouredCities = new ArrayList<>();
 
-        return sameColouredCities.get(rand.nextInt(sameColouredCities.size() - 1));
+        for (City city : Map.getInstance().cities) {
+            if (city.getColor() == colour) {
+                sameColouredCities.add(city);
+            }
+        }
+
+        return sameColouredCities.get(rand.nextInt(sameColouredCities.size()));
     }
 }

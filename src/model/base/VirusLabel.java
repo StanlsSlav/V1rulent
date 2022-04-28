@@ -27,7 +27,7 @@ public class VirusLabel extends JLabel {
         }
 
         setFont(getFont().deriveFont(Font.PLAIN, 64));
-        setSize(new Dimension(61, 80));
+        setSize(61, 80);
         setLocation(1184, 793);
     }
 }

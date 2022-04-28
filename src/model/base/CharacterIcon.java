@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class CharacterIcon extends JLabel {
     public CharacterIcon() {
-        setSize(new Dimension(433, 270));
+        setSize(433, 270);
         setLocation(1468, 769);
         assignRandomCharacter();
     }
