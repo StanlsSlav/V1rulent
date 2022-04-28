@@ -64,6 +64,8 @@ public class Utilities {
     }
 
     public static void loadCities() {
+        Map.getInstance().cities = new ArrayList<>();
+
         final File CITIES_FILE = new File("src/assets/cities.csv");
 
         try (BufferedReader reader = new BufferedReader(new FileReader(CITIES_FILE))) {

@@ -34,11 +34,6 @@ public class Player {
             return true;
         }
 
-        new Exception("Action could not be performed").printStackTrace();
         return false;
-    }
-
-    public void moveTo(City destination) throws NotImplementedException {
-        throw new NotImplementedException();
     }
 }

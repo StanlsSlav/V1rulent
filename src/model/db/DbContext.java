@@ -19,11 +19,11 @@ public class DbContext {
         throw new NotImplementedException();
     }
 
-    public void modifyData(String field, String value) throws NotImplementedException {
-        throw new NotImplementedException();
+    public void modifyData(String field, String value)  {
+        new NotImplementedException().printStackTrace();
     }
 
-    public void deleteData(String identifier) throws NotImplementedException {
-        throw new NotImplementedException();
+    public void deleteData(String identifier)  {
+        new NotImplementedException().printStackTrace();
     }
 }

@@ -10,7 +10,7 @@ import model.game.Difficulty;
 public class OptionsManager {
     public Difficulty difficulty;
 
-    public void changeDifficulty(Difficulty difficulty) throws NotImplementedException {
-        throw new NotImplementedException();
+    public void changeDifficulty(Difficulty difficulty)  {
+        new NotImplementedException().printStackTrace();
     }
 }
