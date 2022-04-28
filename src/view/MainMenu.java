@@ -1,8 +1,10 @@
 package view;
 
 
+import controller.GameManager;
 import model.base.*;
 import model.game.Map;
+import model.game.Player;
 import model.interfaces.IMenu;
 import utils.Utilities;
 
@@ -79,6 +81,8 @@ public class MainMenu extends JFrame implements IMenu {
 
     public JTextArea historialTxtArea;
 
+    public boolean wasGameLoaded = false;
+
     private final MouseAdapter switchToGamePanel = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -96,6 +100,10 @@ public class MainMenu extends JFrame implements IMenu {
             super.mouseClicked(e);
 
             if (isLeftButtonPressed(e)) {
+                if (!wasGameLoaded) {
+                    initializeGameView();
+                }
+
                 initializeGame();
                 setSize(new Dimension(1920, 1080));
                 centerScreen(instance);
@@ -264,7 +272,9 @@ public class MainMenu extends JFrame implements IMenu {
         settingsBackButton = new Button();
     }
 
-    private void initializeGame() {
+    private void initializeGameView() {
+        wasGameLoaded = true;
+
         Utilities.loadCities();
         Utilities.loadSettings();
 
@@ -343,7 +353,11 @@ public class MainMenu extends JFrame implements IMenu {
         historialTxtArea.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
 
         gamePanel.add(historialTxtArea);
+    }
 
+    private void initializeGame() {
+        Player.instance = null;
         Map.getInstance().cities.forEach(city -> gamePanel.add(new CityLabel(city)));
+        GameManager.getInstance().startNewRound();
     }
 }
