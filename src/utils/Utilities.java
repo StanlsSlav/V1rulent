@@ -22,8 +22,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Stream;
 
 public class Utilities {
+    private static final Random rand = new Random();
+
     public static boolean isLeftButtonPressed(MouseEvent event) {
         return event.getButton() == MouseEvent.BUTTON1;
     }
@@ -59,8 +64,6 @@ public class Utilities {
     public static void switchToCard(JPanel rootPanel, String cardName) {
         CardLayout cardLayout = (CardLayout) rootPanel.getLayout();
         cardLayout.show(rootPanel, cardName);
-
-        System.out.printf("Switching to %s%n", cardName);
     }
 
     public static void loadCities() {
@@ -133,5 +136,17 @@ public class Utilities {
 
     public static void loadSettings() {
         new NotImplementedException().printStackTrace();
+    }
+
+    public static Colour getRandomColour() {
+        return Colour.values()[rand.nextInt(Colour.values().length - 1)];
+    }
+
+    public static City getRandomCityForColour(Colour colour) {
+        List<City> sameColouredCities = Map.getInstance().cities.stream()
+              .filter(city -> city.getColor() == colour)
+              .toList();
+
+        return sameColouredCities.get(rand.nextInt(sameColouredCities.size() - 1));
     }
 }
