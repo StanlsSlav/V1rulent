@@ -2,17 +2,14 @@ package model.base;
 
 
 import javax.swing.JTextArea;
-import javax.swing.text.BadLocationException;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class TextArea extends JTextArea {
     public TextArea(String backgroundImageName) {
-        super("Round 1");
+        super();
         setBackgroundImage(getToolkit().getImage("src/assets/img/" + backgroundImageName + ".png"));
         initialize();
     }
