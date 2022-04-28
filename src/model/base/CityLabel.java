@@ -33,32 +33,15 @@ public class CityLabel extends JLabel {
                 super.mouseClicked(e);
                 if (e.isControlDown()) {
                     Player.getInstance().actions = 5;
-                }
-
-                if (e.getClickCount() == 2) {
-                    if (Player.tryPerformAction(ActionType.COMPLETE_CURE)){
-                        relatedCity.setTotalViruses(0);
-                        Logger.getInstance().log("Cured " + relatedCity.getName());
-                    } else {
-                        Logger.getInstance().log("Could not cure " + relatedCity.getName());
-                    }
                     return;
                 }
 
-                if (relatedCity != Player.getInstance().currentCity) {
-                    if (Player.tryPerformAction(ActionType.TRAVEL)) {
-                        Player.getInstance().currentCity = relatedCity;
-                        Logger.getInstance().log("Traveled to " + relatedCity.getName());
-                    } else {
-                        Logger.getInstance().log("Traveled to " + relatedCity.getName());
-                    }
+                if (e.isShiftDown()) {
+                    Player.getInstance().tryPerformAction(ActionType.COMPLETE_CURE, relatedCity);
                     return;
                 }
 
-                if (Player.tryPerformAction(ActionType.CURE)) {
-                    relatedCity.setTotalViruses(relatedCity.getTotalViruses() - 1);
-                    Logger.getInstance().log("Removed a virus from %p, %p left", relatedCity.getName(), relatedCity.getTotalViruses());
-                }
+                Player.getInstance().tryPerformAction(ActionType.TRAVEL, relatedCity);
             }
         });
     }

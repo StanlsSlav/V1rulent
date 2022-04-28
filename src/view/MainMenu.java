@@ -67,10 +67,10 @@ public class MainMenu extends JFrame implements IMenu {
 
     private ArrayList<JLabel> cardsLbls;
 
-    private VirusLabel greenTotalVirusesLbl;
-    private VirusLabel blueTotalVirusesLbl;
-    private VirusLabel yellowTotalVirusesLbl;
-    private VirusLabel redTotalVirusesLbl;
+    public VirusLabel greenTotalVirusesLbl;
+    public VirusLabel blueTotalVirusesLbl;
+    public VirusLabel yellowTotalVirusesLbl;
+    public VirusLabel redTotalVirusesLbl;
 
     private JLabel virusIcon;
 
