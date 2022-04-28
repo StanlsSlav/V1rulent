@@ -6,10 +6,10 @@ import model.exception.NotImplementedException;
 /**
  * Enfermedad del juego
  */
-public class Illness {
+public class Virus {
     public City currentCity;
 
-    public void propagate() throws NotImplementedException {
-        throw new NotImplementedException();
+    public void propagate()  {
+        new NotImplementedException().printStackTrace();
     }
 }

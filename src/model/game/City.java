@@ -61,7 +61,7 @@ public class City {
 
     @Override
     public String toString() {
-        return String.format("<html>City: %s<br>%s Illnesses: %d</html>",
+        return String.format("<html>City: %s<br>%s Viruses: %d</html>",
               getName(), getColor().name(), getTotalViruses());
     }
 }
