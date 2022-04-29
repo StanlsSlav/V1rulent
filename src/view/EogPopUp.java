@@ -45,25 +45,24 @@ public class EogPopUp extends JDialog {
             }
         });
 
-        contentPane.registerKeyboardAction(e ->
-              playAgain(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(e -> playAgain(),
+              KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         pack();
         setVisible(true);
     }
 
     private void goToMainMenu() {
-        MainMenu.getInstance().switchToMainMenu.mouseClicked(null);
+        MainMenu.getInstance().creditsBackButton.doClick();
         dispose();
     }
 
     private void playAgain() {
-        MainMenu.getInstance().switchToGameStartMenu.mouseClicked(null);
+        MainMenu.getInstance().playButton.doClick();
         dispose();
     }
 
     private void exit() {
-        Utilities.exitOnClick.mouseClicked(null);
-        dispose();
+        System.exit(0);
     }
 }
