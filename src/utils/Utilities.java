@@ -85,7 +85,7 @@ public class Utilities {
 
                 city.setName(dotCommaSplit[0]);
                 city.setPoint(new Point(Integer.parseInt(location[0]), Integer.parseInt(location[1])));
-                city.setColor(Colour.valueOf(color));
+                city.setColour(Colour.valueOf(color));
 
                 Map.getInstance().cities.add(city);
             }
@@ -148,7 +148,7 @@ public class Utilities {
         ArrayList<City> sameColouredCities = new ArrayList<>();
 
         for (City city : Map.getInstance().cities) {
-            if (city.getColor() == colour) {
+            if (city.getColour() == colour) {
                 sameColouredCities.add(city);
             }
         }

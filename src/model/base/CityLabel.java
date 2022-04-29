@@ -2,7 +2,6 @@ package model.base;
 
 
 import model.ActionType;
-import model.Logger;
 import model.game.City;
 import model.game.Player;
 
@@ -19,7 +18,7 @@ public class CityLabel extends JLabel {
         setSize(25, 25);
         setLocation(relatedCity.getPoint());
 
-        setIcon(new ImageIcon("src/assets/img/cities/" + relatedCity.getColor().name() + ".png"));
+        setIcon(new ImageIcon("src/assets/img/cities/" + relatedCity.getColour().name() + ".png"));
 
         addMouseListener(new MouseAdapter() {
             @Override

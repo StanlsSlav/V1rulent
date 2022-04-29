@@ -75,8 +75,8 @@ public class MainMenu extends JFrame implements IMenu {
 
     private JLabel virusIcon;
 
-    private JLabel epidemiesIcon;
-    public JLabel epidemiesCounterLbl;
+    private JLabel epidemicsIcon;
+    public JLabel epidemicsCounterLbl;
 
     private CharacterIcon characterIcon;
 
@@ -330,16 +330,16 @@ public class MainMenu extends JFrame implements IMenu {
         virusIcon.setLocation(1210, 830);
         gamePanel.add(virusIcon);
 
-        epidemiesIcon = new JLabel(new ImageIcon("src/assets/img/Lifes.png"));
-        epidemiesIcon.setSize(118, 118);
-        epidemiesIcon.setLocation(42, 659);
-        gamePanel.add(epidemiesIcon);
+        epidemicsIcon = new JLabel(new ImageIcon("src/assets/img/Lifes.png"));
+        epidemicsIcon.setSize(118, 118);
+        epidemicsIcon.setLocation(42, 659);
+        gamePanel.add(epidemicsIcon);
 
-        epidemiesCounterLbl = new JLabel("0");
-        epidemiesCounterLbl.setSize(118, 118);
-        epidemiesCounterLbl.setFont(epidemiesCounterLbl.getFont().deriveFont(Font.PLAIN, 64));
-        epidemiesCounterLbl.setLocation(epidemiesIcon.getLocation().x + 150, epidemiesIcon.getLocation().y);
-        gamePanel.add(epidemiesCounterLbl);
+        epidemicsCounterLbl = new JLabel("0");
+        epidemicsCounterLbl.setSize(118, 118);
+        epidemicsCounterLbl.setFont(epidemicsCounterLbl.getFont().deriveFont(Font.PLAIN, 64));
+        epidemicsCounterLbl.setLocation(epidemicsIcon.getLocation().x + 150, epidemicsIcon.getLocation().y);
+        gamePanel.add(epidemicsCounterLbl);
 
         characterIcon = new CharacterIcon();
         gamePanel.add(characterIcon);

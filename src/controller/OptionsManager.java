@@ -4,7 +4,6 @@ package controller;
 import model.exception.NotImplementedException;
 import model.game.Difficulty;
 import model.game.Map;
-import view.MainMenu;
 
 /**
  * Controlador para los niveles de dificultad
@@ -21,7 +20,7 @@ public class OptionsManager {
     }
 
     public Difficulty difficulty;
-    public int epidemiesThreshold = 8;
+    public int epidemicsThreshold = 8;
     public int virusesThreshold = Map.getInstance().cities.size() * 3;
 
     public void changeDifficulty(Difficulty difficulty) {

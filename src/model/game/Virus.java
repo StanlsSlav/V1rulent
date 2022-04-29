@@ -10,7 +10,7 @@ public class Virus {
     public City currentCity;
 
     public void propagate()  {
-        GameManager.getInstance().incrementEpidemiesCounter();
+        GameManager.getInstance().incrementEpidemicsCounter();
         GameManager.getInstance().checkEndOfGame();
     }
 }
