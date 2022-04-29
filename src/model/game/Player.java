@@ -49,7 +49,7 @@ public class Player {
         }
 
         if (actions < actionCost) {
-            Logger.getInstance().log("You need %p more actions to move to %p",
+            Logger.getInstance().log("You need %p more actions to cure %p",
                   actionCost - actions, city.getName());
             return;
         }
