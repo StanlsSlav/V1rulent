@@ -36,12 +36,11 @@ public class CityLabel extends JLabel {
                     return;
                 }
 
-                if (e.isShiftDown()) {
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    Player.getInstance().tryPerformAction(ActionType.TRAVEL, relatedCity);
+                } else if (e.getButton() == MouseEvent.BUTTON3) {
                     Player.getInstance().tryPerformAction(ActionType.COMPLETE_CURE, relatedCity);
-                    return;
                 }
-
-                Player.getInstance().tryPerformAction(ActionType.TRAVEL, relatedCity);
             }
         });
     }
