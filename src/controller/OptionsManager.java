@@ -1,9 +1,12 @@
 package controller;
 
 
-import model.exception.NotImplementedException;
 import model.game.Difficulty;
 import model.game.Map;
+import model.game.Player;
+
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 
 /**
  * Controlador para los niveles de dificultad
@@ -19,11 +22,14 @@ public class OptionsManager {
         return instance;
     }
 
+    public String playerName = Player.getInstance().name;
     public Difficulty difficulty;
     public int epidemicsThreshold = 8;
     public int virusesThreshold = Map.getInstance().cities.size() * 3;
 
-    public void changeDifficulty(Difficulty difficulty) {
-        new NotImplementedException().printStackTrace();
+    public SpinnerModel epidemicsLimits = new SpinnerNumberModel(1, 1, 15, 1);
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 }
