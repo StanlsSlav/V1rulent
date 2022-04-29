@@ -58,7 +58,6 @@ public class GameManager {
                 Logger.getInstance().log(false, "%p was infected, now it has %p viruses",
                       toInfect.get().getName(), toInfect.get().getTotalViruses());
 
-                totalViruses.put(randomColour, totalViruses.get(randomColour) + 1);
                 previouslyPickedCities.add(toInfect.get());
             }
         }
@@ -116,17 +115,17 @@ public class GameManager {
     }
 
     private boolean haveVirusesPassedThreshold() {
-        AtomicInteger currentTotalViruses = new AtomicInteger();
-        Map.getInstance().cities.forEach(city -> currentTotalViruses.addAndGet(city.getTotalViruses()));
-
-        return currentTotalViruses.get() > OptionsManager.getInstance().virusesThreshold;
+        return totalViruses.values()
+              .stream()
+              .mapToInt(val -> val)
+              .sum() > OptionsManager.getInstance().virusesThreshold;
     }
 
     private boolean isNoMoreVirusesLeft() {
-        AtomicInteger currentTotalViruses = new AtomicInteger();
-        Map.getInstance().cities.forEach(city -> currentTotalViruses.addAndGet(city.getTotalViruses()));
-
-        return currentTotalViruses.get() == 0;
+        return totalViruses.values()
+              .stream()
+              .mapToInt(val -> val)
+              .sum() == 0;
     }
 
     public void incrementEpidemicsCounter() {
@@ -134,6 +133,16 @@ public class GameManager {
         int currentEpidemicsCount = Integer.parseInt(epidemicsCounterLbl.getText());
 
         epidemicsCounterLbl.setText(currentEpidemicsCount + 1 + "");
+    }
+
+    public void incrementColourVirus(Colour colour) {
+        totalViruses.put(colour, totalViruses.get(colour) + 1);
+        updateGameState();
+    }
+
+    public void decrementColourVirus(Colour colour) {
+        totalViruses.put(colour, totalViruses.get(colour) - 1);
+        updateGameState();
     }
 
     public void saveGame() {

@@ -55,7 +55,9 @@ public class Player {
         }
 
         actions -= actionCost;
-        city.setTotalViruses(0);
+        while (city.getTotalViruses() > 0) {
+            city.decrementVirusesCount();
+        }
 
         Logger.getInstance().log("Cured " + city.getName());
     }

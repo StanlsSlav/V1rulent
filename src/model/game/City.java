@@ -64,15 +64,16 @@ public class City {
     public void incrementVirusesCount() {
         if (getTotalViruses() == 3) {
             sendGiftsToNeighbours(this);
+            return;
         }
 
         setTotalViruses(getTotalViruses() + 1);
+        GameManager.getInstance().incrementColourVirus(getColour());
     }
 
     public void decrementVirusesCount() {
         setTotalViruses(getTotalViruses() - 1);
-        GameManager.getInstance().totalViruses.put(colour, GameManager.getInstance().totalViruses.get(colour) - 1);
-        GameManager.getInstance().checkEndOfGame();
+        GameManager.getInstance().decrementColourVirus(getColour());
     }
 
     private void sendGiftsToNeighbours(City source) {
