@@ -101,7 +101,7 @@ public class GameManager {
             return;
         }
 
-        if (anyMoreVirusesLeft()) {
+        if (haveVirusesPassedThreshold()) {
             new EogPopUp("The virus has engulfed the world. You have lost!");
             return;
         }
@@ -116,11 +116,11 @@ public class GameManager {
         return currentEpidemiesCount >= OptionsManager.getInstance().epidemiesThreshold;
     }
 
-    private boolean anyMoreVirusesLeft() {
+    private boolean haveVirusesPassedThreshold() {
         AtomicInteger currentTotalViruses = new AtomicInteger();
         Map.getInstance().cities.forEach(city -> currentTotalViruses.addAndGet(city.getTotalViruses()));
 
-        return currentTotalViruses.get() < OptionsManager.getInstance().virusesThreshold;
+        return currentTotalViruses.get() > OptionsManager.getInstance().virusesThreshold;
     }
 
     private boolean isNoMoreVirusesLeft() {
