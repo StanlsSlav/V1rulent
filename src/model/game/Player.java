@@ -24,6 +24,7 @@ public class Player {
         getInstance();
     }
 
+    public String name = "Unknown";
     public int totalActionsPerRound = 4;
     public int actions = totalActionsPerRound;
     public City currentCity;
