@@ -10,6 +10,7 @@ import model.game.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import java.awt.CardLayout;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -24,6 +25,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+
+import static javax.swing.SwingUtilities.invokeLater;
 
 public class Utilities {
     private static final Random rand = new Random();
@@ -45,25 +48,31 @@ public class Utilities {
     };
 
     public static void centerScreen(JFrame mainFrame) {
-        final double Y = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-        final double X = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+        invokeLater(() -> {
+            final double Y = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+            final double X = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 
-        // Centra la ventana del juego al centro del monitor
-        Window.getWindows()[0].setLocation((int) X / 2 - mainFrame.getWidth() / 2,
-              (int) Y / 2 - mainFrame.getHeight() / 2);
+            // Centra la ventana del juego al centro del monitor
+            Window.getWindows()[0].setLocation((int) X / 2 - mainFrame.getWidth() / 2,
+                  (int) Y / 2 - mainFrame.getHeight() / 2);
+        });
     }
 
     public static void switchImage(JPanel panel, String imageName) {
-        Panel panelToSwitch = (Panel) panel;
-        panelToSwitch.setBackgroundImage(panel.getToolkit().createImage("src/assets/img/" + imageName + ".png"));
+        invokeLater(() -> {
+            Panel panelToSwitch = (Panel) panel;
+            panelToSwitch.setBackgroundImage(panel.getToolkit().createImage("src/assets/img/" + imageName + ".png"));
 
-        // Quita los artefactos
-        panel.updateUI();
+            // Quita los artefactos
+            panel.updateUI();
+        });
     }
 
     public static void switchToCard(JPanel rootPanel, String cardName) {
-        CardLayout cardLayout = (CardLayout) rootPanel.getLayout();
-        cardLayout.show(rootPanel, cardName);
+        invokeLater(() -> {
+            CardLayout cardLayout = (CardLayout) rootPanel.getLayout();
+            cardLayout.show(rootPanel, cardName);
+        });
     }
 
     public static void loadCities() {

@@ -14,10 +14,10 @@ import view.EogPopUp;
 import view.MainMenu;
 
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class GameManager {
     private static GameManager instance;
@@ -70,10 +70,12 @@ public class GameManager {
     }
 
     public void updateGameState() {
-        MainMenu.getInstance().yellowTotalVirusesLbl.setText(String.valueOf(totalViruses.get(Colour.Yellow)));
-        MainMenu.getInstance().blueTotalVirusesLbl.setText(String.valueOf(totalViruses.get(Colour.Blue)));
-        MainMenu.getInstance().greenTotalVirusesLbl.setText(String.valueOf(totalViruses.get(Colour.Green)));
-        MainMenu.getInstance().redTotalVirusesLbl.setText(String.valueOf(totalViruses.get(Colour.Red)));
+        SwingUtilities.invokeLater(() -> {
+            MainMenu.getInstance().yellowTotalVirusesLbl.setText(String.valueOf(totalViruses.get(Colour.Yellow)));
+            MainMenu.getInstance().blueTotalVirusesLbl.setText(String.valueOf(totalViruses.get(Colour.Blue)));
+            MainMenu.getInstance().greenTotalVirusesLbl.setText(String.valueOf(totalViruses.get(Colour.Green)));
+            MainMenu.getInstance().redTotalVirusesLbl.setText(String.valueOf(totalViruses.get(Colour.Red)));
+        });
     }
 
     public void resetGame() {

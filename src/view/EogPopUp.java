@@ -64,5 +64,6 @@ public class EogPopUp extends JDialog {
 
     private void exit() {
         Utilities.exitOnClick.mouseClicked(null);
+        dispose();
     }
 }

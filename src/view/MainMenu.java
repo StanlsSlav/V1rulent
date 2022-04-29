@@ -4,14 +4,11 @@ package view;
 import controller.GameManager;
 import model.base.*;
 import model.game.Map;
-import model.game.Player;
-import model.game.Round;
 import model.interfaces.IMenu;
 import utils.Utilities;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -21,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static javax.swing.SwingUtilities.invokeLater;
 import static utils.Utilities.*;
 
 public class MainMenu extends JFrame implements IMenu {
@@ -105,8 +103,11 @@ public class MainMenu extends JFrame implements IMenu {
                     initializeGameView();
                 }
 
-                initializeGame();
-                setSize(1920, 1080);
+                invokeLater(() -> {
+                    initializeGame();
+                    setSize(1920, 1080);
+                });
+
                 centerScreen(instance);
 
                 switchToGamePanel.mouseClicked(e);
@@ -176,16 +177,19 @@ public class MainMenu extends JFrame implements IMenu {
     public MainMenu() {
         super("V1rulent");
         instance = this;
-        initialize();
 
-        try {
-            setIconImage(ImageIO.read(new File("src/assets/img/Logo.png")));
-        } catch (IOException ioe) {
-            System.err.println("Logo could not be found");
-            ioe.printStackTrace();
-        }
+        invokeLater(() -> {
+            initialize();
 
-        centerScreen(instance);
+            try {
+                setIconImage(ImageIO.read(new File("src/assets/img/Logo.png")));
+            } catch (IOException ioe) {
+                System.err.println("Logo could not be found");
+                ioe.printStackTrace();
+            }
+
+            centerScreen(instance);
+        });
     }
 
     @Override
