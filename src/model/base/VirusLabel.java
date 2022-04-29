@@ -1,11 +1,11 @@
 package model.base;
 
 
+import controller.GameManager;
+
 import javax.swing.JLabel;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
-
 
 public class VirusLabel extends JLabel {
     public VirusLabel(Colour colour) {
@@ -29,5 +29,7 @@ public class VirusLabel extends JLabel {
         setFont(getFont().deriveFont(Font.PLAIN, 64));
         setSize(61, 80);
         setLocation(1184, 793);
+
+        addPropertyChangeListener("text", e -> GameManager.getInstance().checkEndOfGame());
     }
 }

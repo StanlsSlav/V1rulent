@@ -39,12 +39,12 @@ public class MainMenu extends JFrame implements IMenu {
     private JPanel gamePanel;
     private JPanel pausePanel;
 
-    private JButton playButton;
+    public JButton playButton;
     private JButton rulesButton;
     private JButton settingsButton;
     private JButton creditsButton;
     private JButton exitButton;
-    private JButton creditsBackButton;
+    public JButton creditsBackButton;
     private JButton gameStartContinueButton;
     private JButton gameStartBackButton;
     private JButton gameStartLoadButton;
@@ -99,11 +99,11 @@ public class MainMenu extends JFrame implements IMenu {
             super.mouseClicked(e);
 
             if (isLeftButtonPressed(e)) {
-                if (!wasGameLoaded) {
-                    initializeGameView();
-                }
-
                 invokeLater(() -> {
+                    if (!wasGameLoaded) {
+                        initializeGameView();
+                    }
+
                     initializeGame();
                     setSize(1920, 1080);
                 });
@@ -343,11 +343,12 @@ public class MainMenu extends JFrame implements IMenu {
         epidemicsCounterLbl.setSize(118, 118);
         epidemicsCounterLbl.setFont(epidemicsCounterLbl.getFont().deriveFont(Font.PLAIN, 64));
         epidemicsCounterLbl.setLocation(epidemicsIcon.getLocation().x + 150, epidemicsIcon.getLocation().y);
+        epidemicsCounterLbl.addPropertyChangeListener("text",
+              e -> GameManager.getInstance().checkEndOfGame());
         gamePanel.add(epidemicsCounterLbl);
 
         characterIcon = new CharacterIcon();
         gamePanel.add(characterIcon);
-
 
         historialTxtArea = new TextArea();
         historialTxtArea.setSize(443, 708);
