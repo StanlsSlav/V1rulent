@@ -9,6 +9,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -21,12 +23,16 @@ public class EogPopUp extends JDialog {
     private JTextArea popUpTxtArea;
 
     public EogPopUp(String message) {
+        setTitle("EndOfGame");
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(goToMainMenuBtn);
 
         popUpTxtArea.setText(message + "\n");
         popUpTxtArea.append("What do you wanna do now?");
+        popUpTxtArea.setEnabled(false);
+        popUpTxtArea.setFont(popUpTxtArea.getFont().deriveFont(Font.ITALIC, popUpTxtArea.getFont().getSize() + 4));
+        popUpTxtArea.setDisabledTextColor(Color.BLACK);
 
         goToMainMenuBtn.addActionListener(e -> goToMainMenu());
         playAgainBtn.addActionListener(e -> playAgain());
