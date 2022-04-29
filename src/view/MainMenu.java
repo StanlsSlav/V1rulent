@@ -2,13 +2,18 @@ package view;
 
 
 import controller.GameManager;
+import controller.OptionsManager;
 import model.base.*;
+import model.game.Difficulty;
 import model.game.Map;
 import model.interfaces.IMenu;
 import utils.Utilities;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
 import java.awt.Font;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -58,6 +63,12 @@ public class MainMenu extends JFrame implements IMenu {
     private JButton pauseBackBtn;
     private JPanel containerPanel;
     private JLabel pauseIcon;
+    private JLabel nameLbl;
+    private JTextField nameTxtField;
+    private JLabel difficultyLbl;
+    private JComboBox<Difficulty> difficultyComboBox;
+    private JLabel epidemicsLbl;
+    private JSpinner settingsTotalEpidemicsSpinner;
 
     private JLabel yellowCureIcon;
     private JLabel redCureIcon;
@@ -99,11 +110,11 @@ public class MainMenu extends JFrame implements IMenu {
             super.mouseClicked(e);
 
             if (isLeftButtonPressed(e)) {
-                invokeLater(() -> {
-                    if (!wasGameLoaded) {
-                        initializeGameView();
-                    }
+                if (!wasGameLoaded) {
+                    initializeGameView();
+                }
 
+                invokeLater(() -> {
                     initializeGame();
                     setSize(1920, 1080);
                 });
@@ -199,29 +210,59 @@ public class MainMenu extends JFrame implements IMenu {
             public void componentResized(ComponentEvent e) {
                 super.componentResized(e);
 
-                int width = getWidth();
-                int height = getHeight();
+                final int width = getWidth();
+                final int height = getHeight();
 
                 // Los botones no deben pasan el border inclinado
-                int percent = 40;
-
-                if (width > 1550) {
-                    percent -= 25;
-                } else if (width > 1295) {
-                    percent -= 20;
-                } else if (width > 1100) {
-                    percent -= 10;
-                }
-
-                switcherPanel.setBorder(BorderFactory.createEmptyBorder(0, Math.round(width / 100f * percent), 0, 0));
+                switcherPanel.setBorder(BorderFactory.createEmptyBorder(
+                      0, Math.round(width / 100f * 15), 0, 0));
 
                 // Añade 5% de border entre todos los elementos del panel principal
-                int fivePercentOfWidth = width / 100 * 5;
-                int fivePercentOfHeight = height / 100 * 5;
+                final int fivePercentOfWidth = width / 100 * 5;
+                final int fivePercentOfHeight = height / 100 * 5;
 
-                menusPanel.setBorder(BorderFactory.createEmptyBorder(fivePercentOfHeight, fivePercentOfWidth, fivePercentOfHeight, fivePercentOfWidth));
+                menusPanel.setBorder(BorderFactory.createEmptyBorder(
+                      fivePercentOfHeight, fivePercentOfWidth, fivePercentOfHeight, fivePercentOfWidth));
+            }
+        });
 
-                System.out.printf("Width: %d - Height: %d%n", getWidth(), getHeight());
+        difficultyComboBox.addItemListener(e -> {
+            Difficulty newDifficulty = Difficulty.Easy;
+
+            try {
+                newDifficulty = Enum.valueOf(Difficulty.class, e.getItem().toString());
+            } catch (Exception ignored) {
+            }
+
+            OptionsManager.getInstance().setDifficulty(newDifficulty);
+        });
+
+        nameTxtField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                try {
+                    OptionsManager.getInstance().playerName = e.getDocument().getText(0, e.getLength());
+                } catch (BadLocationException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                try {
+                    OptionsManager.getInstance().playerName = e.getDocument().getText(0, e.getLength());
+                } catch (BadLocationException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                try {
+                    OptionsManager.getInstance().playerName = e.getDocument().getText(0, e.getLength());
+                } catch (BadLocationException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
@@ -275,6 +316,7 @@ public class MainMenu extends JFrame implements IMenu {
         pauseBackBtn = new Button();
 
         settingsBackButton = new Button();
+        settingsTotalEpidemicsSpinner = new JSpinner(OptionsManager.getInstance().epidemicsLimits);
     }
 
     private void initializeGameView() {
