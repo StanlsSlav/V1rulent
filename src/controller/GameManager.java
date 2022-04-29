@@ -6,7 +6,6 @@ import model.base.Colour;
 import model.exception.NotImplementedException;
 import model.game.City;
 import model.game.GameHistory;
-import model.game.GameState;
 import model.game.Map;
 import model.game.Player;
 import model.game.Round;
@@ -96,7 +95,7 @@ public class GameManager {
     }
 
     public void checkEndOfGame() {
-        if (hasEpidemiesPassedThreshold()) {
+        if (hasEpidemicsPassedThreshold()) {
             new EogPopUp("The world has entered in panic. You have lost!");
             return;
         }
@@ -111,9 +110,9 @@ public class GameManager {
         }
     }
 
-    private boolean hasEpidemiesPassedThreshold() {
-        int currentEpidemiesCount = Integer.parseInt(MainMenu.getInstance().epidemiesCounterLbl.getText());
-        return currentEpidemiesCount >= OptionsManager.getInstance().epidemiesThreshold;
+    private boolean hasEpidemicsPassedThreshold() {
+        int currentEpidemicsCount = Integer.parseInt(MainMenu.getInstance().epidemicsCounterLbl.getText());
+        return currentEpidemicsCount >= OptionsManager.getInstance().epidemicsThreshold;
     }
 
     private boolean haveVirusesPassedThreshold() {
@@ -130,11 +129,11 @@ public class GameManager {
         return currentTotalViruses.get() == 0;
     }
 
-    public void incrementEpidemiesCounter() {
-        JLabel epidemiesCounterLbl = MainMenu.getInstance().epidemiesCounterLbl;
-        int currentEpidemiesCount = Integer.parseInt(epidemiesCounterLbl.getText());
+    public void incrementEpidemicsCounter() {
+        JLabel epidemicsCounterLbl = MainMenu.getInstance().epidemicsCounterLbl;
+        int currentEpidemicsCount = Integer.parseInt(epidemicsCounterLbl.getText());
 
-        epidemiesCounterLbl.setText(currentEpidemiesCount + 1 + "");
+        epidemicsCounterLbl.setText(currentEpidemicsCount + 1 + "");
     }
 
     public void saveGame() {

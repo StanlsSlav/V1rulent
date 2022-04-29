@@ -29,11 +29,11 @@ public class City {
         this.name = name;
     }
 
-    public Colour getColor() {
+    public Colour getColour() {
         return colour;
     }
 
-    public void setColor(Colour colour) {
+    public void setColour(Colour colour) {
         this.colour = colour;
     }
 
@@ -76,7 +76,7 @@ public class City {
     }
 
     private void sendGiftsToNeighbours(City source) {
-        Logger.getInstance().log("An epidemy starts from %p", getName());
+        Logger.getInstance().log("An epidemic starts from %p", getName());
 
         connectedCities.forEach(city -> {
             if (city != source) {
