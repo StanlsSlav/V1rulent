@@ -10,15 +10,19 @@ import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import static javax.swing.SwingUtilities.invokeLater;
+
 public class CityLabel extends JLabel {
     public CityLabel(City city) {
         super();
         setRelatedCity(city);
 
-        setSize(25, 25);
-        setLocation(relatedCity.getPoint());
+        invokeLater(() -> {
+            setSize(25, 25);
+            setLocation(relatedCity.getPoint());
 
-        setIcon(new ImageIcon("src/assets/img/cities/" + relatedCity.getColour().name() + ".png"));
+            setIcon(new ImageIcon("src/assets/img/cities/" + relatedCity.getColour().name() + ".png"));
+        });
 
         addMouseListener(new MouseAdapter() {
             @Override
