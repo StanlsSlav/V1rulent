@@ -6,6 +6,7 @@ import controller.OptionsManager;
 import model.base.*;
 import model.game.Difficulty;
 import model.game.Map;
+import model.game.Player;
 import model.interfaces.IMenu;
 import utils.Utilities;
 
@@ -14,6 +15,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.html.Option;
 import java.awt.Font;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -64,11 +66,11 @@ public class MainMenu extends JFrame implements IMenu {
     private JPanel containerPanel;
     private JLabel pauseIcon;
     private JLabel nameLbl;
-    private JTextField nameTxtField;
+    public JTextField nameTxtField;
     private JLabel difficultyLbl;
-    private JComboBox<Difficulty> difficultyComboBox;
+    public JComboBox<Difficulty> difficultyComboBox;
     private JLabel epidemicsLbl;
-    private JSpinner settingsTotalEpidemicsSpinner;
+    public JSpinner settingsTotalEpidemicsSpinner;
 
     private JLabel yellowCureIcon;
     private JLabel redCureIcon;
@@ -132,6 +134,8 @@ public class MainMenu extends JFrame implements IMenu {
             super.mouseClicked(e);
 
             if (isLeftButtonPressed(e)) {
+                OptionsManager.getInstance().saveSettings();
+
                 switchToCard(switcherPanel, "MainMenu");
                 switchImage(menusPanel, "MainBg");
             }
@@ -179,6 +183,13 @@ public class MainMenu extends JFrame implements IMenu {
             super.mouseClicked(e);
 
             if (isLeftButtonPressed(e)) {
+                invokeLater(() -> {
+                    nameTxtField.setText(OptionsManager.getInstance().playerName);
+                    // FIXME: Null
+                    difficultyComboBox.setSelectedIndex(OptionsManager.getInstance().difficulty.ordinal());
+                    settingsTotalEpidemicsSpinner.setValue(OptionsManager.getInstance().epidemicsThreshold);
+                });
+
                 switchToCard(rootPanel, "MenusPanel");
                 switchToCard(switcherPanel, "SettingsMenu");
             }
@@ -240,26 +251,22 @@ public class MainMenu extends JFrame implements IMenu {
         nameTxtField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                try {
-                    OptionsManager.getInstance().playerName = e.getDocument().getText(0, e.getLength());
-                } catch (BadLocationException ex) {
-                    ex.printStackTrace();
-                }
+                changePlayerName(e);
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                try {
-                    OptionsManager.getInstance().playerName = e.getDocument().getText(0, e.getLength());
-                } catch (BadLocationException ex) {
-                    ex.printStackTrace();
-                }
+                changePlayerName(e);
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
+                changePlayerName(e);
+            }
+
+            private void changePlayerName(DocumentEvent e) {
                 try {
-                    OptionsManager.getInstance().playerName = e.getDocument().getText(0, e.getLength());
+                    Player.getInstance().name = e.getDocument().getText(0, e.getLength());
                 } catch (BadLocationException ex) {
                     ex.printStackTrace();
                 }
@@ -400,6 +407,7 @@ public class MainMenu extends JFrame implements IMenu {
     }
 
     private void initializeGame() {
+        OptionsManager.getInstance().loadSettingsFromXml();
         Map.getInstance().cities.forEach(city -> gamePanel.add(new CityLabel(city)));
         GameManager.getInstance().resetGame();
     }

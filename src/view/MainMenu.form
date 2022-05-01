@@ -216,6 +216,7 @@
                     </constraints>
                     <properties>
                       <font name="Consolas" size="16"/>
+                      <text value=""/>
                       <toolTipText value="This is how we'll recognize you"/>
                     </properties>
                   </component>
