@@ -2,8 +2,14 @@ package model.game;
 
 
 import controller.GameManager;
+import controller.OptionsManager;
 import model.ActionType;
 import model.Logger;
+import view.MainMenu;
+
+import javax.swing.SwingUtilities;
+
+import static javax.swing.SwingUtilities.invokeLater;
 
 /**
  * El jugador del juego
@@ -28,6 +34,13 @@ public class Player {
     public int totalActionsPerRound = 4;
     public int actions = totalActionsPerRound;
     public City currentCity;
+
+    public void setName(String name) {
+        this.name = name.trim();
+
+        invokeLater(() ->MainMenu.getInstance().nameTxtField.setText(this.name));
+        OptionsManager.getInstance().playerName = this.name;
+    }
 
     public void tryPerformAction(ActionType actionType, City target) {
         switch (actionType) {
