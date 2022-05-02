@@ -15,7 +15,6 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.html.Option;
 import java.awt.Font;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -29,7 +28,7 @@ import static javax.swing.SwingUtilities.invokeLater;
 import static utils.Utilities.*;
 
 public class MainMenu extends JFrame implements IMenu {
-    private static MainMenu instance;
+    public static MainMenu instance;
 
     public static MainMenu getInstance() {
         return instance;
@@ -100,9 +99,11 @@ public class MainMenu extends JFrame implements IMenu {
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
 
-            if (isLeftButtonPressed(e)) {
-                switchToCard(rootPanel, "GamePanel");
+            if (!isLeftButtonPressed(e)) {
+                return;
             }
+
+            switchToCard(rootPanel, "GamePanel");
         }
     };
 
@@ -111,20 +112,22 @@ public class MainMenu extends JFrame implements IMenu {
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
 
-            if (isLeftButtonPressed(e)) {
-                if (!wasGameLoaded) {
-                    initializeGameView();
-                }
-
-                invokeLater(() -> {
-                    initializeGame();
-                    setSize(1920, 1080);
-                });
-
-                centerScreen(instance);
-
-                switchToGamePanel.mouseClicked(e);
+            if (!isLeftButtonPressed(e)) {
+                return;
             }
+
+            if (!wasGameLoaded) {
+                initializeGameView();
+            }
+
+            invokeLater(() -> {
+                initializeGame();
+                setSize(1920, 1080);
+            });
+
+            centerScreen(instance);
+
+            switchToGamePanel.mouseClicked(e);
         }
     };
 
@@ -133,12 +136,12 @@ public class MainMenu extends JFrame implements IMenu {
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
 
-            if (isLeftButtonPressed(e)) {
-                OptionsManager.getInstance().saveSettings();
-
-                switchToCard(switcherPanel, "MainMenu");
-                switchImage(menusPanel, "MainBg");
+            if (!isLeftButtonPressed(e)) {
+                return;
             }
+
+            switchToCard(switcherPanel, "MainMenu");
+            switchImage(menusPanel, "MainBg");
         }
     };
 
@@ -147,9 +150,11 @@ public class MainMenu extends JFrame implements IMenu {
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
 
-            if (e.getButton() == MouseEvent.BUTTON2) {
-                switchToCard(rootPanel, "PausePanel");
+            if (e.getButton() != MouseEvent.BUTTON2) {
+                return;
             }
+
+            switchToCard(rootPanel, "PausePanel");
         }
     };
 
@@ -158,10 +163,12 @@ public class MainMenu extends JFrame implements IMenu {
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
 
-            if (isLeftButtonPressed(e)) {
-                switchToCard(switcherPanel, "CreditsMenu");
-                switchImage(menusPanel, "CreditsBg");
+            if (!isLeftButtonPressed(e)) {
+                return;
             }
+
+            switchToCard(switcherPanel, "CreditsMenu");
+            switchImage(menusPanel, "CreditsBg");
         }
     };
 
@@ -170,10 +177,12 @@ public class MainMenu extends JFrame implements IMenu {
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
 
-            if (isLeftButtonPressed(e)) {
-                switchToCard(switcherPanel, "GameStartMenu");
-                switchToCard(rootPanel, "MenusPanel");
+            if (!isLeftButtonPressed(e)) {
+                return;
             }
+
+            switchToCard(switcherPanel, "GameStartMenu");
+            switchToCard(rootPanel, "MenusPanel");
         }
     };
 
@@ -182,17 +191,18 @@ public class MainMenu extends JFrame implements IMenu {
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
 
-            if (isLeftButtonPressed(e)) {
-                invokeLater(() -> {
-                    nameTxtField.setText(OptionsManager.getInstance().playerName);
-                    // FIXME: Null
-                    difficultyComboBox.setSelectedIndex(OptionsManager.getInstance().difficulty.ordinal());
-                    settingsTotalEpidemicsSpinner.setValue(OptionsManager.getInstance().epidemicsThreshold);
-                });
-
-                switchToCard(rootPanel, "MenusPanel");
-                switchToCard(switcherPanel, "SettingsMenu");
+            if (!isLeftButtonPressed(e)) {
+                return;
             }
+
+            invokeLater(() -> {
+                nameTxtField.setText(OptionsManager.getInstance().playerName);
+                difficultyComboBox.setSelectedIndex(OptionsManager.getInstance().difficulty.ordinal());
+                settingsTotalEpidemicsSpinner.setValue(OptionsManager.getInstance().epidemicsThreshold);
+            });
+
+            switchToCard(rootPanel, "MenusPanel");
+            switchToCard(switcherPanel, "SettingsMenu");
         }
     };
 
@@ -251,22 +261,16 @@ public class MainMenu extends JFrame implements IMenu {
         nameTxtField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                changePlayerName(e);
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                changePlayerName(e);
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                changePlayerName(e);
-            }
-
-            private void changePlayerName(DocumentEvent e) {
                 try {
-                    Player.getInstance().name = e.getDocument().getText(0, e.getLength());
+                    Player.getInstance().setName(e.getDocument().getText(0, e.getLength()));
                 } catch (BadLocationException ex) {
                     ex.printStackTrace();
                 }

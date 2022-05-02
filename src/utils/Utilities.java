@@ -2,6 +2,7 @@ package utils;
 
 
 import controller.GameManager;
+import controller.OptionsManager;
 import model.base.Colour;
 import model.base.Panel;
 import model.exception.NotImplementedException;
@@ -10,7 +11,6 @@ import model.game.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import java.awt.CardLayout;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -42,6 +42,7 @@ public class Utilities {
 
             if (isLeftButtonPressed(e)) {
                 GameManager.getInstance().saveGame();
+                OptionsManager.getInstance().saveSettings();
                 System.exit(0);
             }
         }

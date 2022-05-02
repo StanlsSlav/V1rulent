@@ -6,6 +6,6 @@ import view.MainMenu;
  */
 class Program {
     public static void main(String[] args) {
-        MainMenu mainMenu = new MainMenu();
+        MainMenu.instance = new MainMenu();
     }
 }
