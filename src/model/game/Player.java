@@ -7,10 +7,6 @@ import model.ActionType;
 import model.Logger;
 import view.MainMenu;
 
-import javax.swing.SwingUtilities;
-
-import static javax.swing.SwingUtilities.invokeLater;
-
 /**
  * El jugador del juego
  */
@@ -30,16 +26,23 @@ public class Player {
         getInstance();
     }
 
-    public String name = "Unknown";
-    public int totalActionsPerRound = 4;
-    public int actions = totalActionsPerRound;
+    public String name;
+    public int totalActionsPerRound;
+    public int actions;
     public City currentCity;
+
+    public String getName() {
+        return this.name;
+    }
 
     public void setName(String name) {
         this.name = name.trim();
 
-        invokeLater(() ->MainMenu.getInstance().nameTxtField.setText(this.name));
-        OptionsManager.getInstance().playerName = this.name;
+        if (MainMenu.getInstance() != null) {
+            MainMenu.getInstance().nameTxtField.setText(getName());
+        }
+
+        OptionsManager.getInstance().playerName = getName();
     }
 
     public void tryPerformAction(ActionType actionType, City target) {
