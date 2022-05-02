@@ -38,10 +38,6 @@ public class Player {
     public void setName(String name) {
         this.name = name.trim();
 
-        if (MainMenu.getInstance() != null) {
-            MainMenu.getInstance().nameTxtField.setText(getName());
-        }
-
         OptionsManager.getInstance().playerName = getName();
     }
 

@@ -8,6 +8,7 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
+import view.MainMenu;
 
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
