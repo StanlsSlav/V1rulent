@@ -8,7 +8,6 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
-import view.MainMenu;
 
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
@@ -47,6 +46,14 @@ public class OptionsManager {
         this.difficulty = difficulty;
     }
 
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName.trim();
+    }
+
+    public void setEpidemicsThreshold(int epidemicsThreshold) {
+        this.epidemicsThreshold = epidemicsThreshold;
+    }
+
     public void loadSettingsFromXml() {
         File xmlFile = new File("src/assets/settings.xml");
 
@@ -65,21 +72,17 @@ public class OptionsManager {
         }
 
         Player.getInstance().setName(dummy.playerName);
+        setPlayerName(dummy.playerName);
         setDifficulty(dummy.difficulty);
         epidemicsThreshold = dummy.epidemicsThreshold;
     }
 
     private void createDefaultXmlSettings() {
         File xmlFile = new File("src/assets/settings.xml");
-
-        if (xmlFile.exists() && !xmlFile.delete()) {
-            return;
-        }
-
         Serializer serializer = new Persister();
         OptionsManager defaultOptions = new OptionsManager();
 
-        defaultOptions.playerName = "Unknown";
+        defaultOptions.playerName = Player.getInstance().getName();
         defaultOptions.difficulty = Difficulty.Easy;
         defaultOptions.epidemicsThreshold = 8;
 

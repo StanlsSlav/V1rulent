@@ -261,18 +261,25 @@ public class MainMenu extends JFrame implements IMenu {
         nameTxtField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
+                try {
+                    Player.getInstance().setName(e.getDocument().getText(0, e.getLength()));
+                } catch (BadLocationException ignored) {
+                }
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
+                try {
+                    Player.getInstance().setName(e.getDocument().getText(0, e.getLength()));
+                } catch (BadLocationException ignored) {
+                }
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
                 try {
                     Player.getInstance().setName(e.getDocument().getText(0, e.getLength()));
-                } catch (BadLocationException ex) {
-                    ex.printStackTrace();
+                } catch (BadLocationException ignored) {
                 }
             }
         });

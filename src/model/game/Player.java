@@ -32,20 +32,29 @@ public class Player {
     public City currentCity;
 
     public String getName() {
+        if (this.name == null) {
+            return "Unknown";
+        }
+
         return this.name;
     }
 
     public void setName(String name) {
         this.name = name.trim();
-
-        OptionsManager.getInstance().playerName = getName();
+        OptionsManager.getInstance().setPlayerName(this.name);
     }
 
     public void tryPerformAction(ActionType actionType, City target) {
         switch (actionType) {
-            case TRAVEL: getInstance().travelTo(target); break;
-            case CURE: getInstance().tryRemoveVirus(target); break;
-            case COMPLETE_CURE: getInstance().tryCureCity(target); break;
+            case TRAVEL:
+                getInstance().travelTo(target);
+                break;
+            case CURE:
+                getInstance().tryRemoveVirus(target);
+                break;
+            case COMPLETE_CURE:
+                getInstance().tryCureCity(target);
+                break;
         }
 
         if (actions < 1) {
