@@ -17,6 +17,7 @@
     text-decoration: none;
     border: none;
     outline: none;
+
 }
 
 
@@ -37,7 +38,7 @@ h2 {
 
 p {
     margin-top: 1em;
-    font-family: 'Work Sans', sans-serif;
+
     text-align: justify;
 }
 
@@ -75,3 +76,23 @@ hr {
 
 }
 
+.container-slim {
+    margin: auto;
+    max-width: 800px;
+    overflow: auto;
+    padding: 0 20px;
+}
+
+.container-l{
+    float:left;
+}
+.container-r{
+    float:right;
+}
+ul{
+    margin: 2em;
+
+}
+li{
+    list-style: disc;
+}
