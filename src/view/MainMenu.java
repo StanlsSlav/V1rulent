@@ -277,6 +277,9 @@ public class MainMenu extends JFrame implements IMenu {
             }
         });
 
+        settingsTotalEpidemicsSpinner.addChangeListener(e ->
+              OptionsManager.getInstance().setEpidemicsThreshold((int) settingsTotalEpidemicsSpinner.getValue()));
+
         pauseContinueBtn.addMouseListener(switchToGamePanel);
         pauseSettingsBtn.addMouseListener(switchToSettingsMenu);
         pauseBackBtn.addMouseListener(switchToGameStartMenu);
