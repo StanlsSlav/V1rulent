@@ -134,7 +134,7 @@ public class GameManager {
         JLabel epidemicsCounterLbl = MainMenu.getInstance().epidemicsCounterLbl;
         int currentEpidemicsCount = Integer.parseInt(epidemicsCounterLbl.getText());
 
-        epidemicsCounterLbl.setText(currentEpidemicsCount + 1 + "");
+        MainMenu.getInstance().epidemicsCounterLbl.setText(currentEpidemicsCount + 1 + "");
     }
 
     public void incrementColourVirus(Colour colour) {
