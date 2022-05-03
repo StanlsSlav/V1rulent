@@ -8,6 +8,7 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
+import utils.Utilities;
 
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
@@ -29,6 +30,10 @@ public class OptionsManager {
         return instance;
     }
 
+    public OptionsManager() {
+        this.virusesThreshold = Map.getInstance().cities.size() * 3;
+    }
+
     @Element(name = "player_name")
     public String playerName;
 
@@ -38,7 +43,7 @@ public class OptionsManager {
     @Element(name = "epidemics_threshold")
     public int epidemicsThreshold;
 
-    public int virusesThreshold = Map.getInstance().cities.size() * 3;
+    private int virusesThreshold;
 
     public SpinnerModel epidemicsLimits = new SpinnerNumberModel(1, 1, 15, 1);
 
@@ -52,6 +57,10 @@ public class OptionsManager {
 
     public void setEpidemicsThreshold(int epidemicsThreshold) {
         this.epidemicsThreshold = epidemicsThreshold;
+    }
+
+    public int getVirusesThreshold() {
+        return Map.getInstance().cities.size() * 3;
     }
 
     public void loadSettingsFromXml() {

@@ -78,11 +78,14 @@ public class City {
 
     private void sendGiftsToNeighbours(City source) {
         Logger.getInstance().log("An epidemic starts from %p", getName());
+        GameManager.getInstance().incrementEpidemicsCounter();
 
         getConnectedCities().forEach(city -> {
-            if (city != source) {
-                city.incrementVirusesCount();
+            if (city == source) {
+                return;
             }
+
+            city.incrementVirusesCount();
         });
     }
 
