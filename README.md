@@ -28,3 +28,6 @@ Posteriormente, como teniamos pensado hacerlo todo a pixelees y que se ajusten a
 * **Iago Prieto** - *Programador secundario / diseñador principal* - [IagoPL](https://github.com/IagoPL)
 * **Bryan Cayetano** - *Encargado de base de datos / gestor de datos* - [BryanCayetano](https://github.com/BryanCayetano)
 * **Èric Serrano** - *Diseñador secundario / encargado base de datos* - [ericserrano5](https://github.com/ericserrano5)
+
+Pandemic necesita las siguientes librerias
+  - [Simple](http://simple.sourceforge.net/) XML Parser
