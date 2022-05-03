@@ -5,7 +5,6 @@ import controller.GameManager;
 import controller.OptionsManager;
 import model.ActionType;
 import model.Logger;
-import view.MainMenu;
 
 /**
  * El jugador del juego
@@ -16,6 +15,8 @@ public class Player {
     public static Player getInstance() {
         if (instance == null) {
             instance = new Player();
+            instance.totalActionsPerRound = 4;
+            instance.actions = instance.totalActionsPerRound;
         }
 
         return instance;

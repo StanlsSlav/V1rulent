@@ -120,7 +120,7 @@ public class GameManager {
         return totalViruses.values()
               .stream()
               .mapToInt(val -> val)
-              .sum() > OptionsManager.getInstance().virusesThreshold;
+              .sum() > OptionsManager.getInstance().getVirusesThreshold();
     }
 
     private boolean isNoMoreVirusesLeft() {
