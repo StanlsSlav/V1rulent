@@ -2,6 +2,7 @@ package controller;
 
 
 import model.Logger;
+import model.base.CityCard;
 import model.base.Colour;
 import model.exception.NotImplementedException;
 import model.game.City;
@@ -145,6 +146,27 @@ public class GameManager {
     public void decrementColourVirus(Colour colour) {
         totalViruses.put(colour, totalViruses.get(colour) - 1);
         updateGameState();
+    }
+
+    public void addNewCityCard() {
+        ArrayList<JLabel> cardsLbls = MainMenu.getInstance().cardsLbls;
+        int totalCards = cardsLbls.size();
+
+        for (int i = 0; i < totalCards; i++) {
+            CityCard card = (CityCard) cardsLbls.get(i);
+
+            if (card.getColour() == null) {
+                card.setColour(Utilities.getRandomColour());
+                break;
+            }
+
+            if (i == totalCards - 1) {
+                int randomPosition = Utilities.rand.nextInt(totalCards);
+                CityCard randomCity =  ((CityCard) cardsLbls.get(randomPosition));
+
+                randomCity.setColour(Utilities.getRandomColour());
+            }
+        }
     }
 
     public void saveGame() {

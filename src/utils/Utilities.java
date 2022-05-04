@@ -29,7 +29,7 @@ import java.util.Random;
 import static javax.swing.SwingUtilities.invokeLater;
 
 public class Utilities {
-    private static final Random rand = new Random();
+    public static final Random rand = new Random();
 
     public static boolean isLeftButtonPressed(MouseEvent event) {
         return event.getButton() == MouseEvent.BUTTON1;
