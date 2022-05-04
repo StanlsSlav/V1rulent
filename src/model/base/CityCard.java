@@ -17,8 +17,6 @@ public class CityCard extends JLabel {
 
     public void setColour(Colour colour) {
         this.colour = colour;
-
-        // TODO: Extract to method
         setIcon(new ImageIcon(BASE_PATH + colour.name() + ".png"));
     }
 
