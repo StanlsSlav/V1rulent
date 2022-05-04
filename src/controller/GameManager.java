@@ -6,7 +6,6 @@ import model.base.CityCard;
 import model.base.Colour;
 import model.exception.NotImplementedException;
 import model.game.City;
-import model.game.GameHistory;
 import model.game.Map;
 import model.game.Player;
 import model.game.Round;
@@ -31,9 +30,6 @@ public class GameManager {
         return instance;
     }
 
-    public int roundsCounter;
-    public ArrayList<String> actionsHistory;
-    public ArrayList<GameHistory> gameHistories;
     public HashMap<Colour, Integer> totalViruses = new HashMap<Colour, Integer>() {{
         put(Colour.Blue, 0);
         put(Colour.Yellow, 0);

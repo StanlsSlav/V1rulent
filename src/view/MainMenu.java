@@ -1,6 +1,7 @@
 package view;
 
 
+import controller.DbManager;
 import controller.GameManager;
 import controller.OptionsManager;
 import model.base.*;
@@ -365,7 +366,6 @@ public class MainMenu extends JFrame implements IMenu {
         wasGameLoaded = true;
 
         Utilities.loadCities();
-        Utilities.loadSettings();
 
         // La inicialización debe ser nueva
         gamePanel.removeAll();
@@ -448,11 +448,13 @@ public class MainMenu extends JFrame implements IMenu {
 
     private void initializeLastGame() {
         initializeBaseGame();
+        DbManager.getInstance().connect();
         new NotImplementedException().printStackTrace();
     }
 
     private void initializeSavedGame(/* TODO: A saved game is identified by ... */) {
         initializeBaseGame();
+        DbManager.getInstance().connect();
         new NotImplementedException().printStackTrace();
     }
 

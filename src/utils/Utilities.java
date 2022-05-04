@@ -144,10 +144,6 @@ public class Utilities {
         }
     }
 
-    public static void loadSettings() {
-        new NotImplementedException().printStackTrace();
-    }
-
     public static Colour getRandomColour() {
         return Colour.values()[rand.nextInt(Colour.values().length)];
     }
