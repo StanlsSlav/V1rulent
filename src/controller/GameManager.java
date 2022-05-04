@@ -44,6 +44,7 @@ public class GameManager {
         put(Colour.Red, 0);
     }};
 
+
     public void startNewRound() {
         Round.getInstance().initializeNewRound();
         final int virusesCount = 3;
@@ -81,6 +82,7 @@ public class GameManager {
             MainMenu.getInstance().redTotalVirusesLbl.setText(String.valueOf(totalViruses.get(Colour.Red)));
         });
     }
+
 
     public void resetGame() {
         Player.resetInstance();

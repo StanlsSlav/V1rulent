@@ -1,5 +1,5 @@
 <config>
    <player_name>Unknown</player_name>
    <difficulty>Easy</difficulty>
-   <epidemics_threshold>8</epidemics_threshold>
+   <epidemics_threshold>7</epidemics_threshold>
 </config>

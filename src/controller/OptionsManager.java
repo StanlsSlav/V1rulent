@@ -9,8 +9,7 @@ import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
-import javax.swing.SpinnerModel;
-import javax.swing.SpinnerNumberModel;
+import javax.swing.*;
 import java.io.File;
 
 /**
@@ -54,6 +53,8 @@ public class OptionsManager {
         this.playerName = playerName.trim();
     }
 
+
+    //limite de epidemias
     public void setEpidemicsThreshold(int epidemicsThreshold) {
         this.epidemicsThreshold = epidemicsThreshold;
     }
@@ -83,6 +84,19 @@ public class OptionsManager {
         setPlayerName(dummy.playerName);
         setDifficulty(dummy.difficulty);
         epidemicsThreshold = dummy.epidemicsThreshold;
+
+        switch (difficulty) {
+            default:
+                break;
+            case Medium:
+                epidemicsThreshold = epidemicsThreshold - 2;
+                break;
+            case Hard:
+                epidemicsThreshold = epidemicsThreshold - 4;
+            case Extreme:
+                epidemicsThreshold = epidemicsThreshold - 6;
+        }
+
     }
 
     private void createDefaultXmlSettings() {
