@@ -3,7 +3,6 @@ package model.base;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import java.awt.Dimension;
 
 
 public class CureIcon extends JLabel {
