@@ -4,6 +4,7 @@ package view;
 import controller.GameManager;
 import controller.OptionsManager;
 import model.base.*;
+import model.exception.NotImplementedException;
 import model.game.Difficulty;
 import model.game.Map;
 import model.game.Player;
@@ -76,7 +77,7 @@ public class MainMenu extends JFrame implements IMenu {
     private JLabel blueCureIcon;
     private JLabel greenCureIcon;
 
-    private ArrayList<JLabel> cardsLbls;
+    public ArrayList<JLabel> cardsLbls;
 
     public VirusLabel greenTotalVirusesLbl;
     public VirusLabel blueTotalVirusesLbl;
@@ -116,16 +117,35 @@ public class MainMenu extends JFrame implements IMenu {
                 return;
             }
 
-            if (!wasGameLoaded) {
-                initializeGameView();
+            initializeNewGame();
+            switchToGamePanel.mouseClicked(e);
+        }
+    };
+
+    private final MouseAdapter switchToLastGame = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            super.mouseClicked(e);
+
+            if (!isLeftButtonPressed(e)) {
+                return;
             }
 
-            invokeLater(() -> {
-                initializeGame();
-                setSize(1920, 1080);
-            });
+            initializeLastGame();
+            switchToGamePanel.mouseClicked(e);
+        }
+    };
 
-            centerScreen(instance);
+    private final MouseAdapter switchToSavedGame = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            super.mouseClicked(e);
+
+            if (!isLeftButtonPressed(e)) {
+                return;
+            }
+
+            initializeSavedGame();
 
             switchToGamePanel.mouseClicked(e);
         }
@@ -296,7 +316,8 @@ public class MainMenu extends JFrame implements IMenu {
         creditsBackButton.addMouseListener(switchToMainMenu);
 
         gameStartBackButton.addMouseListener(switchToMainMenu);
-        gameStartContinueButton.addMouseListener(switchToGamePanel);
+        gameStartLoadButton.addMouseListener(switchToSavedGame);
+        gameStartContinueButton.addMouseListener(switchToLastGame);
         gameStartNewButton.addMouseListener(switchToNewGame);
 
         playButton.addMouseListener(switchToGameStartMenu);
@@ -420,9 +441,27 @@ public class MainMenu extends JFrame implements IMenu {
         gamePanel.add(historialTxtArea);
     }
 
-    private void initializeGame() {
-        OptionsManager.getInstance().loadSettingsFromXml();
-        Map.getInstance().cities.forEach(city -> gamePanel.add(new CityLabel(city)));
+    private void initializeNewGame() {
+        initializeBaseGame();
         GameManager.getInstance().resetGame();
+    }
+
+    private void initializeLastGame() {
+        initializeBaseGame();
+        new NotImplementedException().printStackTrace();
+    }
+
+    private void initializeSavedGame(/* TODO: A saved game is identified by ... */) {
+        initializeBaseGame();
+        new NotImplementedException().printStackTrace();
+    }
+
+    private void initializeBaseGame() {
+        OptionsManager.getInstance().loadSettingsFromXml();
+        invokeLater(() -> Map.getInstance().cities.forEach(city -> gamePanel.add(new CityLabel(city))));
+
+        if (!wasGameLoaded) {
+            initializeGameView();
+        }
     }
 }

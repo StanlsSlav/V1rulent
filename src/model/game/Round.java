@@ -1,5 +1,6 @@
 package model.game;
 
+import controller.GameManager;
 import view.MainMenu;
 
 import java.util.HashMap;
@@ -29,6 +30,7 @@ public class Round {
 
     public void initializeNewRound() {
         MainMenu.getInstance().historialTxtArea.append("\nRound " + number + "\n");
+        GameManager.getInstance().addNewCityCard();
         number++;
     }
 }
