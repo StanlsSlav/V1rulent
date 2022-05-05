@@ -1,7 +1,8 @@
 package view;
 
 
-import utils.Utilities;
+import controller.DbManager;
+import controller.GameManager;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -22,7 +23,7 @@ public class EogPopUp extends JDialog {
     private JButton exitBtn;
     private JTextArea popUpTxtArea;
 
-    public EogPopUp(String message) {
+    public EogPopUp(String message, boolean hasPlayerLost) {
         setTitle("EndOfGame");
         setContentPane(contentPane);
         setModal(true);
@@ -48,6 +49,9 @@ public class EogPopUp extends JDialog {
         contentPane.registerKeyboardAction(e -> playAgain(),
               KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
+        String matchResult = hasPlayerLost ? "loss" : "victory";
+        DbManager.getInstance().insertNewMatchResult(matchResult);
+
         pack();
         setVisible(true);
     }
@@ -63,6 +67,7 @@ public class EogPopUp extends JDialog {
     }
 
     private void exit() {
+        GameManager.getInstance().saveGame();
         System.exit(0);
     }
 }
