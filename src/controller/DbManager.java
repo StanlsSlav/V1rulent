@@ -1,16 +1,18 @@
 package controller;
 
 
-import model.exception.NotImplementedException;
+import model.game.Player;
+import model.game.Round;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
- * Controlador para linkear la BD
+ * Controlador para la BD
  */
 public class DbManager {
     private static DbManager instance;
@@ -18,22 +20,17 @@ public class DbManager {
     public static DbManager getInstance() {
         if (instance == null) {
             instance = new DbManager();
+            instance.connect();
         }
 
         return instance;
     }
 
-    private final Scanner in = new Scanner(System.in);
     private Connection connection;
     private final String user = "PND_V1RULENT";
-    private final String passwd = getPasswdFromUser();
+    private final String passwd = "PASSWD";
 
     public DbManager() {
-    }
-
-    private String getPasswdFromUser() {
-        System.out.print("DB passwd: ");
-        return in.nextLine().trim();
     }
 
     public void connect() {
@@ -68,19 +65,44 @@ public class DbManager {
         }
     }
 
-    public ResultSet receiveData() throws NotImplementedException {
-        throw new NotImplementedException();
+    public ArrayList<String> getTop10Players() {
+        ArrayList<String> top10Players = new ArrayList<>();
+        Statement statement;
+
+        String qry = "SELECT player_name, points FROM leaderboard WHERE rownum <= 10";
+        ResultSet result;
+
+        try {
+            statement = connection.createStatement();
+            result = statement.executeQuery(qry);
+
+            while (result.next()) {
+                String formattedResult = String.format("%.10s\t\t%d",
+                      result.getString("player_name"), result.getInt("points"));
+
+                top10Players.add(formattedResult);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return top10Players;
     }
 
-    public ResultSet sendData() throws NotImplementedException {
-        throw new NotImplementedException();
-    }
+    public void insertNewMatchResult(String result) {
+        String playerName = Player.getInstance().getName();
+        int survivedRounds = Round.getInstance().number;
 
-    public void modifyData(String field, String value) {
-        new NotImplementedException().printStackTrace();
-    }
+        Statement statement;
+        String qry = String.format(
+              "INSERT INTO match_results (player, survived_rounds, result) VALUES (player('%s', NULL), %d, '%s')",
+              playerName, survivedRounds, result);
 
-    public void deleteData(String identifier) {
-        new NotImplementedException().printStackTrace();
+        try {
+            statement = connection.createStatement();
+            statement.executeQuery(qry);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

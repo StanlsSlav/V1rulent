@@ -44,6 +44,7 @@ public class MainMenu extends JFrame implements IMenu {
     private JPanel mainMenu;
     private JPanel creditsMenu;
     private JPanel gameStartMenu;
+    private JPanel rankingMenu;
     private JPanel gamePanel;
     private JPanel pausePanel;
 
@@ -72,6 +73,10 @@ public class MainMenu extends JFrame implements IMenu {
     public JComboBox<Difficulty> difficultyComboBox;
     private JLabel epidemicsLbl;
     public JSpinner settingsTotalEpidemicsSpinner;
+
+    private JButton rankingBtn;
+    private JTextArea rankingTxtArea;
+    private JButton rankingBackBtn;
 
     private JLabel yellowCureIcon;
     private JLabel redCureIcon;
@@ -227,6 +232,28 @@ public class MainMenu extends JFrame implements IMenu {
         }
     };
 
+    private final MouseAdapter switchToRanking = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            super.mouseClicked(e);
+
+            if (!isLeftButtonPressed(e)) {
+                return;
+            }
+
+            invokeLater(() -> {
+                ArrayList<String> top10Players = DbManager.getInstance().getTop10Players();
+
+                rankingTxtArea.setText("");
+                for (int i = 0; i < top10Players.size(); i++) {
+                    rankingTxtArea.append(String.format("%d. %s%n", i + 1, top10Players.get(i)));
+                }
+            });
+
+            switchToCard(switcherPanel, "RankingMenu");
+        }
+    };
+
     public MainMenu() {
         super("V1rulent");
         instance = this;
@@ -310,7 +337,6 @@ public class MainMenu extends JFrame implements IMenu {
 
         pauseContinueBtn.addMouseListener(switchToGamePanel);
         pauseSettingsBtn.addMouseListener(switchToSettingsMenu);
-        pauseBackBtn.addMouseListener(switchToGameStartMenu);
 
         gamePanel.addMouseListener(switchToPausePanel);
 
@@ -323,10 +349,13 @@ public class MainMenu extends JFrame implements IMenu {
 
         playButton.addMouseListener(switchToGameStartMenu);
         creditsButton.addMouseListener(switchToCreditsMenu);
+        rankingBtn.addMouseListener(switchToRanking);
         settingsButton.addMouseListener(switchToSettingsMenu);
         exitButton.addMouseListener(exitOnClick);
 
         settingsBackButton.addMouseListener(switchToMainMenu);
+        rankingBackBtn.addMouseListener(switchToMainMenu);
+        pauseBackBtn.addMouseListener(switchToGameStartMenu);
 
         gamePanel.setLayout(null);
 
@@ -344,6 +373,7 @@ public class MainMenu extends JFrame implements IMenu {
         playButton = new Button(Button.ButtonType.PRIMARY);
         rulesButton = new Button();
         settingsButton = new Button();
+        rankingBtn = new Button();
         creditsButton = new Button();
         exitButton = new Button();
 
@@ -360,6 +390,8 @@ public class MainMenu extends JFrame implements IMenu {
 
         settingsBackButton = new Button();
         settingsTotalEpidemicsSpinner = new JSpinner(OptionsManager.getInstance().epidemicsLimits);
+
+        rankingBackBtn = new Button();
     }
 
     private void initializeGameView() {
@@ -448,13 +480,11 @@ public class MainMenu extends JFrame implements IMenu {
 
     private void initializeLastGame() {
         initializeBaseGame();
-        DbManager.getInstance().connect();
         new NotImplementedException().printStackTrace();
     }
 
     private void initializeSavedGame(/* TODO: A saved game is identified by ... */) {
         initializeBaseGame();
-        DbManager.getInstance().connect();
         new NotImplementedException().printStackTrace();
     }
 

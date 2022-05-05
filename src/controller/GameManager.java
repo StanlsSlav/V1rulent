@@ -93,18 +93,18 @@ public class GameManager {
     }
 
     public void checkEndOfGame() {
+        if (isNoMoreVirusesLeft()) {
+            new EogPopUp("Awesome! The world has been saved!", false);
+            return;
+        }
+
         if (hasEpidemicsPassedThreshold()) {
-            new EogPopUp("The world has entered in panic. You have lost!");
+            new EogPopUp("The world has entered in panic. You have lost!", true);
             return;
         }
 
         if (haveVirusesPassedThreshold()) {
-            new EogPopUp("The virus has engulfed the world. You have lost!");
-            return;
-        }
-
-        if (isNoMoreVirusesLeft()) {
-            new EogPopUp("Awesome! The world has been saved!");
+            new EogPopUp("The virus has engulfed the world. You have lost!", true);
         }
     }
 
