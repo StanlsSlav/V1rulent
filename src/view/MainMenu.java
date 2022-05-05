@@ -167,6 +167,7 @@ public class MainMenu extends JFrame implements IMenu {
             }
 
             switchToCard(switcherPanel, "MainMenu");
+            switchToCard(rootPanel, "MenusPanel");
             switchImage(menusPanel, "MainBg");
         }
     };

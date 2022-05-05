@@ -1,20 +1,17 @@
 package utils;
 
 
+import controller.DbManager;
 import controller.GameManager;
 import controller.OptionsManager;
 import model.base.Colour;
 import model.base.Panel;
-import model.exception.NotImplementedException;
 import model.game.City;
 import model.game.Map;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
 import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -30,6 +27,12 @@ import static javax.swing.SwingUtilities.invokeLater;
 
 public class Utilities {
     public static final Random rand = new Random();
+
+    public static void exit(int status) {
+        GameManager.getInstance().saveGame();
+        DbManager.getInstance().disconnect();
+        System.exit(status);
+    }
 
     public static boolean isLeftButtonPressed(MouseEvent event) {
         return event.getButton() == MouseEvent.BUTTON1;
