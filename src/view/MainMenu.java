@@ -267,8 +267,6 @@ public class MainMenu extends JFrame implements IMenu {
                 System.err.println("Logo could not be found");
                 ioe.printStackTrace();
             }
-
-            centerScreen(instance);
         });
     }
 
