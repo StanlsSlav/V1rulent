@@ -39,7 +39,9 @@ CREATE TRIGGER new_match_results
     ON match_results
     FOR EACH ROW
 BEGIN
+    -- TODO: All new match results have these defaults
     :new.end_date := SYSDATE;
+    :new.player.actions_left := 0;
 END;
 
 
