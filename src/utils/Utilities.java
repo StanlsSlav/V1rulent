@@ -48,17 +48,6 @@ public class Utilities {
         }
     };
 
-    public static void centerScreen(JFrame mainFrame) {
-        invokeLater(() -> {
-            final double Y = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-            final double X = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-
-            // Centra la ventana del juego al centro del monitor
-            Window.getWindows()[0].setLocation((int) X / 2 - mainFrame.getWidth() / 2,
-                  (int) Y / 2 - mainFrame.getHeight() / 2);
-        });
-    }
-
     public static void switchImage(JPanel panel, String imageName) {
         invokeLater(() -> {
             Panel panelToSwitch = (Panel) panel;
