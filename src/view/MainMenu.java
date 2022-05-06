@@ -95,7 +95,7 @@ public class MainMenu extends JFrame implements IMenu {
     private JLabel epidemicsIcon;
     public JLabel epidemicsCounterLbl;
 
-    private CharacterIcon characterIcon;
+    public CharacterIcon characterIcon;
 
     public JTextArea historialTxtArea;
 

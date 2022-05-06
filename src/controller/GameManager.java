@@ -166,6 +166,7 @@ public class GameManager {
     }
 
     public void saveGame() {
-        new NotImplementedException().printStackTrace();
+        OptionsManager.getInstance().saveSettings();
+        DbManager.getInstance().saveGame();
     }
 }

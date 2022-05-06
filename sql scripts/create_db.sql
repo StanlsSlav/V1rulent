@@ -1,51 +1,55 @@
 CREATE SEQUENCE id_count START WITH 1 INCREMENT BY 1;
 
 
-CREATE OR REPLACE TYPE cards_arr AS VARRAY(6) OF NUMBER(1);
-CREATE OR REPLACE TYPE cures_arr AS VARRAY(4) OF NUMBER(1);
-
 CREATE OR REPLACE TYPE city AS OBJECT (
     name    VARCHAR2(20),
     viruses NUMBER(1)
 ) INSTANTIABLE NOT FINAL;
-
-CREATE OR REPLACE TYPE city_arr AS VARRAY(49) OF city;
 
 CREATE OR REPLACE TYPE player AS OBJECT (
     name         VARCHAR2(10),
     actions_left NUMBER
 );
 
-CREATE TABLE game_states (
-    player          player,
+
+CREATE OR REPLACE TYPE cards_arr AS VARRAY(6) OF NUMBER(1);
+
+CREATE OR REPLACE TYPE cures_arr AS VARRAY(4) OF NUMBER(1);
+
+CREATE OR REPLACE TYPE city_arr AS VARRAY(49) OF city;
+
+
+CREATE TABLE game_saves (
+    player          player    DEFAULT player('Unknown', 0),
     character       VARCHAR2(40) NOT NULL,
-    cities          city,
-    total_outbreaks NUMBER
+    cities          city_arr     NOT NULL,
+    cards           cards_arr DEFAULT cards_arr(0, 0, 0, 0, 0, 0),
+    cures           cures_arr DEFAULT cures_arr(),
+    total_outbreaks NUMBER    DEFAULT 0
 );
 
+INSERT INTO game_saves (player, character, cities, cards, cures, total_outbreaks) VALUES (player(?, ?), ?, ?, ?, ?, ?);
 
 CREATE TABLE match_results (
-    player          player,
-    survived_rounds NUMBER,
-    end_date        DATE,
+    player          player NOT NULL,
+    survived_rounds NUMBER NOT NULL,
+    end_date        DATE   NOT NULL,
 
     result          VARCHAR2(10)
         CHECK (LOWER(result) IN ('victory', 'loss'))
 );
 
 
-CREATE TRIGGER new_match_results
+CREATE OR REPLACE TRIGGER new_match_results
     BEFORE INSERT
     ON match_results
     FOR EACH ROW
 BEGIN
-    -- TODO: All new match results have these defaults
     :new.end_date := SYSDATE;
-    :new.player.actions_left := 0;
 END;
 
 
--- Used for making life fairly easier
+-- Make life fairly easier
 CREATE OR REPLACE VIEW player_points
 AS
 SELECT mr.player.name AS player_name, COUNT(*) AS points
@@ -53,8 +57,7 @@ SELECT mr.player.name AS player_name, COUNT(*) AS points
  WHERE result = 'victory'
  GROUP BY mr.player.name;
 
-
--- Used for getTop10Players()
+-- getTop10Players()
 CREATE OR REPLACE VIEW leaderboard AS
 SELECT player_name, points
   FROM (

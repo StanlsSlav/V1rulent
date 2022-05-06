@@ -16,13 +16,18 @@ public class CharacterIcon extends JLabel {
         assignRandomCharacter();
     }
 
+    public String character;
+
     public void assignRandomCharacter() {
         final File BASE_CHAR_DIR = new File("src/assets/img/characters/");
         String[] characterImages = BASE_CHAR_DIR.list();
 
-        assert characterImages != null;
-        String characterImage = String.format("%s\\%s",
-              BASE_CHAR_DIR.getPath(), characterImages[Utilities.rand.nextInt(characterImages.length)]);
+        if (characterImages != null) {
+            character = characterImages[Utilities.rand.nextInt(characterImages.length)]
+                  .replace(".png", "");
+        }
+
+        String characterImage = String.format("%s\\%s.png", BASE_CHAR_DIR.getPath(), character);
 
         if (!new File(characterImage).exists()) {
             new FileNotFoundException(characterImage).printStackTrace();
