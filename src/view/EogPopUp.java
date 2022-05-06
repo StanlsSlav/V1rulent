@@ -25,7 +25,7 @@ public class EogPopUp extends JDialog {
     private JTextArea popUpTxtArea;
 
     /**
-     *
+     * Manager for the end of the game
      * @param message the message for win or loose
      * @see controller.GameManager
      * @param hasPlayerLost boolean for see if the player has lost or won

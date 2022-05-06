@@ -148,6 +148,11 @@ public class GameManager {
         MainMenu.getInstance().epidemicsCounterLbl.setText(currentEpidemicsCount + 1 + "");
     }
 
+    /**
+     * update the virus colour +1
+     * @param colour colours managed by id
+     * @see Colour
+     */
     public void incrementColourVirus(Colour colour) {
         totalViruses.put(colour, totalViruses.get(colour) + 1);
         updateGameState();

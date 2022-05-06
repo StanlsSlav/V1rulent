@@ -13,7 +13,7 @@ import javax.swing.*;
 import java.io.File;
 
 /**
- * Controlador para las configuraciones del juego
+ * Controller for the settings game
  */
 @Root(name = "config")
 public class OptionsManager {
@@ -54,7 +54,11 @@ public class OptionsManager {
     }
 
 
-    //limite de epidemias
+    /**
+     * set of maximum number of epidemics
+     * @param epidemicsThreshold maximum number of epidemics in the match
+     * see settings.xml
+     */
     public void setEpidemicsThreshold(int epidemicsThreshold) {
         this.epidemicsThreshold = epidemicsThreshold;
     }
