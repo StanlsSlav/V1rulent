@@ -159,9 +159,9 @@ public class DbManager {
         try (PreparedStatement insertNewMatchResult = connection.prepareStatement(qry)) {
             connection.setAutoCommit(false);
 
-            insertNewMatchResult.setString(1, playerName);
-            insertNewMatchResult.setInt(2, survivedRounds);
-            insertNewMatchResult.setString(3, result);
+            insertNewMatchResult.setString(0, playerName);
+            insertNewMatchResult.setInt(1, survivedRounds);
+            insertNewMatchResult.setString(2, result);
 
             insertNewMatchResult.executeUpdate();
             connection.commit();

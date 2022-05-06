@@ -97,7 +97,6 @@ SELECT player_name, points
             ORDER BY points DESC, player_name
        );
 
-
 -- Simplify game saves loading
 CREATE OR REPLACE VIEW recent_saves AS
 SELECT gs.id
