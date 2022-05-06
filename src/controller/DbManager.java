@@ -37,6 +37,8 @@ public class DbManager {
         String ipConString = "jdbc:oracle:thin:@192.168.3.26:1521:XE";
         String remoteConString = "jdbc:oracle:thin:@oracle.ilerna.com:1521:XE";
 
+        DriverManager.setLoginTimeout(1);
+
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             connection = DriverManager.getConnection(ipConString, user, passwd);
@@ -45,12 +47,11 @@ public class DbManager {
         } catch (SQLException e) {
             try {
                 connection = DriverManager.getConnection(remoteConString, user, passwd);
+                System.out.println("Connected to DB");
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
         }
-
-        System.out.println("Connected to DB");
     }
 
     public void disconnect() {
@@ -60,6 +61,7 @@ public class DbManager {
             }
 
             connection.close();
+            System.out.println("Goodbye DB");
         } catch (SQLException e) {
             e.printStackTrace();
         }
