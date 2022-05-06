@@ -9,7 +9,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 /**
- * Una ciudad de la mapa
+ * One city of the map
+ * That class manage the status of all citys 
  */
 public class City {
     public City() {
@@ -76,6 +77,11 @@ public class City {
         GameManager.getInstance().decrementColourVirus(getColour());
     }
 
+    /**
+     * if the city got 4 viruses, then they got back to 3 and they look fordward to colindant citys and
+     * infect them. Also that function +1 on the pandemic counter (game lives).
+     * @param source select the city that got +3 viruses
+     */
     private void sendGiftsToNeighbours(City source) {
         Logger.getInstance().log("An epidemic starts from %p", getName());
         GameManager.getInstance().incrementEpidemicsCounter();
