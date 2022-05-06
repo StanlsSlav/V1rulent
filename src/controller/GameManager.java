@@ -46,7 +46,7 @@ public class GameManager {
         while (previouslyPickedCities.size() < virusesCount) {
             Colour randomColour = Utilities.getRandomColour();
 
-            Optional<City> toInfect = Map.getInstance().cities.stream()
+            Optional<City> toInfect = Map.getInstance().getCities().stream()
                   .filter(city -> city == Utilities.getRandomCityForColour(randomColour))
                   .findFirst();
 

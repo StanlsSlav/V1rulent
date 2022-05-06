@@ -1,6 +1,8 @@
 package model.game;
 
 
+import utils.Utilities;
+
 import java.util.ArrayList;
 
 
@@ -21,7 +23,19 @@ public class Map {
     private Map() {
     }
 
-    public ArrayList<City> cities = new ArrayList<>();
+    public ArrayList<City> cities;
+
+    public ArrayList<City> getCities() {
+        if (cities == null) {
+            Utilities.loadCities();
+        }
+
+        return cities;
+    }
+
+    public void setCities(ArrayList<City> cities) {
+        this.cities = cities;
+    }
 
     public static int citiesBetween(City startingPoint, City destination) throws Exception {
         throw new Exception();
