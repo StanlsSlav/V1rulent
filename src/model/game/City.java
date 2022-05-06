@@ -88,10 +88,4 @@ public class City {
             city.incrementVirusesCount();
         });
     }
-
-    @Override
-    public String toString() {
-        return String.format("<html>City: %s<br>Viruses: %d</html>",
-              getName(), getTotalViruses());
-    }
 }

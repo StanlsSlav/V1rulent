@@ -30,7 +30,7 @@ public class OptionsManager {
     }
 
     public OptionsManager() {
-        this.virusesThreshold = Map.getInstance().cities.size() * 3;
+        this.virusesThreshold = Map.getInstance().getCities().size() * 3;
     }
 
     @Element(name = "player_name")
@@ -59,7 +59,7 @@ public class OptionsManager {
     }
 
     public int getVirusesThreshold() {
-        return Map.getInstance().cities.size() * 3;
+        return Map.getInstance().getCities().size() * 3;
     }
 
     public void loadSettingsFromXml() {

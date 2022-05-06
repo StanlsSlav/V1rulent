@@ -1,15 +1,18 @@
 package controller;
 
 
-import model.game.City;
-import model.game.Map;
 import model.game.Player;
 import model.game.Round;
-import oracle.sql.ARRAY;
+import oracle.jdbc.OracleConnection;
 import utils.DbUtilities;
+import utils.GameUtilities;
 import view.MainMenu;
 
-import java.sql.*;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -27,9 +30,9 @@ public class DbManager {
         return instance;
     }
 
-    private Connection connection;
+    private OracleConnection connection;
     private final String user = "PND_V1RULENT";
-    private final String passwd = "IBAE123";
+    private final String passwd = "PASSWD";
 
     public DbManager() {
     }
@@ -42,17 +45,19 @@ public class DbManager {
 
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection(ipConString, user, passwd);
+            connection = DriverManager.getConnection(ipConString, user, passwd).unwrap(OracleConnection.class);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Could not find the class for JDBC. Make sure it is added as dependency!");
         } catch (SQLException e) {
             try {
-                connection = DriverManager.getConnection(remoteConString, user, passwd);
+                connection = DriverManager.getConnection(remoteConString, user, passwd).unwrap(OracleConnection.class);
                 System.out.println("Connected to DB");
             } catch (SQLException ex) {
                 DbUtilities.printSQLException(ex);
             }
         }
+
+        System.out.println("Connected to DB");
     }
 
     public void disconnect() {
@@ -102,9 +107,9 @@ public class DbManager {
         try (PreparedStatement insertNewMatchResult = connection.prepareStatement(qry)) {
             connection.setAutoCommit(false);
 
-            insertNewMatchResult.setString(0, playerName);
-            insertNewMatchResult.setInt(1, survivedRounds);
-            insertNewMatchResult.setString(2, result);
+            insertNewMatchResult.setString(1, playerName);
+            insertNewMatchResult.setInt(2, survivedRounds);
+            insertNewMatchResult.setString(3, result);
 
             insertNewMatchResult.executeUpdate();
             connection.commit();
@@ -123,30 +128,25 @@ public class DbManager {
         String playerName = Player.getInstance().getName();
         int actionsLeft = Player.getInstance().actions;
         String character = MainMenu.getInstance().characterIcon.character;
-        Array cities;
-        Array cards;
-        Array cures;
+        String cities = GameUtilities.getInstance().getCities();
+        String cards = GameUtilities.getInstance().getCards();
+        String cures = GameUtilities.getInstance().getCures();
         int totalOutbreaks = Integer.parseInt(MainMenu.getInstance().epidemicsCounterLbl.getText());
 
         String qry =
               "INSERT INTO game_saves (player, character, cities, cards, cures, total_outbreaks) " +
-                    "VALUES (player(?, ?), ?, ?, ?, ?, ?)";
+                    "VALUES (player(?, ?), ?, city_arr(?), cards_arr(?), cures_arr(?), ?)";
 
         try (PreparedStatement insertGameSave = connection.prepareStatement(qry)) {
             connection.setAutoCommit(false);
 
-            // TODO: Complete GameUtilities and make sure the arrays get created accordingly
-            cities = connection.createArrayOf("city", Map.getInstance().cities.toArray());
-            cards = connection.createArrayOf("varchar2(6)", GameUtilities.getInstance().getCards());
-            cures = connection.createArrayOf("number", GameUtilities.getInstance().getCures());
-
-            insertGameSave.setString(0, playerName);
-            insertGameSave.setInt(1, actionsLeft);
-            insertGameSave.setString(2, character);
-            insertGameSave.setArray(3, cities);
-            insertGameSave.setArray(4, cards);
-            insertGameSave.setArray(5, cures);
-            insertGameSave.setInt(6, totalOutbreaks);
+            insertGameSave.setString(1, playerName);
+            insertGameSave.setInt(2, actionsLeft);
+            insertGameSave.setString(3, character);
+            insertGameSave.setString(4, cities);
+            insertGameSave.setString(5, cards);
+            insertGameSave.setString(6, cures);
+            insertGameSave.setInt(7, totalOutbreaks);
 
             insertGameSave.executeUpdate();
             connection.commit();

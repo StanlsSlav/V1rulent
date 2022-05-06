@@ -28,7 +28,10 @@ public class CityLabel extends JLabel {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                setToolTipText(relatedCity.toString());
+                String toolTipText = String.format("<html>City: %s<br>Viruses: %d</html>",
+                      relatedCity.getName(), relatedCity.getTotalViruses());
+
+                setToolTipText(toolTipText);
             }
 
             @Override

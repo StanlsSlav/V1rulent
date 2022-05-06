@@ -12,8 +12,10 @@ CREATE OR REPLACE TYPE player AS OBJECT (
 );
 
 
+-- Each card is represented by its colour
 CREATE OR REPLACE TYPE cards_arr AS VARRAY(6) OF NUMBER(1);
 
+-- Each cure is represented by its binary, 1 unlocked
 CREATE OR REPLACE TYPE cures_arr AS VARRAY(4) OF NUMBER(1);
 
 CREATE OR REPLACE TYPE city_arr AS VARRAY(49) OF city;
@@ -27,8 +29,6 @@ CREATE TABLE game_saves (
     cures           cures_arr DEFAULT cures_arr(),
     total_outbreaks NUMBER    DEFAULT 0
 );
-
-INSERT INTO game_saves (player, character, cities, cards, cures, total_outbreaks) VALUES (player(?, ?), ?, ?, ?, ?, ?);
 
 CREATE TABLE match_results (
     player          player NOT NULL,

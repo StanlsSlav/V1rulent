@@ -78,10 +78,10 @@ public class MainMenu extends JFrame implements IMenu {
     private JTextArea rankingTxtArea;
     private JButton rankingBackBtn;
 
-    private JLabel yellowCureIcon;
-    private JLabel redCureIcon;
-    private JLabel blueCureIcon;
-    private JLabel greenCureIcon;
+    public JLabel yellowCureIcon;
+    public JLabel redCureIcon;
+    public JLabel blueCureIcon;
+    public JLabel greenCureIcon;
 
     public ArrayList<JLabel> cardsLbls;
 
@@ -255,6 +255,33 @@ public class MainMenu extends JFrame implements IMenu {
         }
     };
 
+    private final MouseAdapter saveGameAndSwitchToMainMenu = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            super.mouseClicked(e);
+
+            if (!isLeftButtonPressed(e)) {
+                return;
+            }
+
+            switchToMainMenu.mouseClicked(e);
+            DbManager.getInstance().saveGame();
+        }
+    };
+
+    private final MouseAdapter exitGame = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            super.mouseClicked(e);
+
+            if (!isLeftButtonPressed(e)) {
+                return;
+            }
+
+            exit(0, false);
+        }
+    };
+
     public MainMenu() {
         super("V1rulent");
         instance = this;
@@ -350,11 +377,11 @@ public class MainMenu extends JFrame implements IMenu {
         creditsButton.addMouseListener(switchToCreditsMenu);
         rankingBtn.addMouseListener(switchToRanking);
         settingsButton.addMouseListener(switchToSettingsMenu);
-        exitButton.addMouseListener(exitOnClick);
+        exitButton.addMouseListener(exitGame);
 
         settingsBackButton.addMouseListener(switchToMainMenu);
         rankingBackBtn.addMouseListener(switchToMainMenu);
-        pauseBackBtn.addMouseListener(switchToGameStartMenu);
+        pauseBackBtn.addMouseListener(saveGameAndSwitchToMainMenu);
 
         gamePanel.setLayout(null);
 
@@ -489,7 +516,7 @@ public class MainMenu extends JFrame implements IMenu {
 
     private void initializeBaseGame() {
         OptionsManager.getInstance().loadSettingsFromXml();
-        invokeLater(() -> Map.getInstance().cities.forEach(city -> gamePanel.add(new CityLabel(city))));
+        invokeLater(() -> Map.getInstance().getCities().forEach(city -> gamePanel.add(new CityLabel(city))));
 
         if (!wasGameLoaded) {
             initializeGameView();

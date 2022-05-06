@@ -27,8 +27,11 @@ import static javax.swing.SwingUtilities.invokeLater;
 public class Utilities {
     public static final Random rand = new Random();
 
-    public static void exit(int status) {
-        GameManager.getInstance().saveGame();
+    public static void exit(int status, boolean shouldSaveState) {
+        if (shouldSaveState) {
+            GameManager.getInstance().saveGame();
+        }
+
         DbManager.getInstance().disconnect();
         System.exit(status);
     }
@@ -46,7 +49,7 @@ public class Utilities {
                 return;
             }
 
-            exit(0);
+            exit(0, true);
         }
     };
 
@@ -68,7 +71,7 @@ public class Utilities {
     }
 
     public static void loadCities() {
-        Map.getInstance().cities = new ArrayList<>();
+        Map.getInstance().setCities(new ArrayList<>());
 
         final File CITIES_FILE = new File("src/assets/cities.csv");
 
@@ -86,7 +89,7 @@ public class Utilities {
                 city.setPoint(new Point(Integer.parseInt(location[0]), Integer.parseInt(location[1])));
                 city.setColour(Colour.valueOf(color));
 
-                Map.getInstance().cities.add(city);
+                Map.getInstance().getCities().add(city);
             }
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
@@ -142,7 +145,7 @@ public class Utilities {
     public static City getRandomCityForColour(Colour colour) {
         ArrayList<City> sameColouredCities = new ArrayList<>();
 
-        for (City city : Map.getInstance().cities) {
+        for (City city : Map.getInstance().getCities()) {
             if (city.getColour() == colour) {
                 sameColouredCities.add(city);
             }
