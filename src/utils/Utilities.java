@@ -3,7 +3,6 @@ package utils;
 
 import controller.DbManager;
 import controller.GameManager;
-import controller.OptionsManager;
 import model.base.Colour;
 import model.base.Panel;
 import model.game.City;
@@ -43,11 +42,11 @@ public class Utilities {
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
 
-            if (isLeftButtonPressed(e)) {
-                GameManager.getInstance().saveGame();
-                OptionsManager.getInstance().saveSettings();
-                System.exit(0);
+            if (!isLeftButtonPressed(e)) {
+                return;
             }
+
+            exit(0);
         }
     };
 

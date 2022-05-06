@@ -2,7 +2,7 @@ package view;
 
 
 import controller.DbManager;
-import controller.GameManager;
+import utils.Utilities;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -37,7 +37,7 @@ public class EogPopUp extends JDialog {
 
         goToMainMenuBtn.addActionListener(e -> goToMainMenu());
         playAgainBtn.addActionListener(e -> playAgain());
-        exitBtn.addActionListener(e -> exit());
+        exitBtn.addMouseListener(Utilities.exitOnClick);
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -64,10 +64,5 @@ public class EogPopUp extends JDialog {
     private void playAgain() {
         MainMenu.getInstance().playButton.doClick();
         dispose();
-    }
-
-    private void exit() {
-        GameManager.getInstance().saveGame();
-        System.exit(0);
     }
 }
