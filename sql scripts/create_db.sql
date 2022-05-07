@@ -4,13 +4,12 @@ CREATE SEQUENCE game_saves_id START WITH 1 INCREMENT BY 1;
 CREATE OR REPLACE TYPE city AS OBJECT (
     name    VARCHAR2(20),
     viruses NUMBER(1)
-) INSTANTIABLE NOT FINAL;
+);
 
 CREATE OR REPLACE TYPE player AS OBJECT (
     name         VARCHAR2(10),
     actions_left NUMBER
 );
-
 
 -- Each card is represented by its colour name
 CREATE OR REPLACE TYPE cards_arr AS VARRAY(6) OF VARCHAR2(7);
@@ -24,12 +23,14 @@ CREATE OR REPLACE TYPE city_arr AS VARRAY(49) OF city;
 CREATE TABLE game_saves (
     id              NUMBER PRIMARY KEY,
     save_date       DATE,
-    player          player    DEFAULT player('Unknown', 0),
+    player          player         DEFAULT player('Unknown', 0),
     character       VARCHAR2(40) NOT NULL,
     cities          city_arr     NOT NULL,
-    cards           cards_arr DEFAULT cards_arr(0, 0, 0, 0, 0, 0),
-    cures           cures_arr DEFAULT cures_arr(),
-    total_outbreaks NUMBER    DEFAULT 0
+    cards           cards_arr      DEFAULT cards_arr(0, 0, 0, 0, 0, 0),
+    cures           cures_arr      DEFAULT cures_arr(),
+    round           NUMBER         DEFAULT 0,
+    history         VARCHAR2(1024) DEFAULT '',
+    total_outbreaks NUMBER         DEFAULT 0
 );
 
 CREATE TABLE match_results (
@@ -76,3 +77,19 @@ SELECT player_name, points
              FROM player_points
             ORDER BY points DESC, player_name
        );
+
+
+-- Simplify game saves loading
+CREATE OR REPLACE VIEW recent_saves AS
+SELECT gs.id
+     , gs.save_date
+     , gs.player
+     , gs.character
+     , gs.cities
+     , gs.cards
+     , gs.cures
+     , gs.total_outbreaks
+     , gs.round
+     , gs.history
+  FROM game_saves gs
+ ORDER BY gs.save_date DESC;

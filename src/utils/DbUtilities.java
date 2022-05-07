@@ -10,13 +10,9 @@ public class DbUtilities {
                 continue;
             }
 
-            if (ignoreSQLException(((SQLException) e).getSQLState())) {
-                continue;
-            }
-
             e.printStackTrace(System.err);
-            System.err.println("SQLState: " + ((SQLException)e).getSQLState());
-            System.err.println("Error Code: " + ((SQLException)e).getErrorCode());
+            System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+            System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
             System.err.println("Message: " + e.getMessage());
 
             Throwable t = ex.getCause();
@@ -26,14 +22,5 @@ public class DbUtilities {
                 t = t.getCause();
             }
         }
-    }
-
-    public static boolean ignoreSQLException(String sqlState) {
-        if (sqlState == null) {
-            System.out.println("The SQL state is not defined!");
-            return false;
-        }
-
-        return sqlState.equalsIgnoreCase("X0Y32") || sqlState.equalsIgnoreCase("42Y55");
     }
 }
