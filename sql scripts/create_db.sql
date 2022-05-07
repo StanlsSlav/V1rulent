@@ -1,4 +1,4 @@
-CREATE SEQUENCE id_count START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE game_saves_id START WITH 1 INCREMENT BY 1;
 
 
 CREATE OR REPLACE TYPE city AS OBJECT (
@@ -12,8 +12,8 @@ CREATE OR REPLACE TYPE player AS OBJECT (
 );
 
 
--- Each card is represented by its colour
-CREATE OR REPLACE TYPE cards_arr AS VARRAY(6) OF NUMBER(1);
+-- Each card is represented by its colour name
+CREATE OR REPLACE TYPE cards_arr AS VARRAY(6) OF VARCHAR2(7);
 
 -- Each cure is represented by its binary, 1 unlocked
 CREATE OR REPLACE TYPE cures_arr AS VARRAY(4) OF NUMBER(1);
@@ -22,6 +22,8 @@ CREATE OR REPLACE TYPE city_arr AS VARRAY(49) OF city;
 
 
 CREATE TABLE game_saves (
+    id              NUMBER PRIMARY KEY,
+    save_date       DATE,
     player          player    DEFAULT player('Unknown', 0),
     character       VARCHAR2(40) NOT NULL,
     cities          city_arr     NOT NULL,
@@ -46,6 +48,15 @@ CREATE OR REPLACE TRIGGER new_match_results
     FOR EACH ROW
 BEGIN
     :new.end_date := SYSDATE;
+END;
+
+CREATE OR REPLACE TRIGGER new_game_save
+    BEFORE INSERT
+    ON game_saves
+    FOR EACH ROW
+BEGIN
+    :new.id := game_saves_id.nextval;
+    :new.save_date := SYSDATE;
 END;
 
 

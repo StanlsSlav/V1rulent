@@ -26,7 +26,12 @@ public class GameUtilities {
             CityCard cardLbl = (CityCard) MainMenu.getInstance().cardsLbls.get(i);
             Colour cardColour = cardLbl.getColour();
 
-            cardsArrayString.append(cardColour.name()).append(", ");
+            if (cardColour == null) {
+                cardsArrayString.append("NULL").append(", ");
+                continue;
+            }
+
+            cardsArrayString.append(String.format("'%s'", cardColour.name())).append(", ");
         }
 
         return cardsArrayString.substring(0, cardsArrayString.length() - 2);
@@ -56,12 +61,12 @@ public class GameUtilities {
             City city = Map.getInstance().getCities().get(i);
 
             if (i != citiesSize - 1) {
-                cityArrayString.append(String.format("city(%s, %d), ", city.getName(), city.getTotalViruses()));
+                cityArrayString.append(String.format("city('%s', %d), ", city.getName(), city.getTotalViruses()));
                 continue;
             }
 
             // Last item in the array must not end with a comma ','
-            cityArrayString.append(String.format("city(%s, %d)", city.getName(), city.getTotalViruses()));
+            cityArrayString.append(String.format("city('%s', %d)", city.getName(), city.getTotalViruses()));
         }
 
         return cityArrayString.substring(0, cityArrayString.length());
