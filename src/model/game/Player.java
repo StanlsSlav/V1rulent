@@ -27,9 +27,9 @@ public class Player {
         getInstance();
     }
 
-    public String name;
+    private String name;
     public int totalActionsPerRound;
-    public int actions;
+    private int actions;
     public City currentCity;
 
     public String getName() {
@@ -43,6 +43,14 @@ public class Player {
     public void setName(String name) {
         this.name = name.trim();
         OptionsManager.getInstance().setPlayerName(this.name);
+    }
+
+    public int getActions() {
+        return actions;
+    }
+
+    public void setActions(int actions) {
+        this.actions = Math.max(Math.min(actions, totalActionsPerRound), 0);
     }
 
     public void tryPerformAction(ActionType actionType, City target) {

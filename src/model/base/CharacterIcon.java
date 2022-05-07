@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-
 public class CharacterIcon extends JLabel {
     public CharacterIcon() {
         setSize(433, 270);
@@ -16,15 +15,15 @@ public class CharacterIcon extends JLabel {
         assignRandomCharacter();
     }
 
-    public String character;
+    private String character;
 
     public void assignRandomCharacter() {
         final File BASE_CHAR_DIR = new File("src/assets/img/characters/");
         String[] characterImages = BASE_CHAR_DIR.list();
 
         if (characterImages != null) {
-            character = characterImages[Utilities.rand.nextInt(characterImages.length)]
-                  .replace(".png", "");
+            setCharacter(characterImages[Utilities.rand.nextInt(characterImages.length)]
+                  .replace(".png", ""));
         }
 
         String characterImage = String.format("%s\\%s.png", BASE_CHAR_DIR.getPath(), character);
@@ -34,5 +33,14 @@ public class CharacterIcon extends JLabel {
         }
 
         setIcon(new ImageIcon(characterImage));
+    }
+
+    public void setCharacter(String character) {
+        this.character = character;
+        setIcon(new ImageIcon(String.format("src/assets/img/characters/%s.png", character)));
+    }
+
+    public String getCharacter() {
+        return character;
     }
 }

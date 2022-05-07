@@ -151,8 +151,7 @@ public class MainMenu extends JFrame implements IMenu {
                 return;
             }
 
-            initializeSavedGame();
-
+            initializeSavedGame(0);
             switchToGamePanel.mouseClicked(e);
         }
     };
@@ -506,11 +505,17 @@ public class MainMenu extends JFrame implements IMenu {
 
     private void initializeLastGame() {
         initializeBaseGame();
-        new NotImplementedException().printStackTrace();
+        DbManager.getInstance().loadLastGame();
     }
 
-    private void initializeSavedGame(/* TODO: A saved game is identified by ... */) {
+    private void initializeSavedGame(int id) {
         initializeBaseGame();
+
+        if (id < 1) {
+            initializeLastGame();
+            return;
+        }
+
         new NotImplementedException().printStackTrace();
     }
 
