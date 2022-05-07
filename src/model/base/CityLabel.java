@@ -38,7 +38,7 @@ public class CityLabel extends JLabel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (e.isControlDown()) {
-                    Player.getInstance().actions = 5;
+                    Player.getInstance().setActions(5);
                     return;
                 }
 

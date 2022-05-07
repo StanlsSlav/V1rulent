@@ -125,8 +125,8 @@ public class DbManager {
 
     public void saveGame() {
         String playerName = Player.getInstance().getName();
-        int actionsLeft = Player.getInstance().actions;
-        String character = MainMenu.getInstance().characterIcon.character;
+        int actionsLeft = Player.getInstance().getActions();
+        String character = MainMenu.getInstance().characterIcon.getCharacter();
         String cities = GameUtilities.getInstance().getCities();
         String cards = GameUtilities.getInstance().getCards();
         String cures = GameUtilities.getInstance().getCures();
