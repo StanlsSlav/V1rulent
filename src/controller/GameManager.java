@@ -4,7 +4,9 @@ package controller;
 import model.Logger;
 import model.base.CityCard;
 import model.base.Colour;
-import model.exception.NotImplementedException;
+import model.base.CureIcon;
+import model.entities.CityEntity;
+import model.entities.GameSave;
 import model.game.City;
 import model.game.Map;
 import model.game.Player;
@@ -15,8 +17,10 @@ import view.MainMenu;
 
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Optional;
 
 public class GameManager {
@@ -158,7 +162,7 @@ public class GameManager {
 
             if (i == totalCards - 1) {
                 int randomPosition = Utilities.rand.nextInt(totalCards);
-                CityCard randomCity =  ((CityCard) cardsLbls.get(randomPosition));
+                CityCard randomCity = ((CityCard) cardsLbls.get(randomPosition));
 
                 randomCity.setColour(Utilities.getRandomColour());
             }
@@ -168,5 +172,76 @@ public class GameManager {
     public void saveGame() {
         OptionsManager.getInstance().saveSettings();
         DbManager.getInstance().saveGame();
+    }
+
+    public void loadSave(GameSave gameSave) {
+        Player.getInstance().setActions(gameSave.player.actionsLeft);
+        MainMenu.getInstance().characterIcon.setCharacter(gameSave.character);
+        loadCities(gameSave.cities);
+        loadCards(gameSave.cards);
+        loadCures(gameSave.cures);
+
+        Round.getInstance().number = gameSave.round;
+        MainMenu.getInstance().historialTxtArea.setText(gameSave.historialText);
+        MainMenu.getInstance().epidemicsCounterLbl.setText(String.valueOf(gameSave.totalOutbreaks));
+    }
+
+    private void loadCities(Object[] cities) {
+        ArrayList<City> mapCities = Map.getInstance().getCities();
+
+        for (int i = 0; i < mapCities.size(); i++) {
+            City toModify = mapCities.get(i);
+
+            City savedCity = new City();
+            savedCity.setName(((CityEntity) cities[i]).name);
+            savedCity.setTotalViruses(((CityEntity) cities[i]).viruses);
+
+            if (savedCity.getName().equals(toModify.getName())) {
+                toModify.setTotalViruses(savedCity.getTotalViruses());
+            }
+        }
+    }
+
+    private void loadCards(Object[] cardColours) {
+        ArrayList<JLabel> mapCards = MainMenu.getInstance().cardsLbls;
+
+        for (int i = 0; i < cardColours.length; i++) {
+            String colourName = (String) cardColours[i];
+
+            if (colourName == null) {
+                continue;
+            }
+
+            CityCard card = (CityCard) mapCards.get(i);
+            card.setColour(Enum.valueOf(Colour.class, colourName));
+        }
+    }
+
+    private void loadCures(Object[] cureStates) {
+        CureIcon yellowCure = (CureIcon) MainMenu.getInstance().yellowCureIcon;
+        CureIcon redCure = (CureIcon) MainMenu.getInstance().redCureIcon;
+        CureIcon blueCure = (CureIcon) MainMenu.getInstance().blueCureIcon;
+        CureIcon greenCure = (CureIcon) MainMenu.getInstance().greenCureIcon;
+
+        if (cureStates.length != 4) {
+            throw new RuntimeException(String.format(
+                  "There was %d cure states instead of 4", cureStates.length));
+        }
+
+        if (Objects.equals(cureStates[0], BigDecimal.ONE)) {
+            yellowCure.unlock();
+        }
+
+        if (Objects.equals(cureStates[1], BigDecimal.ONE)) {
+            redCure.unlock();
+        }
+
+        if (Objects.equals(cureStates[2], BigDecimal.ONE)) {
+            blueCure.unlock();
+        }
+
+        if (Objects.equals(cureStates[3], BigDecimal.ONE)) {
+            greenCure.unlock();
+        }
     }
 }
