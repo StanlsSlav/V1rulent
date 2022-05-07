@@ -51,7 +51,6 @@ public class DbManager {
         } catch (SQLException e) {
             try {
                 connection = DriverManager.getConnection(remoteConString, user, passwd).unwrap(OracleConnection.class);
-                System.out.println("Connected to DB");
             } catch (SQLException ex) {
                 DbUtilities.printSQLException(ex);
             }
@@ -133,22 +132,14 @@ public class DbManager {
         String cures = GameUtilities.getInstance().getCures();
         int totalOutbreaks = Integer.parseInt(MainMenu.getInstance().epidemicsCounterLbl.getText());
 
-        String qry =
-              "INSERT INTO game_saves (player, character, cities, cards, cures, total_outbreaks) " +
-                    "VALUES (player(?, ?), ?, city_arr(?), cards_arr(?), cures_arr(?), ?)";
+        String qry = String.format(
+              "INSERT INTO game_saves (player, character, cities, cards, cures, total_outbreaks) VALUES " +
+                    "(player('%s', %d), '%s', city_arr(%s), cards_arr(%s), cures_arr(%s), %d)",
+              playerName, actionsLeft, character, cities, cards, cures, totalOutbreaks);
 
-        try (PreparedStatement insertGameSave = connection.prepareStatement(qry)) {
+        try (Statement insertGameSave = connection.createStatement()) {
             connection.setAutoCommit(false);
-
-            insertGameSave.setString(1, playerName);
-            insertGameSave.setInt(2, actionsLeft);
-            insertGameSave.setString(3, character);
-            insertGameSave.setString(4, cities);
-            insertGameSave.setString(5, cards);
-            insertGameSave.setString(6, cures);
-            insertGameSave.setInt(7, totalOutbreaks);
-
-            insertGameSave.executeUpdate();
+            insertGameSave.executeUpdate(qry);
             connection.commit();
         } catch (SQLException e) {
             DbUtilities.printSQLException(e);
