@@ -92,6 +92,11 @@ public class GameManager {
 
         updateGameState();
 
+        for (JLabel lbl : MainMenu.getInstance().cardsLbls) {
+            CityCard cityCard = (CityCard) lbl;
+            cityCard.reset();
+        }
+
         MainMenu.getInstance().historialTxtArea.setText("");
         startNewRound();
     }

@@ -10,9 +10,13 @@ public class CityCard extends JLabel {
     private Colour colour;
 
     public CityCard() {
-        setIcon(new ImageIcon(BASE_PATH + "Empty.png"));
+        reset();
         setSize(238, 70);
         setLocation(369, 826);
+    }
+
+    public void reset() {
+        setIcon(new ImageIcon(BASE_PATH + "Empty.png"));
     }
 
     public void setColour(Colour colour) {
