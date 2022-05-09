@@ -162,7 +162,7 @@ public class DbManager {
 
         String qry =
               "SELECT id, save_date, player, character, cities, cards, cures, total_outbreaks, round, history " +
-                    "FROM recent_saves rs WHERE rs.player.name = '?' AND rownum = 1";
+                    "FROM recent_saves rs WHERE rs.player.name = ? AND rownum = 1";
 
         try (PreparedStatement selectLastSave = connection.prepareStatement(qry)) {
             Map<String, Class<?>> map = connection.getTypeMap();
