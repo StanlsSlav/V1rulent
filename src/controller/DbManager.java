@@ -157,7 +157,8 @@ public class DbManager {
         }
     }
 
-    public void loadLastGame() {
+    public boolean tryLoadingLastGame() {
+        boolean isLoadingSuccessful = true;
         String playerName = Player.getInstance().getName();
 
         String qry =
@@ -191,8 +192,11 @@ public class DbManager {
             GameManager.getInstance().loadSave(save);
         } catch (SQLException e) {
             DbUtilities.printSQLException(e);
+            isLoadingSuccessful = false;
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+
+        return isLoadingSuccessful;
     }
 }

@@ -505,7 +505,12 @@ public class MainMenu extends JFrame implements IMenu {
 
     private void initializeLastGame() {
         initializeBaseGame();
-        DbManager.getInstance().loadLastGame();
+
+        if (DbManager.getInstance().tryLoadingLastGame()) {
+            return;
+        }
+
+        initializeNewGame();
     }
 
     private void initializeSavedGame(int id) {
