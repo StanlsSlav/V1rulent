@@ -16,6 +16,7 @@ import view.EogPopUp;
 import view.MainMenu;
 
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -171,6 +172,19 @@ public class GameManager {
 
                 randomCity.setColour(Utilities.getRandomColour());
             }
+        }
+    }
+
+    public void updateSaveTable(ArrayList<GameSave> gameSaves) {
+        JTable saveTable = MainMenu.getInstance().gameSelectionSavesTable;
+        int rowCount = saveTable.getRowCount();
+
+        if (gameSaves.size() < 1) {
+            return;
+        }
+
+        for (int i = 0; i < rowCount; i++) {
+            saveTable.setValueAt(gameSaves.get(i).saveDate.toString(), i, 0);
         }
     }
 

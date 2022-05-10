@@ -79,7 +79,7 @@ public class MainMenu extends JFrame implements IMenu {
     private JButton rankingBackBtn;
     private JPanel gameSelectionMenu;
     private JButton gameSelectionBackBtn;
-    private JTable gameSelectionSavesTable;
+    public JTable gameSelectionSavesTable;
 
     public JLabel yellowCureIcon;
     public JLabel redCureIcon;
@@ -154,6 +154,7 @@ public class MainMenu extends JFrame implements IMenu {
                 return;
             }
 
+            GameManager.getInstance().updateSaveTable(DbManager.getInstance().getGameSaves());
             switchToCard(switcherPanel, "GameSelectionMenu");
         }
     };
@@ -424,8 +425,9 @@ public class MainMenu extends JFrame implements IMenu {
 
         rankingBackBtn = new Button();
 
-        // TODO: Replace with proper JTable returning method
-        gameSelectionSavesTable = new JTable(new Object[][]{ { 1, "Test3" }, { 2, "Test2" } }, new Object[]{ "Index", "D" });
+        // La cabecera no se mostrara porque falta el JScrollPane, que también alarga los elementos del menu
+        // Pero sin una cabecera entonces el null exception saltara
+        gameSelectionSavesTable = new JTable(new Object[10][1], new Object[] {"Save Date"});
     }
 
     private void initializeGameView() {
