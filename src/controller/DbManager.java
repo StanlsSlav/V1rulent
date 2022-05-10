@@ -10,6 +10,7 @@ import utils.DbUtilities;
 import utils.GameUtilities;
 import view.MainMenu;
 
+import java.sql.Array;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,6 +35,8 @@ public class DbManager {
     }
 
     private OracleConnection connection;
+    Map<String, Class<?>> map;
+
     private final String user = "PND_V1RULENT";
     private final String passwd = "PASSWD";
 
@@ -50,7 +53,7 @@ public class DbManager {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             connection = DriverManager.getConnection(ipConString, user, passwd).unwrap(OracleConnection.class);
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Could not find the class for JDBC. Make sure it is added as dependency!");
+            throw new RuntimeException(e);
         } catch (SQLException e) {
             try {
                 connection = DriverManager.getConnection(remoteConString, user, passwd).unwrap(OracleConnection.class);
@@ -59,7 +62,20 @@ public class DbManager {
             }
         }
 
+        loadObjectMapping();
+
         System.out.println("Connected to DB");
+    }
+
+    public void loadObjectMapping() {
+        try {
+            map = connection.getTypeMap();
+            map.put("CITY", Class.forName("model.entities.CityEntity"));
+            map.put("PLAYER", Class.forName("model.entities.PlayerEntity"));
+            connection.setTypeMap(map);
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void disconnect() {
@@ -97,6 +113,34 @@ public class DbManager {
         }
 
         return top10Players;
+    }
+
+    public ArrayList<GameSave> getGameSaves() {
+        String playerName = Player.getInstance().getName();
+        ArrayList<GameSave> gameSaves = new ArrayList<>();
+
+        String qry =
+              "SELECT id, save_date, player, character, cities, cards, cures, total_outbreaks, round, history " +
+                    "FROM recent_saves rs WHERE rs.player.name = ?";
+
+        try (PreparedStatement selectLastSave = connection.prepareStatement(qry)) {
+            // BUG: ORA-01008: not all variables bound
+            selectLastSave.setString(1, playerName);
+            ResultSet result = selectLastSave.executeQuery(qry);
+
+            GameSave save = new GameSave();
+
+            while (result.next()) {
+                save.id = result.getInt("id");
+                save.saveDate = result.getDate("save_date");
+
+                gameSaves.add(save);
+            }
+        } catch (SQLException e) {
+            DbUtilities.printSQLException(e);
+        }
+
+        return gameSaves;
     }
 
     public void insertNewMatchResult(String result) {
