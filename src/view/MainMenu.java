@@ -77,6 +77,9 @@ public class MainMenu extends JFrame implements IMenu {
     private JButton rankingBtn;
     private JTextArea rankingTxtArea;
     private JButton rankingBackBtn;
+    private JPanel gameSelectionMenu;
+    private JButton gameSelectionBackBtn;
+    private JTable gameSelectionSavesTable;
 
     public JLabel yellowCureIcon;
     public JLabel redCureIcon;
@@ -142,7 +145,7 @@ public class MainMenu extends JFrame implements IMenu {
         }
     };
 
-    private final MouseAdapter switchToSavedGame = new MouseAdapter() {
+    private final MouseAdapter switchToGameSaveMenu = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
@@ -151,8 +154,7 @@ public class MainMenu extends JFrame implements IMenu {
                 return;
             }
 
-            initializeSavedGame(0);
-            switchToGamePanel.mouseClicked(e);
+            switchToCard(switcherPanel, "GameSelectionMenu");
         }
     };
 
@@ -368,9 +370,11 @@ public class MainMenu extends JFrame implements IMenu {
         creditsBackButton.addMouseListener(switchToMainMenu);
 
         gameStartBackButton.addMouseListener(switchToMainMenu);
-        gameStartLoadButton.addMouseListener(switchToSavedGame);
+        gameStartLoadButton.addMouseListener(switchToGameSaveMenu);
         gameStartContinueButton.addMouseListener(switchToLastGame);
         gameStartNewButton.addMouseListener(switchToNewGame);
+
+        gameSelectionBackBtn.addMouseListener(switchToGameStartMenu);
 
         playButton.addMouseListener(switchToGameStartMenu);
         creditsButton.addMouseListener(switchToCreditsMenu);
@@ -409,6 +413,8 @@ public class MainMenu extends JFrame implements IMenu {
         gameStartNewButton = new Button();
         gameStartBackButton = new Button();
 
+        gameSelectionBackBtn = new Button();
+
         pauseContinueBtn = new Button(Button.ButtonType.PRIMARY);
         pauseSettingsBtn = new Button();
         pauseBackBtn = new Button();
@@ -417,6 +423,9 @@ public class MainMenu extends JFrame implements IMenu {
         settingsTotalEpidemicsSpinner = new JSpinner(OptionsManager.getInstance().epidemicsLimits);
 
         rankingBackBtn = new Button();
+
+        // TODO: Replace with proper JTable returning method
+        gameSelectionSavesTable = new JTable(new Object[][]{ { 1, "Test3" }, { 2, "Test2" } }, new Object[]{ "Index", "D" });
     }
 
     private void initializeGameView() {
