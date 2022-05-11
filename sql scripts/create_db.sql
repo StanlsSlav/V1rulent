@@ -7,7 +7,7 @@ CREATE OR REPLACE TYPE city AS OBJECT (
 );
 
 CREATE OR REPLACE TYPE player AS OBJECT (
-    name         VARCHAR2(10),
+    name         VARCHAR2(20),
     actions_left NUMBER
 );
 
