@@ -124,9 +124,8 @@ public class DbManager {
                     "FROM recent_saves rs WHERE rs.player.name = ?";
 
         try (PreparedStatement selectLastSave = connection.prepareStatement(qry)) {
-            // BUG: ORA-01008: not all variables bound
             selectLastSave.setString(1, playerName);
-            ResultSet result = selectLastSave.executeQuery(qry);
+            ResultSet result = selectLastSave.executeQuery();
 
             GameSave save = new GameSave();
 
