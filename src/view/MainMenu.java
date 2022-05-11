@@ -10,7 +10,7 @@ import model.game.Difficulty;
 import model.game.Map;
 import model.game.Player;
 import model.interfaces.IMenu;
-import utils.Utilities;
+import utils.GeneralUtilities;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static javax.swing.SwingUtilities.invokeLater;
-import static utils.Utilities.*;
+import static utils.GeneralUtilities.*;
 
 public class MainMenu extends JFrame implements IMenu {
     public static MainMenu instance;
@@ -433,7 +433,7 @@ public class MainMenu extends JFrame implements IMenu {
     private void initializeGameView() {
         wasGameLoaded = true;
 
-        Utilities.loadCities();
+        GeneralUtilities.loadCities();
 
         // La inicialización debe ser nueva
         gamePanel.removeAll();

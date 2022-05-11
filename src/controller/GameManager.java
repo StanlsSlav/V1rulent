@@ -11,7 +11,7 @@ import model.game.City;
 import model.game.Map;
 import model.game.Player;
 import model.game.Round;
-import utils.Utilities;
+import utils.GeneralUtilities;
 import view.EogPopUp;
 import view.MainMenu;
 
@@ -49,10 +49,10 @@ public class GameManager {
         ArrayList<City> previouslyPickedCities = new ArrayList<>();
 
         while (previouslyPickedCities.size() < virusesCount) {
-            Colour randomColour = Utilities.getRandomColour();
+            Colour randomColour = GeneralUtilities.getRandomColour();
 
             Optional<City> toInfect = Map.getInstance().getCities().stream()
-                  .filter(city -> city == Utilities.getRandomCityForColour(randomColour))
+                  .filter(city -> city == GeneralUtilities.getRandomCityForColour(randomColour))
                   .findFirst();
 
             if (toInfect.isPresent() && !previouslyPickedCities.contains(toInfect.get())) {
@@ -162,15 +162,15 @@ public class GameManager {
             CityCard card = (CityCard) cardsLbls.get(i);
 
             if (card.getColour() == null) {
-                card.setColour(Utilities.getRandomColour());
+                card.setColour(GeneralUtilities.getRandomColour());
                 break;
             }
 
             if (i == totalCards - 1) {
-                int randomPosition = Utilities.rand.nextInt(totalCards);
+                int randomPosition = GeneralUtilities.rand.nextInt(totalCards);
                 CityCard randomCity = ((CityCard) cardsLbls.get(randomPosition));
 
-                randomCity.setColour(Utilities.getRandomColour());
+                randomCity.setColour(GeneralUtilities.getRandomColour());
             }
         }
     }

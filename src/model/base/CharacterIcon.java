@@ -1,7 +1,7 @@
 package model.base;
 
 
-import utils.Utilities;
+import utils.GeneralUtilities;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -22,7 +22,7 @@ public class CharacterIcon extends JLabel {
         String[] characterImages = BASE_CHAR_DIR.list();
 
         if (characterImages != null) {
-            setCharacter(characterImages[Utilities.rand.nextInt(characterImages.length)]
+            setCharacter(characterImages[GeneralUtilities.rand.nextInt(characterImages.length)]
                   .replace(".png", ""));
         }
 
