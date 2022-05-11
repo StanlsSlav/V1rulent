@@ -42,6 +42,25 @@ CREATE TABLE match_results (
         CHECK (LOWER(result) IN ('victory', 'loss'))
 );
 
+-- TODO: Can not be called on trigger, find its correct place to call
+CREATE OR REPLACE PROCEDURE clear_old_saves(
+    player_name VARCHAR2
+) IS
+    save_id game_saves.id%TYPE;
+    CURSOR old_saves IS SELECT id
+                          FROM game_saves gs
+                         WHERE gs.player.name = player_name AND rownum > 10
+                         ORDER BY save_date;
+BEGIN
+    OPEN old_saves;
+
+    LOOP
+        FETCH old_saves INTO save_id;
+        EXIT WHEN old_saves%NOTFOUND;
+
+        DELETE FROM game_saves WHERE id = save_id;
+    END LOOP;
+END;
 
 CREATE OR REPLACE TRIGGER new_match_results
     BEFORE INSERT

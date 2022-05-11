@@ -10,7 +10,6 @@ import utils.DbUtilities;
 import utils.GameUtilities;
 import view.MainMenu;
 
-import java.sql.Array;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
