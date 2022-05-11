@@ -19,7 +19,9 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Optional;
@@ -177,14 +179,18 @@ public class GameManager {
 
     public void updateSaveTable(ArrayList<GameSave> gameSaves) {
         JTable saveTable = MainMenu.getInstance().gameSelectionSavesTable;
-        int rowCount = saveTable.getRowCount();
+        int rowCount = Math.min(gameSaves.size(), saveTable.getRowCount());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
         if (gameSaves.size() < 1) {
             return;
         }
 
         for (int i = 0; i < rowCount; i++) {
-            saveTable.setValueAt(gameSaves.get(i).saveDate.toString(), i, 0);
+            Date saveDate = gameSaves.get(i).saveDate;
+
+            saveTable.setValueAt(gameSaves.get(i).id, i, 0);
+            saveTable.setValueAt(dateFormat.format(saveDate), i, 1);
         }
     }
 

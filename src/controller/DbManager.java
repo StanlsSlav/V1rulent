@@ -127,11 +127,19 @@ public class DbManager {
             selectLastSave.setString(1, playerName);
             ResultSet result = selectLastSave.executeQuery();
 
-            GameSave save = new GameSave();
-
             while (result.next()) {
+                GameSave save = new GameSave();
+
                 save.id = result.getInt("id");
                 save.saveDate = result.getDate("save_date");
+                save.player = (PlayerEntity) result.getObject("player");
+                save.character = result.getString("character");
+                save.cities = (Object[]) result.getArray("cities").getArray(map);
+                save.cards = (Object[]) result.getArray("cards").getArray(map);
+                save.cures = (Object[]) result.getArray("cures").getArray(map);
+                save.totalOutbreaks = result.getInt("total_outbreaks");
+                save.round = result.getInt("round");
+                save.historialText = result.getString("history");
 
                 gameSaves.add(save);
             }
