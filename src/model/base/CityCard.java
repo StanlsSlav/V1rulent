@@ -16,6 +16,7 @@ public class CityCard extends JLabel {
     }
 
     public void reset() {
+        this.colour = null;
         setIcon(new ImageIcon(BASE_PATH + "Empty.png"));
     }
 
