@@ -2,7 +2,7 @@ package view;
 
 
 import controller.DbManager;
-import utils.Utilities;
+import utils.GeneralUtilities;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -37,7 +37,7 @@ public class EogPopUp extends JDialog {
 
         goToMainMenuBtn.addActionListener(e -> goToMainMenu());
         playAgainBtn.addActionListener(e -> playAgain());
-        exitBtn.addMouseListener(Utilities.exitOnClick);
+        exitBtn.addMouseListener(GeneralUtilities.exitOnClick);
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {

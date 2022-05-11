@@ -1,7 +1,7 @@
 package model.game;
 
 
-import utils.Utilities;
+import utils.GeneralUtilities;
 
 import java.util.ArrayList;
 
@@ -27,7 +27,7 @@ public class Map {
 
     public ArrayList<City> getCities() {
         if (cities == null) {
-            Utilities.loadCities();
+            GeneralUtilities.loadCities();
         }
 
         return cities;
