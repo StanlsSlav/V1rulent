@@ -5,7 +5,7 @@ import controller.DbManager;
 import controller.GameManager;
 import controller.OptionsManager;
 import model.base.*;
-import model.exception.NotImplementedException;
+import model.entities.GameSave;
 import model.game.Difficulty;
 import model.game.Map;
 import model.game.Player;
@@ -25,6 +25,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static javax.swing.SwingUtilities.invokeLater;
 import static utils.GeneralUtilities.*;
@@ -363,6 +364,17 @@ public class MainMenu extends JFrame implements IMenu {
         settingsTotalEpidemicsSpinner.addChangeListener(e ->
               OptionsManager.getInstance().setEpidemicsThreshold((int) settingsTotalEpidemicsSpinner.getValue()));
 
+        gameSelectionSavesTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                int id = Integer.parseInt(String.valueOf(gameSelectionSavesTable.getValueAt(gameSelectionSavesTable.getSelectedRow(), 0)));
+                initializeSavedGame(id);
+                switchToGamePanel.mouseClicked(e);
+            }
+        });
+
         pauseContinueBtn.addMouseListener(switchToGamePanel);
         pauseSettingsBtn.addMouseListener(switchToSettingsMenu);
 
@@ -427,7 +439,7 @@ public class MainMenu extends JFrame implements IMenu {
 
         // La cabecera no se mostrara porque falta el JScrollPane, que también alarga los elementos del menu
         // Pero sin una cabecera entonces el null exception saltara
-        gameSelectionSavesTable = new JTable(new Object[10][1], new Object[] {"Save Date"});
+        gameSelectionSavesTable = new JTable(new Object[10][2], new Object[] {"Id", "Save Date"});
     }
 
     private void initializeGameView() {
@@ -532,7 +544,15 @@ public class MainMenu extends JFrame implements IMenu {
             return;
         }
 
-        new NotImplementedException().printStackTrace();
+        ArrayList<GameSave> gameSaves = DbManager.getInstance().getGameSaves();
+        Optional<GameSave> selectedGameSave = gameSaves.stream().filter(x -> x.id == id).findFirst();
+
+        if (selectedGameSave.isPresent()) {
+            GameManager.getInstance().loadSave(selectedGameSave.get());
+            return;
+        }
+
+        initializeNewGame();
     }
 
     private void initializeBaseGame() {
