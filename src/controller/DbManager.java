@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * Controlador para la BD
+ * Controller for the interactions between the game and DB
  */
 public class DbManager {
     private static DbManager instance;
@@ -34,11 +34,16 @@ public class DbManager {
     }
 
     private OracleConnection connection;
-    Map<String, Class<?>> map;
+    private Map<String, Class<?>> map;
 
     private final String user = "PND_V1RULENT";
     private final String passwd = "PASSWD";
 
+    /**
+     * Connect to the DB. <i>oracle.ilerna.com</i> respectively.<p>
+     * If the connection failed then it'll try switching automatically to the internal <i>192.168.3.26</i>.<p>
+     * The resulting connection will be unwrapped to an {@link OracleConnection}
+     */
     public void connect() {
         String ipConString = "jdbc:oracle:thin:@192.168.3.26:1521:XE";
         String remoteConString = "jdbc:oracle:thin:@oracle.ilerna.com:1521:XE";
@@ -63,6 +68,9 @@ public class DbManager {
         System.out.println("Connected to DB");
     }
 
+    /**
+     * Set the DB to Java mapping for the current {@code connection}
+     */
     public void loadObjectMapping() {
         try {
             map = connection.getTypeMap();
@@ -74,6 +82,9 @@ public class DbManager {
         }
     }
 
+    /**
+     * Disconnect from the DB if there is an active connection
+     */
     public void disconnect() {
         try {
             if (connection.isClosed()) {
@@ -87,6 +98,11 @@ public class DbManager {
         }
     }
 
+    /**
+     * Get the top 10 player from the DB
+     *
+     * @return The names of the top 10 players, formatted as follow "%.10s		%d"
+     */
     public ArrayList<String> getTop10Players() {
         ArrayList<String> top10Players = new ArrayList<>();
         Statement statement;
@@ -111,6 +127,11 @@ public class DbManager {
         return top10Players;
     }
 
+    /**
+     * Get the latest game saves from the DB based on the current
+     *
+     * @return The game saves
+     */
     public ArrayList<GameSave> getGameSaves() {
         String playerName = Player.getInstance().getName();
         ArrayList<GameSave> gameSaves = new ArrayList<>();
@@ -146,6 +167,11 @@ public class DbManager {
         return gameSaves;
     }
 
+    /**
+     * Insert a match result with the currently loaded variables into the DB
+     *
+     * @param result Indicates if the player won or lost the game/match
+     */
     public void insertNewMatchResult(String result) {
         String playerName = Player.getInstance().getName();
         int survivedRounds = Round.getInstance().number;
@@ -173,6 +199,9 @@ public class DbManager {
         }
     }
 
+    /**
+     * Save the current state of the game into the DB
+     */
     public void saveGame() {
         String playerName = Player.getInstance().getName();
         int actionsLeft = Player.getInstance().getActions();
@@ -204,6 +233,11 @@ public class DbManager {
         }
     }
 
+    /**
+     * Try loading the last game save for the current player
+     *
+     * @return True if loading is successful; otherwise False
+     */
     public boolean tryLoadingLastGame() {
         boolean isLoadingSuccessful = true;
         String playerName = Player.getInstance().getName();
