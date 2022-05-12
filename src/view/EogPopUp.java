@@ -60,6 +60,7 @@ public class EogPopUp extends JDialog {
         DbManager.getInstance().insertNewMatchResult(matchResult);
 
         pack();
+        setResizable(false);
         setVisible(true);
     }
 
