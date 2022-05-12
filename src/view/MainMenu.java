@@ -507,8 +507,6 @@ public class MainMenu extends JFrame implements IMenu {
         epidemicsCounterLbl.setSize(118, 118);
         epidemicsCounterLbl.setFont(epidemicsCounterLbl.getFont().deriveFont(Font.PLAIN, 64));
         epidemicsCounterLbl.setLocation(epidemicsIcon.getLocation().x + 150, epidemicsIcon.getLocation().y);
-        epidemicsCounterLbl.addPropertyChangeListener("text",
-              e -> GameManager.getInstance().checkEndOfGame());
         gamePanel.add(epidemicsCounterLbl);
 
         characterIcon = new CharacterIcon();
