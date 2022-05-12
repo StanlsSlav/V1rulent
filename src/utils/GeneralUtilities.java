@@ -24,7 +24,7 @@ import java.util.Random;
 
 import static javax.swing.SwingUtilities.invokeLater;
 
-public class Utilities {
+public class GeneralUtilities {
     public static final Random rand = new Random();
 
     public static void exit(int status, boolean shouldSaveState) {
