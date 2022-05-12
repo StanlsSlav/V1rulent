@@ -39,9 +39,6 @@ public class DbManager {
     private final String user = "PND_V1RULENT";
     private final String passwd = "PASSWD";
 
-    public DbManager() {
-    }
-
     public void connect() {
         String ipConString = "jdbc:oracle:thin:@192.168.3.26:1521:XE";
         String remoteConString = "jdbc:oracle:thin:@oracle.ilerna.com:1521:XE";
