@@ -12,9 +12,14 @@ public class CureIcon extends JLabel {
 
     public CureIcon(Colour colour) {
         setSize(118, 114);
-        setIcon(new ImageIcon(cureImagesBasePath + "Empty.png"));
+        lock();
         setLocation(42, 786);
         setColor(colour);
+    }
+
+    public void lock() {
+        this.isEmpty = true;
+        setIcon(new ImageIcon(cureImagesBasePath + "Empty.png"));
     }
 
     public void unlock() {
