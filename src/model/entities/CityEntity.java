@@ -1,8 +1,6 @@
 package model.entities;
 
 
-import model.game.City;
-
 import java.sql.SQLData;
 import java.sql.SQLException;
 import java.sql.SQLInput;
@@ -29,9 +27,5 @@ public class CityEntity implements SQLData {
     public void writeSQL(SQLOutput stream) throws SQLException {
         stream.writeString(name);
         stream.writeInt(viruses);
-    }
-
-    public City toCity() {
-        return new City();
     }
 }
