@@ -4,6 +4,9 @@ package view;
 import controller.DbManager;
 import controller.GameManager;
 import controller.OptionsManager;
+import model.base.Button;
+import model.base.Panel;
+import model.base.TextArea;
 import model.base.*;
 import model.entities.GameSave;
 import model.game.Difficulty;
@@ -17,7 +20,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
@@ -102,8 +105,6 @@ public class MainMenu extends JFrame implements IMenu {
     public CharacterIcon characterIcon;
 
     public JTextArea historialTxtArea;
-
-    private boolean wasGameLoaded = false;
 
     private final MouseAdapter switchToGamePanel = new MouseAdapter() {
         @Override
@@ -443,8 +444,6 @@ public class MainMenu extends JFrame implements IMenu {
     }
 
     private void initializeGameView() {
-        wasGameLoaded = true;
-
         GeneralUtilities.loadCities();
 
         // La inicialización debe ser nueva
@@ -556,9 +555,6 @@ public class MainMenu extends JFrame implements IMenu {
     private void initializeBaseGame() {
         OptionsManager.getInstance().loadSettingsFromXml();
         invokeLater(() -> Map.getInstance().getCities().forEach(city -> gamePanel.add(new CityLabel(city))));
-
-        if (!wasGameLoaded) {
-            initializeGameView();
-        }
+        initializeGameView();
     }
 }
