@@ -213,11 +213,6 @@ public class DbManager {
                     "FROM recent_saves rs WHERE rs.player.name = ? AND rownum = 1";
 
         try (PreparedStatement selectLastSave = connection.prepareStatement(qry)) {
-            Map<String, Class<?>> map = connection.getTypeMap();
-            map.put("CITY", Class.forName("model.entities.CityEntity"));
-            map.put("PLAYER", Class.forName("model.entities.PlayerEntity"));
-            connection.setTypeMap(map);
-
             selectLastSave.setString(1, playerName);
             ResultSet result = selectLastSave.executeQuery();
 
@@ -240,8 +235,6 @@ public class DbManager {
         } catch (SQLException e) {
             DbUtilities.printSQLException(e);
             isLoadingSuccessful = false;
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
 
         return isLoadingSuccessful;
