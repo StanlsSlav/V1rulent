@@ -219,7 +219,7 @@ public class DbManager {
             connection.setTypeMap(map);
 
             selectLastSave.setString(1, playerName);
-            ResultSet result = selectLastSave.executeQuery(qry);
+            ResultSet result = selectLastSave.executeQuery();
 
             GameSave save = new GameSave();
 
