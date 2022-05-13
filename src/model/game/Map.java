@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 
 /**
- * Representante del mapa del mundo (juego)
+ * Representative of the game's map
  */
 public class Map {
     private static Map instance;
