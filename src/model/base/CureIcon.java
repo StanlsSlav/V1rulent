@@ -24,7 +24,6 @@ public class CureIcon extends JLabel {
 
     public void unlock() {
         this.isUnlocked = true;
-        setColor(colour);
         setIcon(new ImageIcon(cureImagesBasePath + colour.name() + ".png"));
     }
 
