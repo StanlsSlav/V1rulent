@@ -8,6 +8,9 @@ import javax.swing.JLabel;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+/**
+ * Represents an icon for a character
+ */
 public class CharacterIcon extends JLabel {
     public CharacterIcon() {
         setSize(433, 270);
@@ -17,6 +20,12 @@ public class CharacterIcon extends JLabel {
 
     private String character;
 
+    /**
+     * Assign a random character and icon for the current instance
+     *
+     * <p>
+     * The random characters are picked from <i>src/assets/img/characters/</i> directory
+     */
     public void assignRandomCharacter() {
         final File BASE_CHAR_DIR = new File("src/assets/img/characters/");
         String[] characterImages = BASE_CHAR_DIR.list();
