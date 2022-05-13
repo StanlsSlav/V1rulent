@@ -20,9 +20,6 @@ public class Map {
         return instance;
     }
 
-    private Map() {
-    }
-
     public ArrayList<City> cities;
 
     public ArrayList<City> getCities() {
@@ -35,9 +32,5 @@ public class Map {
 
     public void setCities(ArrayList<City> cities) {
         this.cities = cities;
-    }
-
-    public static int citiesBetween(City startingPoint, City destination) throws Exception {
-        throw new Exception();
     }
 }
