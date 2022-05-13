@@ -53,12 +53,6 @@ public class OptionsManager {
         this.playerName = playerName.trim();
     }
 
-
-    /**
-     * set of maximum number of epidemics
-     * @param epidemicsThreshold maximum number of epidemics in the match
-     * see settings.xml
-     */
     public void setEpidemicsThreshold(int epidemicsThreshold) {
         this.epidemicsThreshold = epidemicsThreshold;
     }
@@ -67,6 +61,13 @@ public class OptionsManager {
         return Map.getInstance().getCities().size() * 3;
     }
 
+    /**
+     * Load the player name, difficulty and epidemics threshold from the settings file, if it does not exist then it
+     * creates a new one with the default values, check {@link OptionsManager#createDefaultXmlSettings()}
+     *
+     * <p>
+     * If the serialization failed then an exception will be printed, but not thrown!
+     */
     public void loadSettingsFromXml() {
         File xmlFile = new File("src/assets/settings.xml");
 
@@ -100,9 +101,14 @@ public class OptionsManager {
             case Extreme:
                 epidemicsThreshold = epidemicsThreshold - 6;
         }
-
     }
 
+    /**
+     * Create a default settings file
+     *
+     * <p>
+     * If the deserialization failed then an exception will be printed, not thrown!
+     */
     private void createDefaultXmlSettings() {
         File xmlFile = new File("src/assets/settings.xml");
         Serializer serializer = new Persister();
@@ -119,6 +125,9 @@ public class OptionsManager {
         }
     }
 
+    /**
+     * Save the current settings to the according file
+     */
     public void saveSettings() {
         File xmlFile = new File("src/assets/settings.xml");
 
