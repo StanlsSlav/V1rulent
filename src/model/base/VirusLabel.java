@@ -8,6 +8,9 @@ import javax.swing.SwingUtilities;
 import java.awt.Color;
 import java.awt.Font;
 
+/**
+ * Represents visually the counter for a certain virus colour
+ */
 public class VirusLabel extends JLabel {
     public VirusLabel(Colour colour) {
         super();
