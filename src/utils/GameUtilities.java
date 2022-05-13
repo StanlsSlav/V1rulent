@@ -45,10 +45,10 @@ public class GameUtilities {
         CureIcon blueCure = (CureIcon) MainMenu.getInstance().blueCureIcon;
         CureIcon greenCure = (CureIcon) MainMenu.getInstance().greenCureIcon;
 
-        curesArrayString.append(yellowCure.isLocked() ? 0 : 1).append(", ");
-        curesArrayString.append(redCure.isLocked() ? 0 : 1).append(", ");
-        curesArrayString.append(blueCure.isLocked() ? 0 : 1).append(", ");
-        curesArrayString.append(greenCure.isLocked() ? 0 : 1);
+        curesArrayString.append(yellowCure.isUnlocked() ? 0 : 1).append(", ");
+        curesArrayString.append(redCure.isUnlocked() ? 0 : 1).append(", ");
+        curesArrayString.append(blueCure.isUnlocked() ? 0 : 1).append(", ");
+        curesArrayString.append(greenCure.isUnlocked() ? 0 : 1);
 
         return curesArrayString.toString();
     }
