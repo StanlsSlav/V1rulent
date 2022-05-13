@@ -3,7 +3,6 @@ package model.base;
 
 import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -11,6 +10,9 @@ import java.awt.Image;
 
 import static javax.swing.SwingUtilities.invokeLater;
 
+/**
+ * Custom enhanced {@link JTextArea} to support background images
+ */
 public class TextArea extends JTextArea {
     public TextArea() {
         super();
