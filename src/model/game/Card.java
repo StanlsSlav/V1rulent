@@ -4,17 +4,14 @@ package model.game;
 import model.interfaces.ICard;
 
 /**
- * Entidad de una carta base
+ * Base entity of an card
  *
- * @param <T> El tipo de cuál se aplica el efecto de la carta
+ * @param <T> Type of the effect to apply to
  */
 public class Card<T> implements ICard<T> {
     public String title;
     public String description;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean applyEffect(T target) {
         return false;
