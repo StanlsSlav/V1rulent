@@ -10,8 +10,10 @@ import java.awt.event.MouseEvent;
 
 import static java.awt.Font.PLAIN;
 
-
 public class Button extends JButton {
+    /**
+     * Represent a type of the {@link Button}
+     */
     public enum ButtonType {
         PRIMARY,
         SECONDARY
@@ -29,6 +31,9 @@ public class Button extends JButton {
 
     private final ButtonType type;
 
+    /**
+     * Create a default button, based on its {@code type}, for the current instance
+     */
     private void initialize() {
         setFont(new Font("Roboto Light", PLAIN, 40));
         setForeground(Color.BLACK);
