@@ -4,7 +4,9 @@ package model.base;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-
+/**
+ * Represents visually the status of a cure
+ */
 public class CureIcon extends JLabel {
     private final String cureImagesBasePath = "src/assets/img/cures/";
     private boolean isUnlocked = true;
