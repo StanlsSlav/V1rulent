@@ -12,6 +12,9 @@ import java.awt.event.MouseEvent;
 
 import static javax.swing.SwingUtilities.invokeLater;
 
+/**
+ * Visual representative of a {@link City}
+ */
 public class CityLabel extends JLabel {
     public CityLabel(City city) {
         super();
@@ -51,6 +54,12 @@ public class CityLabel extends JLabel {
         });
     }
 
+    /**
+     * The city model the instance represents
+     *
+     * <p>
+     * Used for manipulating the city the instance represents
+     */
     private City relatedCity;
 
     public void setRelatedCity(City relatedCity) {
