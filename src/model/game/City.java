@@ -9,13 +9,12 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 /**
- * One city of the map
- * That class manage the status of all citys 
+ * Represents the data of an city instance
+ *
+ * <p>
+ * {@link model.base.CityLabel} is its visual representative
  */
 public class City {
-    public City() {
-    }
-
     private String name;
     private Colour colour;
     private Point point;
@@ -62,6 +61,12 @@ public class City {
         this.totalViruses = totalViruses;
     }
 
+    /**
+     * Increment the instance' virus count
+     *
+     * <p>
+     * If it already got 3 viruses then propagate to {@link City#connectedCities} avoiding the source city, this
+     */
     public void incrementVirusesCount() {
         if (getTotalViruses() == 3) {
             sendGiftsToNeighbours(this);
@@ -72,15 +77,21 @@ public class City {
         GameManager.getInstance().incrementColourVirus(getColour());
     }
 
+    /**
+     * Similar to {@link City#incrementVirusesCount()}
+     *
+     * <p>
+     * Decrement the instance' virus count
+     */
     public void decrementVirusesCount() {
         setTotalViruses(getTotalViruses() - 1);
         GameManager.getInstance().decrementColourVirus(getColour());
     }
 
     /**
-     * if the city got 4 viruses, then they got back to 3 and they look fordward to colindant citys and
-     * infect them. Also that function +1 on the pandemic counter (game lives).
-     * @param source select the city that got +3 viruses
+     * Propagate the virus to the {@link City#connectedCities}
+     *
+     * @param source The source from where the breakout comes from and ignore it
      */
     private void sendGiftsToNeighbours(City source) {
         Logger.getInstance().log("An epidemic starts from %p", getName());
