@@ -26,6 +26,9 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Game controller
+ */
 public class GameManager {
     private static GameManager instance;
 
@@ -44,6 +47,9 @@ public class GameManager {
         put(Colour.Red, 0);
     }};
 
+    /**
+     * Perform the needed actions to start a new round and log it into the historial text
+     */
     public void startNewRound() {
         Round.getInstance().initializeNewRound();
         final int virusesCount = 3;
@@ -66,13 +72,16 @@ public class GameManager {
             }
         }
 
-        // Deja un espacio entre las ciudades contagiadas y las acciones del usuario
+        // Put a space between the infected cities and user's actions
         MainMenu.getInstance().historialTxtArea.append("\n");
 
         updateGameState();
         Player.getInstance().refillActions();
     }
 
+    /**
+     * Update the visual values of the total viruses with the values from {@code totalViruses}
+     */
     public void updateGameState() {
         SwingUtilities.invokeLater(() -> {
             MainMenu.getInstance().yellowTotalVirusesLbl.setText(String.valueOf(totalViruses.get(Colour.Yellow)));
@@ -82,6 +91,9 @@ public class GameManager {
         });
     }
 
+    /**
+     * Reset the variables of the game (player, the rounds, total viruses/infections, ...) to their default
+     */
     public void resetGame() {
         Player.resetInstance();
         Round.resetInstance();
@@ -104,6 +116,22 @@ public class GameManager {
         startNewRound();
     }
 
+    /**
+     * Check for end of game cases
+     *
+     * <p>
+     * The player losses if
+     * <ul>
+     *     <li>The epidemics passed the set threshold, check {@link GameManager#hasEpidemicsPassedThreshold()}</li>
+     *     <li>The viruses passed the set threshold, check {@link GameManager#haveVirusesPassedThreshold()}</li>
+     * </ul>
+     *
+     * <p>
+     * The player wins if
+     * <ul>
+     *     <li>There's no virus left to cure, check {@link GameManager#isNoMoreVirusesLeft()}</li>
+     * </ul>
+     */
     public void checkEndOfGame() {
         if (isNoMoreVirusesLeft()) {
             new EogPopUp("Awesome! The world has been saved!", false);
@@ -120,11 +148,21 @@ public class GameManager {
         }
     }
 
+    /**
+     * Determine if the current epidemics count passed over the set threshold
+     *
+     * @return True if current epidemics count did pass over the threshold; otherwise False
+     */
     private boolean hasEpidemicsPassedThreshold() {
         int currentEpidemicsCount = Integer.parseInt(MainMenu.getInstance().epidemicsCounterLbl.getText());
         return currentEpidemicsCount >= OptionsManager.getInstance().epidemicsThreshold;
     }
 
+    /**
+     * Determine if the current viruses count passed over the set threshold
+     *
+     * @return True if current viruses count did pass over the threshold; otherwise False
+     */
     private boolean haveVirusesPassedThreshold() {
         return totalViruses.values()
               .stream()
@@ -132,6 +170,11 @@ public class GameManager {
               .sum() > OptionsManager.getInstance().getVirusesThreshold();
     }
 
+    /**
+     * Determine if there's no more viruses left to cure
+     *
+     * @return True if there's no more viruses to cure; otherwise False
+     */
     private boolean isNoMoreVirusesLeft() {
         return totalViruses.values()
               .stream()
@@ -139,6 +182,9 @@ public class GameManager {
               .sum() == 0;
     }
 
+    /**
+     * Increment the visual value of the epidemics counter
+     */
     public void incrementEpidemicsCounter() {
         JLabel epidemicsCounterLbl = MainMenu.getInstance().epidemicsCounterLbl;
         int currentEpidemicsCount = Integer.parseInt(epidemicsCounterLbl.getText());
@@ -147,20 +193,31 @@ public class GameManager {
     }
 
     /**
-     * update the virus colour +1
-     * @param colour colours managed by id
-     * @see Colour
+     * Increment the virus count of a certain {@code colour} and updates the visual values of it
+     *
+     * @param colour The virus colour to increment
      */
     public void incrementColourVirus(Colour colour) {
         totalViruses.put(colour, totalViruses.get(colour) + 1);
         updateGameState();
     }
 
+    /**
+     * Does the oposite of {@link GameManager#incrementColourVirus(Colour)}
+     *
+     * <p>
+     * Decrement the virus count of a certain {@code colour} and updates the visual values of it
+     *
+     * @param colour The virus colour to decrement
+     */
     public void decrementColourVirus(Colour colour) {
         totalViruses.put(colour, totalViruses.get(colour) - 1);
         updateGameState();
     }
 
+    /**
+     * Add a new city card
+     */
     public void addNewCityCard() {
         ArrayList<JLabel> cardsLbls = MainMenu.getInstance().cardsLbls;
         int totalCards = cardsLbls.size();
@@ -182,6 +239,11 @@ public class GameManager {
         }
     }
 
+    /**
+     * Update the save table from the game saves loading menu
+     *
+     * @param gameSaves The list with the game saves to load
+     */
     public void updateSaveTable(ArrayList<GameSave> gameSaves) {
         JTable saveTable = MainMenu.getInstance().gameSelectionSavesTable;
         int rowCount = Math.min(gameSaves.size(), saveTable.getRowCount());
@@ -199,11 +261,20 @@ public class GameManager {
         }
     }
 
+    /**
+     * Save the current game state with its new settings, check {@link OptionsManager#saveSettings()} and
+     * {@link DbManager#saveGame()}
+     */
     public void saveGame() {
         OptionsManager.getInstance().saveSettings();
         DbManager.getInstance().saveGame();
     }
 
+    /**
+     * Load a game from {@code gameSave}
+     *
+     * @param gameSave The game save from the DB
+     */
     public void loadSave(GameSave gameSave) {
         Player.getInstance().setActions(gameSave.player.actionsLeft);
         MainMenu.getInstance().characterIcon.setCharacter(gameSave.character);
@@ -216,6 +287,11 @@ public class GameManager {
         MainMenu.getInstance().epidemicsCounterLbl.setText(String.valueOf(gameSave.totalOutbreaks));
     }
 
+    /**
+     * Load cities from the DB into {@link Map#cities}
+     *
+     * @param cities The city object array loaded from the DB
+     */
     private void loadCities(Object[] cities) {
         ArrayList<City> mapCities = Map.getInstance().getCities();
 
@@ -232,6 +308,11 @@ public class GameManager {
         }
     }
 
+    /**
+     * Similar to {@link GameManager#loadCities(Object[])}, but for the {@link MainMenu#cardsLbls}
+     *
+     * @param cardColours The card colours array loaded from the DB
+     */
     private void loadCards(Object[] cardColours) {
         ArrayList<JLabel> mapCards = MainMenu.getInstance().cardsLbls;
 
@@ -247,6 +328,14 @@ public class GameManager {
         }
     }
 
+    /**
+     * Similar to {@link GameManager#loadCities(Object[])} and {@link GameManager#loadCards(Object[])}, but for the cure
+     * labels from {@link MainMenu}
+     *
+     * @param cureStates The cure states loaded from the DB
+     *
+     * @throws RuntimeException Throws when {@code cureStates} length is not 4
+     */
     private void loadCures(Object[] cureStates) {
         CureIcon yellowCure = (CureIcon) MainMenu.getInstance().yellowCureIcon;
         CureIcon redCure = (CureIcon) MainMenu.getInstance().redCureIcon;
