@@ -2,7 +2,7 @@ package model.game;
 
 
 /**
- * Las dificultades presentes para el juego
+ * The current difficulties available in the game
  */
 public enum Difficulty {
     Easy, Medium, Hard, Extreme
