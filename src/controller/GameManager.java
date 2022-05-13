@@ -222,11 +222,18 @@ public class GameManager {
         ArrayList<JLabel> cardsLbls = MainMenu.getInstance().cardsLbls;
         int totalCards = cardsLbls.size();
 
+        ArrayList<Colour> coloursToAvoid = getColoursToAvoid();
+        Colour cardColour;
+
+        do {
+            cardColour = GeneralUtilities.getRandomColour();
+        } while (coloursToAvoid.contains(cardColour));
+
         for (int i = 0; i < totalCards; i++) {
             CityCard card = (CityCard) cardsLbls.get(i);
 
             if (card.getColour() == null) {
-                card.setColour(GeneralUtilities.getRandomColour());
+                card.setColour(cardColour);
                 break;
             }
 
@@ -234,8 +241,72 @@ public class GameManager {
                 int randomPosition = GeneralUtilities.rand.nextInt(totalCards);
                 CityCard randomCity = ((CityCard) cardsLbls.get(randomPosition));
 
-                randomCity.setColour(GeneralUtilities.getRandomColour());
+                randomCity.setColour(cardColour);
             }
+        }
+
+        checkCardColour(cardColour);
+    }
+
+    public ArrayList<Colour> getColoursToAvoid() {
+        ArrayList<Colour> coloursToAvoid = new ArrayList<>();
+
+        if (((CureIcon) MainMenu.getInstance().blueCureIcon).isUnlocked()) {
+            coloursToAvoid.add(Colour.Blue);
+        }
+
+        if (((CureIcon) MainMenu.getInstance().yellowCureIcon).isUnlocked()) {
+            coloursToAvoid.add(Colour.Yellow);
+        }
+
+        if (((CureIcon) MainMenu.getInstance().greenCureIcon).isUnlocked()) {
+            coloursToAvoid.add(Colour.Green);
+        }
+
+        if (((CureIcon) MainMenu.getInstance().redCureIcon).isUnlocked()) {
+            coloursToAvoid.add(Colour.Red);
+        }
+
+        return coloursToAvoid;
+    }
+
+    public void checkCardColour(Colour colour) {
+        ArrayList<CityCard> cityCards = new ArrayList<>();
+        ArrayList<CityCard> foundCards = new ArrayList<>();
+
+        for (JLabel cardLbl : MainMenu.getInstance().cardsLbls) {
+            cityCards.add((CityCard) cardLbl);
+        }
+
+        for (CityCard cityCard : cityCards) {
+            if (cityCard.getColour() == colour) {
+                foundCards.add(cityCard);
+            }
+        }
+
+        if (foundCards.size() == 4) {
+            unlockCure(foundCards, colour);
+        }
+    }
+
+    private void unlockCure(ArrayList<CityCard> cardsToConsume, Colour cureColourToUnlock) {
+        for (CityCard card : cardsToConsume) {
+            card.reset();
+        }
+
+        switch (cureColourToUnlock) {
+            case Blue:
+                ((CureIcon) MainMenu.getInstance().blueCureIcon).unlock();
+                break;
+            case Red:
+                ((CureIcon) MainMenu.getInstance().redCureIcon).unlock();
+                break;
+            case Green:
+                ((CureIcon) MainMenu.getInstance().greenCureIcon).unlock();
+                break;
+            case Yellow:
+                ((CureIcon) MainMenu.getInstance().yellowCureIcon).unlock();
+                break;
         }
     }
 
