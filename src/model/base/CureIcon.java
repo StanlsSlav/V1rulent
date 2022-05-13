@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 
 public class CureIcon extends JLabel {
     private final String cureImagesBasePath = "src/assets/img/cures/";
-    private boolean isEmpty = true;
+    private boolean isUnlocked = true;
     private Colour colour;
 
     public CureIcon(Colour colour) {
@@ -18,18 +18,18 @@ public class CureIcon extends JLabel {
     }
 
     public void lock() {
-        this.isEmpty = true;
+        this.isUnlocked = false;
         setIcon(new ImageIcon(cureImagesBasePath + "Empty.png"));
     }
 
     public void unlock() {
-        this.isEmpty = false;
+        this.isUnlocked = true;
         setColor(colour);
         setIcon(new ImageIcon(cureImagesBasePath + colour.name() + ".png"));
     }
 
-    public boolean isLocked() {
-        return isEmpty;
+    public boolean isUnlocked() {
+        return isUnlocked;
     }
 
     private void setColor(Colour colour) {
