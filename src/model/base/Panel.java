@@ -13,10 +13,6 @@ public class Panel extends JPanel {
         setBackgroundImage(getToolkit().getImage("src/assets/img/" + backgroundImageName + ".png"));
     }
 
-    public Panel(Image backgroundImage) {
-        setBackgroundImage(backgroundImage);
-    }
-
     private Image backgroundImage;
 
     public void setBackgroundImage(Image backgroundImage) {
