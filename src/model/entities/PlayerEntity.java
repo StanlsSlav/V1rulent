@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import java.sql.SQLInput;
 import java.sql.SQLOutput;
 
+/**
+ * Representative for a sql serializable {@link model.game.Player}
+ */
 public class PlayerEntity implements SQLData {
     public String name;
     public int actionsLeft;
