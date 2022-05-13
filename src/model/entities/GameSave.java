@@ -3,6 +3,9 @@ package model.entities;
 
 import java.sql.Date;
 
+/**
+ * Representative for the sql table with the game saves
+ */
 public class GameSave {
     public int id;
     public Date saveDate;
