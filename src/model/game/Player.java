@@ -72,6 +72,8 @@ public class Player {
                 break;
         }
 
+        GameManager.getInstance().checkEndOfGame();
+
         if (actions < 1) {
             GameManager.getInstance().startNewRound();
         }
