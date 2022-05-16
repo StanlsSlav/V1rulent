@@ -62,13 +62,13 @@ public class Player {
     public void tryPerformAction(ActionType actionType, City target) {
         switch (actionType) {
             case TRAVEL:
-                getInstance().travelTo(target);
+                travelTo(target);
                 break;
             case CURE:
-                getInstance().tryRemoveVirus(target);
+                tryRemoveVirus(target);
                 break;
             case COMPLETE_CURE:
-                getInstance().tryCureCity(target);
+                tryCureCity(target);
                 break;
         }
 
