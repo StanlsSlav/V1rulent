@@ -8,6 +8,9 @@ import model.game.City;
 import model.game.Map;
 import view.MainMenu;
 
+/**
+ * Utilities used alongside the game
+ */
 public class GameUtilities {
     private static GameUtilities instance;
 
@@ -19,6 +22,11 @@ public class GameUtilities {
         return instance;
     }
 
+    /**
+     * Create an SQL array of cards
+     *
+     * @return The SQL variant of, a first level, varray of cards
+     */
     public String getCards() {
         StringBuilder cardsArrayString = new StringBuilder();
 
@@ -37,6 +45,14 @@ public class GameUtilities {
         return cardsArrayString.substring(0, cardsArrayString.length() - 2);
     }
 
+    /**
+     * Create an SQL array of cure states
+     *
+     * <p>
+     * 1 if the cure is unlocked; otherwise 0
+     *
+     * @return The SQL variant of, a first level, varray of cures
+     */
     public String getCures() {
         StringBuilder curesArrayString = new StringBuilder();
 
@@ -53,6 +69,11 @@ public class GameUtilities {
         return curesArrayString.toString();
     }
 
+    /**
+     * Create an SQL array of city objects
+     *
+     * @return The SQL variant of, a first level, varray of city objects
+     */
     public String getCities() {
         StringBuilder cityArrayString = new StringBuilder();
         int citiesSize = Map.getInstance().cities.size();
