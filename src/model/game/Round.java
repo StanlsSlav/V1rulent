@@ -5,7 +5,7 @@ import controller.GameManager;
 import view.MainMenu;
 
 /**
- * Cada vez que el jugador se queda sin acciones, una nueva ronda empezara
+ * Represents the round of the current game
  */
 public class Round {
     public static Round instance;
@@ -25,6 +25,9 @@ public class Round {
 
     public int number = 1;
 
+    /**
+     * Start a new round
+     */
     public void initializeNewRound() {
         MainMenu.getInstance().historialTxtArea.append("\nRound " + number + "\n");
         GameManager.getInstance().addNewCityCard();
