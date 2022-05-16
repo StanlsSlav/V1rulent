@@ -24,6 +24,9 @@ import java.util.Random;
 
 import static javax.swing.SwingUtilities.invokeLater;
 
+/**
+ * Utilities used all around the game
+ */
 public class GeneralUtilities {
     public static final Random rand = new Random();
 
@@ -36,6 +39,13 @@ public class GeneralUtilities {
         System.exit(status);
     }
 
+    /**
+     * Detect if the left mouse button is pressed from the according {@code event}
+     *
+     * @param event The mouse event from which to determine if the left mouse button was clicked
+     *
+     * @return True if the left mouse button was clicked; otherwise False
+     */
     public static boolean isLeftButtonPressed(MouseEvent event) {
         return event.getButton() == MouseEvent.BUTTON1;
     }
@@ -53,16 +63,28 @@ public class GeneralUtilities {
         }
     };
 
+    /**
+     * Switch the background image of an {@code panel}
+     *
+     * @param panel The panel with the old background image to be replaced
+     * @param imageName The name of the new background image
+     */
     public static void switchImage(JPanel panel, String imageName) {
         invokeLater(() -> {
             Panel panelToSwitch = (Panel) panel;
             panelToSwitch.setBackgroundImage(panel.getToolkit().createImage("src/assets/img/" + imageName + ".png"));
 
-            // Quita los artefactos
+            // Remove artefacts
             panel.updateUI();
         });
     }
 
+    /**
+     * Switch to the proper {@code cardName}, based on the {@code rootPanel}
+     *
+     * @param rootPanel The panel to get its contents switched
+     * @param cardName The card name to switch to
+     */
     public static void switchToCard(JPanel rootPanel, String cardName) {
         invokeLater(() -> {
             CardLayout cardLayout = (CardLayout) rootPanel.getLayout();
@@ -70,6 +92,9 @@ public class GeneralUtilities {
         });
     }
 
+    /**
+     * Load the cities from the <i>cities.csv</i> into {@link Map#cities}
+     */
     public static void loadCities() {
         Map.getInstance().setCities(new ArrayList<>());
 
@@ -101,6 +126,9 @@ public class GeneralUtilities {
         loadCityConnections();
     }
 
+    /**
+     * Load the proper city connections for each city in {@code Map#cities}
+     */
     private static void loadCityConnections() {
         File citiesFile = new File("src/assets/cities.csv");
 
@@ -138,10 +166,22 @@ public class GeneralUtilities {
         }
     }
 
+    /**
+     * Get a random colour
+     *
+     * @return The random colour
+     */
     public static Colour getRandomColour() {
         return Colour.values()[rand.nextInt(Colour.values().length)];
     }
 
+    /**
+     * Get a random city with its colour matching the passed {@code colour}
+     *
+     * @param colour The colour from which to find the city
+     *
+     * @return The random city
+     */
     public static City getRandomCityForColour(Colour colour) {
         ArrayList<City> sameColouredCities = new ArrayList<>();
 
