@@ -16,7 +16,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-
+/**
+ * Represents the pop-up at the end of the game
+ */
 public class EogPopUp extends JDialog {
     private JPanel contentPane;
     private JButton goToMainMenuBtn;
@@ -25,10 +27,11 @@ public class EogPopUp extends JDialog {
     private JTextArea popUpTxtArea;
 
     /**
-     * Manager for the end of the game
-     * @param message the message for win or loose
-     * @see controller.GameManager
-     * @param hasPlayerLost boolean for see if the player has lost or won
+     * Create a default end of game pop-up
+     *
+     * @param message The message to write in the pop-up
+     * @param hasPlayerLost Indicate whenever the player has lost to save the result in the DB as a lost;
+     * otherwise a win will be saved in the DB
      */
     public EogPopUp(String message, boolean hasPlayerLost) {
         setTitle("EndOfGame");
