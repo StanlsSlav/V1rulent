@@ -98,6 +98,11 @@ public class GameManager {
         Player.resetInstance();
         Round.resetInstance();
 
+        ((CureIcon) MainMenu.getInstance().yellowCureIcon).lock();
+        ((CureIcon) MainMenu.getInstance().blueCureIcon).lock();
+        ((CureIcon) MainMenu.getInstance().greenCureIcon).lock();
+        ((CureIcon) MainMenu.getInstance().redCureIcon).lock();
+
         totalViruses = new HashMap<Colour, Integer>() {{
             put(Colour.Blue, 0);
             put(Colour.Yellow, 0);
