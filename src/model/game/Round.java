@@ -1,10 +1,8 @@
 package model.game;
 
+
 import controller.GameManager;
 import view.MainMenu;
-
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Cada vez que el jugador se queda sin acciones, una nueva ronda empezara
@@ -26,7 +24,6 @@ public class Round {
     }
 
     public int number = 1;
-    public HashMap<Integer, List<String>> history;
 
     public void initializeNewRound() {
         MainMenu.getInstance().historialTxtArea.append("\nRound " + number + "\n");
