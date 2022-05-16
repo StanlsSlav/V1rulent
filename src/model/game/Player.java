@@ -78,7 +78,7 @@ public class Player {
     }
 
     /**
-     * Try curing the {@code city} by removing all the viruses from {@code city}
+     * Try to cure the {@code city} by removing all the viruses from {@code city}
      *
      * <p>
      * The cost of the action is the {@code totalActionsPerRound} and the {@code city} must have at least a virus to be
@@ -109,7 +109,7 @@ public class Player {
     }
 
     /**
-     * Try curing the {@code city} by removing all the viruses from {@code city}
+     * Try to cure the {@code city} by removing all the viruses from {@code city}
      *
      * <p>
      * The cost of the action is 1, the {@code city} must have at least a virus to be and the player must be in the
