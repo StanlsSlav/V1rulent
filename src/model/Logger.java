@@ -4,6 +4,12 @@ package model;
 import model.game.Player;
 import view.MainMenu;
 
+/**
+ * Custom logger for the game
+ *
+ * <p>
+ * Everything gets logged into the games historial text area
+ */
 public class Logger {
     private static Logger instance;
 
@@ -15,11 +21,33 @@ public class Logger {
         return instance;
     }
 
+    /**
+     * Log {@code message} with the proper {@code parameters} and after log the player's left actions
+     *
+     * <p>
+     * The message can be parametrized with the <b>%p</b> tag
+     *
+     * @param message The message to log
+     * @param parameters The parameters to replace the tag with
+     * @param <T> The generic type of the parameters
+     */
     @SafeVarargs
     public final <T> void log(String message, T... parameters) {
         log(true, message, parameters);
     }
 
+    /**
+     * Log {@code message} with the proper {@code parameters}, if {@code logActionsLeft} is true then it'll also log the
+     * player's left actions
+     *
+     * <p>
+     * The message can be parametrized, similarly to {@link String#format(String, Object...)}, with the <b>%p</b> tag
+     *
+     * @param logActionsLeft Indicate if, after the {@code message}, the player's left actions should be logged
+     * @param message The message to log
+     * @param parameters The parameters to replace the tag with
+     * @param <T> The generic type of the parameters
+     */
     @SafeVarargs
     public final <T> void log(boolean logActionsLeft, String message, T... parameters) {
         for (T parameter : parameters) {
