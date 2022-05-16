@@ -3,10 +3,10 @@ package model.interfaces;
 
 public interface ICard<T> {
     /**
-     * Aplica el efecto adecuado al {@code target}
+     * Apply the proper effect to {@code target}
      *
-     * @param target Quien recibirá la bonificación
-     * @return True si se ha podido aplicar el efecto; False en caso contrario
+     * @param target The target who'll receive the effect
+     * @return True if the effect could be applied; otherwise False
      */
     boolean applyEffect(T target);
 }
