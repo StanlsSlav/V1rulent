@@ -7,7 +7,7 @@ import model.ActionType;
 import model.Logger;
 
 /**
- * El jugador del juego
+ * Represents the user that's currently playing the game
  */
 public class Player {
     public static Player instance;
@@ -53,6 +53,12 @@ public class Player {
         this.actions = Math.max(Math.min(actions, totalActionsPerRound), 0);
     }
 
+    /**
+     * Try performing the action according to the {@code actionType}
+     *
+     * @param actionType The type of the action to perform
+     * @param target Some action types need a city target to interact with
+     */
     public void tryPerformAction(ActionType actionType, City target) {
         switch (actionType) {
             case TRAVEL:
@@ -71,6 +77,15 @@ public class Player {
         }
     }
 
+    /**
+     * Try curing the {@code city} by removing all the viruses from {@code city}
+     *
+     * <p>
+     * The cost of the action is the {@code totalActionsPerRound} and the {@code city} must have at least a virus to be
+     * able to perform the action
+     *
+     * @param city The city to perform the action against
+     */
     private void tryCureCity(City city) {
         int actionCost = totalActionsPerRound;
 
@@ -93,6 +108,15 @@ public class Player {
         Logger.getInstance().log("Cured " + city.getName());
     }
 
+    /**
+     * Try curing the {@code city} by removing all the viruses from {@code city}
+     *
+     * <p>
+     * The cost of the action is 1, the {@code city} must have at least a virus to be and the player must be in the
+     * {@code city} able to perform the action
+     *
+     * @param city The city to perform the action against
+     */
     private void tryRemoveVirus(City city) {
         int actionCost = 1;
         int totalViruses = city.getTotalViruses();
@@ -114,6 +138,11 @@ public class Player {
         GameManager.getInstance().updateGameState();
     }
 
+    /**
+     * Switch the current player's location to {@code city}
+     *
+     * @param city The city in which to move
+     */
     private void travelTo(City city) {
         int actionCost = 1;
 
