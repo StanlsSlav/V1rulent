@@ -16,6 +16,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import static utils.GeneralUtilities.switchToCard;
+
 /**
  * Represents the pop-up at the end of the game
  */
@@ -68,12 +70,13 @@ public class EogPopUp extends JDialog {
     }
 
     private void goToMainMenu() {
-        MainMenu.getInstance().creditsBackButton.doClick();
+        switchToCard(MainMenu.getInstance().switcherPanel, "MainMenu");
+        switchToCard(MainMenu.getInstance().rootPanel, "MenusPanel");
         dispose();
     }
 
     private void playAgain() {
-        MainMenu.getInstance().playButton.doClick();
+        MainMenu.getInstance().initializeNewGame();
         dispose();
     }
 }

@@ -43,10 +43,10 @@ public class MainMenu extends JFrame implements IMenu {
         return instance;
     }
 
-    private JPanel rootPanel;
+    public JPanel rootPanel;
 
     private JPanel menusPanel;
-    private JPanel switcherPanel;
+    public JPanel switcherPanel;
 
     private JPanel mainMenu;
     private JPanel creditsMenu;
@@ -524,7 +524,7 @@ public class MainMenu extends JFrame implements IMenu {
     /**
      * Initialize a new game with the start defaults set
      */
-    private void initializeNewGame() {
+    public void initializeNewGame() {
         initializeBaseGame();
         GameManager.getInstance().resetGame();
     }
