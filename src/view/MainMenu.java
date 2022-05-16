@@ -33,6 +33,9 @@ import java.util.Optional;
 import static javax.swing.SwingUtilities.invokeLater;
 import static utils.GeneralUtilities.*;
 
+/**
+ * Represents the whole game view
+ */
 public class MainMenu extends JFrame implements IMenu {
     public static MainMenu instance;
 
@@ -518,11 +521,20 @@ public class MainMenu extends JFrame implements IMenu {
         gamePanel.add(historialTxtArea);
     }
 
+    /**
+     * Initialize a new game with the start defaults set
+     */
     private void initializeNewGame() {
         initializeBaseGame();
         GameManager.getInstance().resetGame();
     }
 
+    /**
+     * Initialize the last saved game for the current player
+     *
+     * <p>
+     * If it could not be initialized then it will start a new game, check {@link MainMenu#initializeNewGame()}
+     */
     private void initializeLastGame() {
         initializeBaseGame();
 
@@ -533,6 +545,15 @@ public class MainMenu extends JFrame implements IMenu {
         initializeNewGame();
     }
 
+    /**
+     * Initialize a saved game from the DB based on user 'id' choice
+     *
+     * <p>
+     * If the game could not be loaded then a new game will be started instead, check
+     * {@link MainMenu#initializeNewGame()}
+     *
+     * @param id The id of the game to load
+     */
     private void initializeSavedGame(int id) {
         initializeBaseGame();
 
@@ -552,6 +573,14 @@ public class MainMenu extends JFrame implements IMenu {
         initializeNewGame();
     }
 
+    /**
+     * Initialize a base game
+     * <ol>
+     *     <li>Load XML settings, check {@link OptionsManager#loadSettingsFromXml()}</li>
+     *     <li>Add the cities to the map</li>
+     *     <li>Initialize the game view, check {@link MainMenu#initializeGameView()}</li>
+     * </ol>
+     */
     private void initializeBaseGame() {
         OptionsManager.getInstance().loadSettingsFromXml();
         invokeLater(() -> Map.getInstance().getCities().forEach(city -> gamePanel.add(new CityLabel(city))));
