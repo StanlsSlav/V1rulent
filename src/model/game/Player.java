@@ -15,8 +15,6 @@ public class Player {
     public static Player getInstance() {
         if (instance == null) {
             instance = new Player();
-            instance.totalActionsPerRound = 4;
-            instance.actions = instance.totalActionsPerRound;
         }
 
         return instance;
@@ -27,16 +25,18 @@ public class Player {
         getInstance();
     }
 
+    public Player() {
+        this.name = "Unknown";
+        this.totalActionsPerRound = 4;
+        this.actions = this.totalActionsPerRound;
+    }
+
     private String name;
     public int totalActionsPerRound;
     private int actions;
     public City currentCity;
 
     public String getName() {
-        if (this.name == null) {
-            return "Unknown";
-        }
-
         return this.name;
     }
 
