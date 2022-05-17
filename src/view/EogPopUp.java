@@ -78,7 +78,8 @@ public class EogPopUp extends JDialog {
     }
 
     private void playAgain() {
-        MainMenu.getInstance().initializeNewGame();
+        switchToCard(MainMenu.getInstance().switcherPanel, "GameStartMenu");
+        switchToCard(MainMenu.getInstance().rootPanel, "MenusPanel");
         dispose();
     }
 }
