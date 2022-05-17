@@ -92,13 +92,19 @@ public class Player {
         int actionCost = totalActionsPerRound;
 
         if (city.getTotalViruses() < 1) {
-            Logger.getInstance().log("There is no virus in %p", city.getName());
+            Logger.getInstance().log(false, "There is no virus in %p", city.getName());
             return;
         }
 
         if (actions < actionCost) {
             Logger.getInstance().log("You need %p more actions to cure %p",
                   actionCost - actions, city.getName());
+            return;
+        }
+
+        if (GameManager.getInstance().isCureForColourLocked(city.getColour())) {
+            Logger.getInstance().log(false,"The cure for the %p colour is locked",
+                  city.getColour());
             return;
         }
 
