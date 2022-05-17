@@ -29,10 +29,8 @@ public class Logger {
      *
      * @param message The message to log
      * @param parameters The parameters to replace the tag with
-     * @param <T> The generic type of the parameters
      */
-    @SafeVarargs
-    public final <T> void log(String message, T... parameters) {
+    public final void log(String message, Object... parameters) {
         log(true, message, parameters);
     }
 
@@ -46,11 +44,9 @@ public class Logger {
      * @param logActionsLeft Indicate if, after the {@code message}, the player's left actions should be logged
      * @param message The message to log
      * @param parameters The parameters to replace the tag with
-     * @param <T> The generic type of the parameters
      */
-    @SafeVarargs
-    public final <T> void log(boolean logActionsLeft, String message, T... parameters) {
-        for (T parameter : parameters) {
+    public final void log(boolean logActionsLeft, String message, Object... parameters) {
+        for (Object parameter : parameters) {
             message = message.replaceFirst("%p", parameter.toString());
         }
 
