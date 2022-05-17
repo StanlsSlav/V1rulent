@@ -336,6 +336,34 @@ public class GameManager {
     }
 
     /**
+     * Check if the cure related to the {@code colourToCheck} is locked
+     *
+     * @param colourToCheck The cure colour to check
+     *
+     * @return True if the cure related to the {@code colourToCheck} is locked; otherwise False
+     */
+    public boolean isCureForColourLocked(Colour colourToCheck) {
+        boolean isUnlocked = false;
+
+        switch (colourToCheck) {
+            case Blue:
+                isUnlocked = ((CureIcon) MainMenu.getInstance().blueCureIcon).isUnlocked();
+                break;
+            case Red:
+                isUnlocked = ((CureIcon) MainMenu.getInstance().redCureIcon).isUnlocked();
+                break;
+            case Green:
+                isUnlocked = ((CureIcon) MainMenu.getInstance().greenCureIcon).isUnlocked();
+                break;
+            case Yellow:
+                isUnlocked = ((CureIcon) MainMenu.getInstance().yellowCureIcon).isUnlocked();
+                break;
+        }
+
+        return !isUnlocked;
+    }
+
+    /**
      * Update the save table from the game saves loading menu
      *
      * @param gameSaves The list with the game saves to load
