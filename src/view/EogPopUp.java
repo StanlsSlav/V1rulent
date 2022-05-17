@@ -28,8 +28,6 @@ public class EogPopUp extends JDialog {
     private JButton exitBtn;
     private JTextArea popUpTxtArea;
 
-    private boolean isShown = false;
-
     /**
      * Create a default end of game pop-up
      *
