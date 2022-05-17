@@ -41,6 +41,21 @@ public class OptionsManager {
 
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+
+        switch (difficulty) {
+            case Easy:
+                epidemicsThreshold = 8;
+                break;
+            case Medium:
+                epidemicsThreshold = 6;
+                break;
+            case Hard:
+                epidemicsThreshold = 4;
+                break;
+            case Extreme:
+                epidemicsThreshold = 2;
+                break;
+        }
     }
 
     public void setPlayerName(String playerName) {
@@ -83,18 +98,6 @@ public class OptionsManager {
         setPlayerName(dummy.playerName);
         setDifficulty(dummy.difficulty);
         epidemicsThreshold = dummy.epidemicsThreshold;
-
-        switch (difficulty) {
-            default:
-                break;
-            case Medium:
-                epidemicsThreshold = epidemicsThreshold - 2;
-                break;
-            case Hard:
-                epidemicsThreshold = epidemicsThreshold - 4;
-            case Extreme:
-                epidemicsThreshold = epidemicsThreshold - 6;
-        }
     }
 
     /**
