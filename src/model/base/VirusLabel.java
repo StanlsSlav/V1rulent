@@ -36,7 +36,5 @@ public class VirusLabel extends JLabel {
         });
 
         setLocation(1184, 793);
-
-        addPropertyChangeListener("text", e -> GameManager.getInstance().checkEndOfGame());
     }
 }
