@@ -205,6 +205,7 @@ public class GameManager {
     public void incrementColourVirus(Colour colour) {
         totalViruses.put(colour, totalViruses.get(colour) + 1);
         updateGameState();
+        checkEndOfGame();
     }
 
     /**
