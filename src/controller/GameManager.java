@@ -253,6 +253,14 @@ public class GameManager {
         checkCardColour(cardColour);
     }
 
+    /**
+     * Get colours to avoid when drawing a new city card
+     *
+     * <p>
+     * When a colour gets unlocked, it must be avoided to randomly draw
+     *
+     * @return A list defining which colours to avoid
+     */
     public ArrayList<Colour> getColoursToAvoid() {
         ArrayList<Colour> coloursToAvoid = new ArrayList<>();
 
@@ -275,6 +283,11 @@ public class GameManager {
         return coloursToAvoid;
     }
 
+    /**
+     * Check the status of a colour to determine if it should be unlocked or not
+     *
+     * @param colour The colour to check
+     */
     public void checkCardColour(Colour colour) {
         ArrayList<CityCard> cityCards = new ArrayList<>();
         ArrayList<CityCard> foundCards = new ArrayList<>();
@@ -294,6 +307,13 @@ public class GameManager {
         }
     }
 
+    /**
+     * Unlock the cure with the colour defined by {@code cureColourToUnlock} and remove the {@code cardsToConsume} from
+     * the player's hand
+     *
+     * @param cardsToConsume The card to remove from player's hand
+     * @param cureColourToUnlock The cure colour to unlock
+     */
     private void unlockCure(ArrayList<CityCard> cardsToConsume, Colour cureColourToUnlock) {
         for (CityCard card : cardsToConsume) {
             card.reset();
