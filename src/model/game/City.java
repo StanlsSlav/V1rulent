@@ -94,7 +94,7 @@ public class City {
      * @param source The source from where the breakout comes from and ignore it
      */
     private void sendGiftsToNeighbours(City source) {
-        Logger.getInstance().log("An epidemic starts from %p", getName());
+        Logger.getInstance().log(false, "An epidemic starts from %p", getName());
         GameManager.getInstance().incrementEpidemicsCounter();
 
         getConnectedCities().forEach(city -> {
@@ -102,6 +102,7 @@ public class City {
                 return;
             }
 
+            Logger.getInstance().log(false, "%p got infected", city.name);
             city.incrementVirusesCount();
         });
     }

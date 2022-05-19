@@ -135,11 +135,17 @@ public class GameManager {
      * The player wins if
      * <ul>
      *     <li>There's no virus left to cure, check {@link GameManager#isNoMoreVirusesLeft()}</li>
+     *     <li>All cures are unlocked, check {@link GameManager#areAllCuresUnlocked()}</li>
      * </ul>
      */
     public void checkEndOfGame() {
         if (isNoMoreVirusesLeft()) {
             new EogPopUp("Awesome! The world has been saved!", false);
+            return;
+        }
+
+        if (areAllCuresUnlocked()) {
+            new EogPopUp("All cures are unlocked! The world has been saved!", false);
             return;
         }
 
@@ -185,6 +191,22 @@ public class GameManager {
               .stream()
               .mapToInt(val -> val)
               .sum() == 0;
+    }
+
+    /**
+     * Determine if all cures are unlocked
+     *
+     * @return True if all cures are unlocked; otherwise False
+     */
+    private boolean areAllCuresUnlocked() {
+        ArrayList<CureIcon> cures = new ArrayList<>();
+
+        cures.add(((CureIcon) MainMenu.getInstance().yellowCureIcon));
+        cures.add(((CureIcon) MainMenu.getInstance().blueCureIcon));
+        cures.add(((CureIcon) MainMenu.getInstance().redCureIcon));
+        cures.add(((CureIcon) MainMenu.getInstance().greenCureIcon));
+
+        return cures.stream().allMatch(CureIcon::isUnlocked);
     }
 
     /**
