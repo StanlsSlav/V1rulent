@@ -27,6 +27,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -289,6 +291,23 @@ public class MainMenu extends JFrame implements IMenu {
         }
     };
 
+    private final MouseAdapter launchWebsite = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            super.mouseClicked(e);
+
+            if (!isLeftButtonPressed(e)) {
+                return;
+            }
+
+            try {
+                Desktop.getDesktop().browse(new URI("https://stanlsslav.github.io/V1rulent/"));
+            } catch (IOException | URISyntaxException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    };
+
     public MainMenu() {
         super("V1rulent");
         instance = this;
@@ -394,6 +413,7 @@ public class MainMenu extends JFrame implements IMenu {
         gameSelectionBackBtn.addMouseListener(switchToGameStartMenu);
 
         playButton.addMouseListener(switchToGameStartMenu);
+        rulesButton.addMouseListener(launchWebsite);
         creditsButton.addMouseListener(switchToCreditsMenu);
         rankingBtn.addMouseListener(switchToRanking);
         settingsButton.addMouseListener(switchToSettingsMenu);
